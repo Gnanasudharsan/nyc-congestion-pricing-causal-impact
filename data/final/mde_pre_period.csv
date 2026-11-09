@@ -1,0 +1,7 @@
+key,method,unit,placebos,placebo_mean,placebo_sd,mde_80pct_power
+T1,did_placebo,log points x 100 (approx. %),14,-1.464,1.08,3.024
+T2,did_placebo,log points x 100 (approx. %),14,-7.562,0.474,1.328
+T3,did_placebo,log points x 100 (approx. %),14,-1.487,0.464,1.301
+S1,did_placebo,log points x 100 (approx. %),14,-1.123,0.473,1.325
+R1,sc_proxy_equal_weights,log points x 100 (approx. %),14,1.668,2.697,7.552
+A1,sc_proxy_equal_weights,PM2.5 µg/m³,14,-1.749,0.751,2.102
