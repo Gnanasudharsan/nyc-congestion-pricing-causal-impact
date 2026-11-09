@@ -26,7 +26,6 @@ TABLE_BEFORE_2025 = "wujg-7c2s"
 TABLE_FROM_2025 = "5wq4-mkjj"
 OUT_DIR = INTERIM_DIR / "subway"
 STATIONS_CSV = RAW_DIR / "socrata" / "subway_stations.csv"
-CHUNK_DAYS = 7
 FIRST_DAY = date(2023, 1, 1)
 LAST_DAY = date(2026, 10, 29)  # last day in the 2025+ table at audit time
 
@@ -36,51 +35,33 @@ def table_for(day: date) -> str:
     return TABLE_BEFORE_2025 if day < date(2025, 1, 1) else TABLE_FROM_2025
 
 
-def week_starts(first: date, last: date) -> list[date]:
-    """Chunk starts every 7 days; chunks never cross the Jan 1, 2025 table seam."""
-    starts: list[date] = []
-    day = first
-    while day <= last:
-        starts.append(day)
-        next_day = day + timedelta(days=CHUNK_DAYS)
-        seam = date(2025, 1, 1)
-        day = seam if day < seam < next_day else next_day
-    return starts
+def study_days(first: date, last: date) -> list[date]:
+    """Every day from first to last inclusive."""
+    return [first + timedelta(days=offset) for offset in range((last - first).days + 1)]
 
 
-def fetch_chunk(start: date, last: date) -> pl.DataFrame:
-    """Daily entries by station complex for one chunk of up to 7 days.
+def fetch_day(day: date) -> pl.DataFrame:
+    """Entries by station complex for one day.
 
-    Server-side aggregation takes about 2 seconds per day of data; a whole month
-    in one query exceeds the 300-second timeout, so we query a week at a time.
+    One-day queries take about 1-2 seconds on the server. Week-long queries
+    occasionally exceed the 300-second timeout on the 2025+ table, so we query a
+    day at a time; a single day also can never straddle the 2024/2025 table seam.
     """
-    end = min(
-        start + timedelta(days=CHUNK_DAYS),
-        date(2025, 1, 1) if start < date(2025, 1, 1) else last + timedelta(days=1),
-        last + timedelta(days=1),
-    )
+    next_day = day + timedelta(days=1)
     rows = query_all(
         DOMAIN,
-        table_for(start),
+        table_for(day),
         {
-            "$select": "station_complex_id, date_trunc_ymd(transit_timestamp) as day, "
-            "sum(ridership) as entries",
-            "$where": f"transit_timestamp >= '{start.isoformat()}T00:00:00' "
-            f"and transit_timestamp < '{end.isoformat()}T00:00:00'",
-            "$group": "station_complex_id, day",
-            "$order": "station_complex_id, day",
+            "$select": "station_complex_id, sum(ridership) as entries",
+            "$where": f"transit_timestamp >= '{day.isoformat()}T00:00:00' "
+            f"and transit_timestamp < '{next_day.isoformat()}T00:00:00'",
+            "$group": "station_complex_id",
+            "$order": "station_complex_id",
         },
     )
-    return (
-        pl.DataFrame(
-            rows, schema={"station_complex_id": pl.Utf8, "day": pl.Utf8, "entries": pl.Utf8}
-        )
-        .with_columns(
-            pl.col("day").str.slice(0, 10).str.to_date().alias("date"),
-            pl.col("entries").cast(pl.Float64),
-        )
-        .drop("day")
-    )
+    return pl.DataFrame(
+        rows, schema={"station_complex_id": pl.Utf8, "entries": pl.Utf8}
+    ).with_columns(pl.lit(day).alias("date"), pl.col("entries").cast(pl.Float64))
 
 
 def crz_complexes(path: str = str(STATIONS_CSV)) -> pl.DataFrame:
@@ -94,15 +75,16 @@ def crz_complexes(path: str = str(STATIONS_CSV)) -> pl.DataFrame:
 
 
 def main() -> None:
-    """Fetch every month (resumable) and write data/processed/subway_station_day.parquet."""
+    """Fetch every day (resumable) and write data/processed/subway_station_day.parquet."""
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    for start in week_starts(FIRST_DAY, LAST_DAY):
-        destination = OUT_DIR / f"{start.isoformat()}.parquet"
+    for day in study_days(FIRST_DAY, LAST_DAY):
+        destination = OUT_DIR / f"{day.isoformat()}.parquet"
         if destination.exists():
             continue
-        fetch_chunk(start, LAST_DAY).write_parquet(destination)
-        LOG.info("subway chunk %s done", start)
+        fetch_day(day).write_parquet(destination)
+        if day.day == 1:
+            LOG.info("subway %s done", day)
     panel = pl.read_parquet(sorted(OUT_DIR.glob("*.parquet")))
     panel = panel.join(crz_complexes(), on="station_complex_id", how="left").sort(
         "station_complex_id", "date"

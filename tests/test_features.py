@@ -69,10 +69,8 @@ def test_daily_weather_handles_dst_fall_back_day() -> None:
     assert daily["wind_sector"].item() == "W"
 
 
-def test_subway_chunks_never_cross_the_table_seam() -> None:
-    from cordon.clean.subway import table_for, week_starts
+def test_subway_days_map_to_the_right_source_table() -> None:
+    from cordon.clean.subway import study_days, table_for
 
-    starts = week_starts(date(2024, 12, 20), date(2025, 1, 20))
-    assert date(2025, 1, 1) in starts
-    assert table_for(date(2024, 12, 31)) == "wujg-7c2s"
-    assert table_for(date(2025, 1, 1)) == "5wq4-mkjj"
+    days = study_days(date(2024, 12, 30), date(2025, 1, 2))
+    assert [table_for(d) for d in days] == ["wujg-7c2s", "wujg-7c2s", "5wq4-mkjj", "5wq4-mkjj"]
