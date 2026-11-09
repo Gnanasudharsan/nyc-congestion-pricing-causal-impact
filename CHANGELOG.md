@@ -3,6 +3,23 @@
 All notable changes are documented here. Format follows Keep a Changelog; phases are tagged
 `phase-N`.
 
+## [phase-4] — 2026-11-09
+### Added
+- Spillover outcomes S2 (randomization inference over 56 assignments), S3, S4, S5, A2
+  (synthetic control), and A2b (weather-adjusted NO2 DiD). BH q-values across the spillover
+  family (`results/spillover_bh.csv`).
+- Heterogeneity cuts (`cordon.designs.heterogeneity`): peak vs overnight, weekday vs weekend,
+  vehicle class, borough. Stacked regressions with level-specific fixed effects give a valid SE
+  for each difference; BH within each cut.
+- Equity inputs: ACS 2019–2023 tract tables (keyless summary files), TIGER 2023 tracts, and EH
+  Data Portal adult asthma ED rates by NTA at a pinned commit. Allocated to taxi zones by area
+  (`data/final/zone_equity.csv`).
+- Zone-level S1/S3 effects with placebo-based noise and DerSimonian–Laird empirical-Bayes
+  shrinkage, plus exploratory population-weighted associations (`cordon.designs.zone_effects`).
+- Generated `docs/results-phase4.md` and Phase 4 figures. Deviations 12–17, logged before
+  estimation.
+- Tests for the stacked heterogeneity design and the shrinkage.
+
 ## [phase-3] — 2026-11-09
 ### Added
 - `cordon.designs`:

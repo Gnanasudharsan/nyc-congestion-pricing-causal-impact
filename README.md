@@ -3,10 +3,12 @@
 [![CI](https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact/actions/workflows/ci.yml/badge.svg)](https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-> **Status: Phase 3 of 7 complete (core causal estimates).**
+> **Status: Phase 4 of 7 complete (spillovers, heterogeneity, equity).**
 > The analysis plan was tagged `analysis-plan-v1` (amended to `analysis-plan-v1.1`) before any
 > effect estimate was computed. Phase 3 estimates, with uncertainty, are in
-> [docs/results-phase3.md](docs/results-phase3.md). **They are not final claims.** Several
+> [docs/results-phase3.md](docs/results-phase3.md); spillovers, heterogeneity, and the
+> exploratory equity lens are in [docs/results-phase4.md](docs/results-phase4.md).
+> **They are not final claims.** Several
 > designs show pre-trends, and the robust / fragile / not supported labels come after the
 > Phase 5 falsification tests.
 
@@ -51,8 +53,8 @@ real space.
 | 1 | Data audit, `data/MANIFEST.json`, pre-registered analysis plan | ✅ Done |
 | 2 | Cleaning pipelines, data tests, descriptive and pre-trend plots | ✅ Done |
 | 3 | Core causal estimates (DiD / event study, synthetic control), replication | ✅ Done |
-| 4 | Spillovers, heterogeneity, equity lens | ⏳ Next |
-| 5 | Robustness, placebo tests, parallel-trends sensitivity, DoWhy refuters | — |
+| 4 | Spillovers, heterogeneity, equity lens | ✅ Done |
+| 5 | Robustness, placebo tests, parallel-trends sensitivity, DoWhy refuters | ⏳ Next |
 | 6 | Quarto paper (PDF) and website (GitHub Pages) | — |
 | 7 | v1.0.0 release | — |
 
@@ -67,7 +69,7 @@ make setup         # pinned Python 3.12 environment + pre-commit hooks
 make test          # unit tests
 make data          # download raw data, build and validate processed panels (~1-2 hours)
 make descriptives  # figures, pre-period MDEs, docs/descriptives.md
-make analysis      # every Phase 3 design -> results/, docs/results-phase3.md (~30 min)
+make analysis      # every design -> results/, docs/results-phase3.md and -phase4.md (~45 min)
 make all           # full rebuild from raw downloads (filled in phase by phase)
 ```
 
