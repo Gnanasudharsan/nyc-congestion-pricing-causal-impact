@@ -57,7 +57,7 @@ class DidOutcome:
     weather_columns: tuple[str, ...] = specs.WEATHER_COLUMNS
     primary_inference: str = "cluster"  # "cluster" or "randomization"
     bootstrap: bool = True  # wild cluster bootstrap check
-    clusters_label: str = "unit"
+    clusters_label: str = "units"
 
 
 @dataclass(frozen=True)
@@ -79,28 +79,28 @@ DID_OUTCOMES = [
         "Crossings at CRZ-feeding MTA tunnels vs control bridges",
         panels.bt_builder("control", "treated"),
         primary_inference="randomization",
-        clusters_label="facility",
+        clusters_label="facilities",
     ),
     DidOutcome(
         "T2",
         "primary",
         "Taxi + FHV trips from CRZ zones vs far-control zones",
         lambda: panels.tlc_count_panel("crz"),
-        clusters_label="taxi zone",
+        clusters_label="taxi zones",
     ),
     DidOutcome(
         "T3",
         "primary",
         "Peak speed of trips within the CRZ vs within far-control zones",
         panels.tlc_speed_builder("crz"),
-        clusters_label="taxi zone",
+        clusters_label="taxi zones",
     ),
     DidOutcome(
         "S1",
         "primary",
         "Taxi + FHV trips in the border ring (both ends outside the CRZ) vs far control",
         lambda: panels.tlc_count_panel("border_ring"),
-        clusters_label="taxi zone",
+        clusters_label="taxi zones",
     ),
     DidOutcome(
         "T5a",
@@ -108,7 +108,7 @@ DID_OUTCOMES = [
         "Yellow-taxi trips from CRZ zones vs far control",
         lambda: panels.tlc_count_panel("crz", services=("yellow",)),
         bootstrap=False,
-        clusters_label="taxi zone",
+        clusters_label="taxi zones",
     ),
     DidOutcome(
         "T5b",
@@ -116,7 +116,7 @@ DID_OUTCOMES = [
         "High-volume FHV trips from CRZ zones vs far control",
         lambda: panels.tlc_count_panel("crz", services=("fhvhv",)),
         bootstrap=False,
-        clusters_label="taxi zone",
+        clusters_label="taxi zones",
     ),
     DidOutcome(
         "T5c",
@@ -124,7 +124,7 @@ DID_OUTCOMES = [
         "Shared-ride requests from CRZ zones vs far control",
         lambda: panels.tlc_count_panel("crz", measure="shared_requests", services=("fhvhv",)),
         bootstrap=False,
-        clusters_label="taxi zone",
+        clusters_label="taxi zones",
     ),
     DidOutcome(
         "R2",
@@ -132,7 +132,7 @@ DID_OUTCOMES = [
         "Subway entries at CRZ station complexes vs elsewhere",
         panels.subway_panel,
         bootstrap=False,
-        clusters_label="station complex",
+        clusters_label="station complexes",
     ),
     DidOutcome(
         "R3",
@@ -141,7 +141,7 @@ DID_OUTCOMES = [
         panels.bus_panel,
         frequency="month",
         bootstrap=False,
-        clusters_label="route",
+        clusters_label="routes",
     ),
     DidOutcome(
         "A3",
@@ -152,7 +152,7 @@ DID_OUTCOMES = [
         unit_label="µg/m³",
         weather=True,
         primary_inference="randomization",
-        clusters_label="site",
+        clusters_label="sites",
     ),
     DidOutcome(
         "A3_pbl",
@@ -164,7 +164,7 @@ DID_OUTCOMES = [
         weather=True,
         weather_columns=specs.WEATHER_COLUMNS_WITH_PBL,
         primary_inference="randomization",
-        clusters_label="site",
+        clusters_label="sites",
     ),
 ]
 
@@ -409,7 +409,7 @@ def run_did(outcome: DidOutcome, tables: Tables, weather: pl.DataFrame) -> None:
                     extra if name == "post_year1" else None,
                 )
             )
-        if not trends:
+        if design.adjust is None:  # pyfixest has no pre-fitted adjustment step
             tables.crosschecks.append(pyfixest_crosscheck(outcome, design, estimate))
 
         study = specs.DidSpec(
