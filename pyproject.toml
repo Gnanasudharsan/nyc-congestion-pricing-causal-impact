@@ -68,7 +68,7 @@ mypy_path = "src"
 packages = ["cordon"]
 
 [[tool.mypy.overrides]]
-module = ["duckdb.*", "geopandas.*", "shapely.*", "holidays.*", "statsmodels.*", "linearmodels.*", "causalpy.*", "pysyncon.*", "dowhy.*", "wildboottest.*", "altair.*", "plotly.*", "scipy.*"]
+module = ["duckdb.*", "pyfixest.*", "geopandas.*", "shapely.*", "holidays.*", "statsmodels.*", "linearmodels.*", "causalpy.*", "pysyncon.*", "dowhy.*", "wildboottest.*", "altair.*", "plotly.*", "scipy.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
