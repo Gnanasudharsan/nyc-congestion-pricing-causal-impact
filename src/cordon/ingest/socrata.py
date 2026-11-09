@@ -35,14 +35,21 @@ class SocrataProfile:
 
 
 def _get_json(url: str, params: dict[str, str] | None = None) -> Any:
-    """GET a JSON response, retrying transient server errors (5xx) with backoff."""
+    """GET a JSON response, retrying 5xx errors, timeouts, and dropped connections."""
     for attempt in range(MAX_ATTEMPTS):
-        response = requests.get(url, params=params, timeout=TIMEOUT_SECONDS)
-        if response.status_code < 500 or attempt == MAX_ATTEMPTS - 1:
-            break
+        last_attempt = attempt == MAX_ATTEMPTS - 1
+        try:
+            response = requests.get(url, params=params, timeout=TIMEOUT_SECONDS)
+        except (requests.ConnectionError, requests.Timeout):
+            if last_attempt:
+                raise
+            time.sleep(BACKOFF_SECONDS * (attempt + 1))
+            continue
+        if response.status_code < 500 or last_attempt:
+            response.raise_for_status()
+            return response.json()
         time.sleep(BACKOFF_SECONDS * (attempt + 1))
-    response.raise_for_status()
-    return response.json()
+    raise RuntimeError("unreachable")
 
 
 def resource_url(domain: str, dataset_id: str) -> str:
