@@ -3,11 +3,33 @@
 All notable changes are documented here. Format follows Keep a Changelog; phases are tagged
 `phase-N`.
 
-## [Unreleased]
+## [phase-3] — 2026-11-09
+### Added
+- `cordon.designs`:
+  - fixed-effect demeaning;
+  - pooled DiD and event study with pre-fitted adjustments (unit trends, weather);
+  - cluster-robust SEs that match `pyfixest`;
+  - restricted wild cluster bootstrap-t (Webb weights; every replication re-estimates the
+    adjustment);
+  - randomization inference, demeaned synthetic control (exact NNLS weights) with placebo
+    inference, and Holm/BH.
+- Estimators unit-tested on simulated data with known effects (`tests/test_designs.py`).
+- Phase 3 run (`make analysis`):
+  - six primary outcomes with Holm adjustment;
+  - non-spillover secondaries T5, R2, R3, R4, A3, A4;
+  - detrended specification everywhere, anticipation and 2026 windows;
+  - pre-trend tests.
+  Writes `results/*.csv` and the generated `docs/results-phase3.md`.
+- Replication of Pandey, Guler & Gayah (2026). CausalPy Bayesian synthetic-control
+  cross-check. Fitted-synthetic-control MDEs (deviation 2 follow-up).
+- HonestDiD port validated against the R reference: 20/20 interval endpoints to 2 dp. It runs in
+  an isolated, locked environment.
+- ADR 0012 and deviations 6–11. Each was logged before the estimate it affects.
 ### Changed
 - Analysis plan amendment 1 (tag `analysis-plan-v1.1`): adds a pre-period-detrended secondary
   specification for every design, with a stricter claim rule for T2, R4, A1, A3 and R2
   (ADR 0011, deviation 5). Made before any treatment-effect estimate.
+- Panel builders moved to `cordon.designs.panels`. CI installs the `causal` group.
 
 ## [phase-2] — 2026-11-09
 ### Added

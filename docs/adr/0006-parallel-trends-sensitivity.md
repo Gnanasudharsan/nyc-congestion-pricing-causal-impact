@@ -25,3 +25,10 @@ and an early version number.
 ## Consequences
 Every DiD headline carries a single, interpretable sensitivity number. The validation step costs
 some time but protects against relying on an immature dependency.
+
+## Update (2026-11-09, Phase 3; deviation 7)
+- The port reproduces all 20 published R interval endpoints to 2 dp: relative magnitudes
+  (M̄ = 0.5–2) and smoothness (M = 0–0.05). See `results/honestdid_validation.csv`.
+- It only runs on NumPy 1.x. It is therefore invoked through `scripts/honestdid_bounds.py`, with
+  its own `uv` lockfile, and receives inputs as JSON files.
+- The smoothness (Δ^SD) bound needed by amendment 1 passes the same validation.
