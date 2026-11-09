@@ -4,4 +4,4 @@ The plan is tagged `analysis-plan-v1` (Phase 1). Every change after that tag is 
 
 | Date | Section of plan | Change | Reason | Made before or after seeing related estimates? |
 |---|---|---|---|---|
-| — | — | No deviations yet (plan not yet written). | — | — |
+| — | — | No deviations yet. Plan v1 tagged `analysis-plan-v1` on 2026-11-09. | — | — |
