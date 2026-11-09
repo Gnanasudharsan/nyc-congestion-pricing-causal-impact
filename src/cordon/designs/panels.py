@@ -107,22 +107,37 @@ def tlc_trips_builder(treated_group: str) -> Callable[[], pl.DataFrame]:
     return build
 
 
-def tlc_speed_builder(treated_group: str, peak: bool = True) -> Callable[[], pl.DataFrame]:
+def tlc_speed_builder(
+    treated_group: str,
+    peak: bool = True,
+    control_group: str = "far_control",
+    control_boroughs: tuple[str, ...] | None = None,
+    min_trips: int = 20,
+) -> Callable[[], pl.DataFrame]:
     """TLC: log distance-weighted speed of same-group trips by pickup zone.
 
     Peak toll hours by default (T3, S4); ``peak=False`` gives overnight hours.
+    ``control_group``/``control_boroughs`` change the comparison zones and
+    ``min_trips`` the zone-day minimum (deviation 3); both are Phase 5 checks.
     """
 
     def build() -> pl.DataFrame:
         groups = pl.read_csv(FINAL_DIR / "zone_groups.csv").select(
-            pl.col("location_id").alias("pu_location_id"), pl.col("group").alias("pu_group")
+            pl.col("location_id").alias("pu_location_id"),
+            pl.col("group").alias("pu_group"),
+            pl.col("borough").alias("pu_borough"),
         )
         panel = (
             pl.read_parquet(PROCESSED_DIR / "tlc_zone_day.parquet")
             .join(groups, on="pu_location_id", how="inner")
             .filter((pl.col("is_peak") == peak) & (pl.col("pu_group") == pl.col("do_group")))
-            .filter(pl.col("pu_group").is_in([treated_group, "far_control"]))
+            .filter(pl.col("pu_group").is_in([treated_group, control_group]))
         )
+        if control_boroughs is not None:
+            panel = panel.filter(
+                (pl.col("pu_group") == treated_group)
+                | pl.col("pu_borough").is_in(list(control_boroughs))
+            )
         daily = (
             panel.group_by("date", "pu_location_id", "pu_group")
             .agg(
@@ -130,7 +145,7 @@ def tlc_speed_builder(treated_group: str, peak: bool = True) -> Callable[[], pl.
                 pl.col("speed_seconds").sum(),
                 pl.col("speed_trips").sum(),
             )
-            .filter(pl.col("speed_trips") >= 20)  # avoid noisy zone-days
+            .filter(pl.col("speed_trips") >= max(min_trips, 1))  # avoid noisy zone-days
             .with_columns(
                 (pl.col("speed_miles") / (pl.col("speed_seconds") / 3600)).log().alias("log_mph"),
                 pl.when(pl.col("pu_group") == treated_group)
@@ -200,8 +215,12 @@ def air_builder(
     treated_roles: list[str],
     control_roles: list[str],
     control_source: str | None = None,
+    include_smoke: bool = False,
 ) -> Callable[[], pl.DataFrame]:
-    """Air: daily-mean concentration per site on valid, non-smoke days (levels, not logs)."""
+    """Air: daily-mean concentration per site on valid, non-smoke days (levels, not logs).
+
+    ``include_smoke`` keeps smoke days (the pre-registered robustness check).
+    """
 
     def build() -> pl.DataFrame:
         smoke = pl.read_parquet(PROCESSED_DIR / "smoke_days.parquet").select("date", "is_smoke_day")
@@ -209,7 +228,7 @@ def air_builder(
             pl.read_parquet(PROCESSED_DIR / "air_site_day.parquet")
             .filter((pl.col("pollutant") == pollutant) & pl.col("valid_day"))
             .join(smoke, on="date", how="left")
-            .filter(~pl.col("is_smoke_day").fill_null(False))
+            .filter(pl.lit(include_smoke) | ~pl.col("is_smoke_day").fill_null(False))
         )
         treated = panel.filter(pl.col("role").is_in(treated_roles))
         control = panel.filter(pl.col("role").is_in(control_roles))
@@ -261,6 +280,8 @@ def tlc_count_panel(
     measure: str = "trips",
     services: tuple[str, ...] | None = None,
     peak: bool | None = None,
+    control_group: str = "far_control",
+    control_boroughs: tuple[str, ...] | None = None,
 ) -> pl.DataFrame:
     """log(1 + daily count) by pickup zone with the plan's counting rules (T2, S1, S3, T5).
 
@@ -268,9 +289,13 @@ def tlc_count_panel(
     drop-off is also outside the CRZ. ``measure`` is ``trips`` or
     ``shared_requests``; ``services`` restricts to yellow, green, or fhvhv;
     ``peak`` restricts to peak (True) or overnight (False) toll hours.
+    ``control_group`` and ``control_boroughs`` change the comparison zones (Phase 5
+    control-group checks; the pre-registered control is every far-control zone).
     """
     groups = pl.read_csv(FINAL_DIR / "zone_groups.csv").select(
-        pl.col("location_id").alias("pu_location_id"), pl.col("group").alias("pu_group")
+        pl.col("location_id").alias("pu_location_id"),
+        pl.col("group").alias("pu_group"),
+        pl.col("borough").alias("pu_borough"),
     )
     panel = pl.read_parquet(PROCESSED_DIR / "tlc_zone_day.parquet").join(
         groups, on="pu_location_id", how="inner"
@@ -285,7 +310,9 @@ def tlc_count_panel(
         treated = panel.filter(
             (pl.col("pu_group") == treated_group) & (pl.col("do_group") != "crz")
         )
-    control = panel.filter((pl.col("pu_group") == "far_control") & (pl.col("do_group") != "crz"))
+    control = panel.filter((pl.col("pu_group") == control_group) & (pl.col("do_group") != "crz"))
+    if control_boroughs is not None:
+        control = control.filter(pl.col("pu_borough").is_in(list(control_boroughs)))
     daily = (
         pl.concat(
             [
@@ -453,7 +480,12 @@ def impute_two_way(values: np.ndarray, iterations: int = 500) -> np.ndarray:
 
 
 def air_synthetic(
-    pollutant: str, treated_roles: list[str], statistic: str = "daily_mean"
+    pollutant: str,
+    treated_roles: list[str],
+    statistic: str = "daily_mean",
+    include_smoke: bool = False,
+    min_treated_sites: int | None = None,
+    min_donor_completeness: float | None = None,
 ) -> SyntheticPanel:
     """A1/A4 (and Phase 4's A2/S5): weekly mean of daily values, treated vs donors.
 
@@ -464,6 +496,11 @@ def air_synthetic(
     - Donor-weeks that are missing are imputed with donor + week effects
       (deviation 8). The treated series is never imputed.
     - Weeks where fewer than 75% of donors report are dropped (deviation 8).
+
+    Phase 5 checks (deviation 22): ``include_smoke`` keeps smoke days;
+    ``min_treated_sites`` lets a week count when at least that many treated sites
+    are valid (used for the all-CRZ-sites check); ``min_donor_completeness`` keeps
+    only donors observed in at least that share of the treated unit's weeks.
     """
     smoke = pl.read_parquet(PROCESSED_DIR / "smoke_days.parquet").select("date", "is_smoke_day")
     air = (
@@ -471,7 +508,7 @@ def air_synthetic(
         .filter((pl.col("pollutant") == pollutant) & pl.col("valid_day"))
         .filter(pl.col("role").is_in([*treated_roles, "donor"]))
         .join(smoke, on="date", how="left")
-        .filter(~pl.col("is_smoke_day").fill_null(False))
+        .filter(pl.lit(include_smoke) | ~pl.col("is_smoke_day").fill_null(False))
         .with_columns(
             pl.col("date").dt.truncate("1w").alias("week"),
             (pl.col("source") + ":" + pl.col("site_id")).alias("site_key"),
@@ -497,7 +534,7 @@ def air_synthetic(
     treated_series = (
         treated.group_by("week")
         .agg(pl.col("centred").mean(), pl.len().alias("sites"))
-        .filter(pl.col("sites") == n_treated_sites)
+        .filter(pl.col("sites") >= (min_treated_sites or n_treated_sites))
         .sort("week")
     )
     donors_long = weekly.filter(pl.col("role") == "donor").join(
@@ -512,6 +549,10 @@ def air_synthetic(
     raw = donor_wide.select(donor_names).to_numpy().astype(np.float64)
     # Keep weeks where most donors report; this also ends the panel where the AQS
     # donor files end, so whole stretches of donor data are never invented.
+    if min_donor_completeness is not None:
+        complete = (~np.isnan(raw)).mean(axis=0) >= min_donor_completeness
+        raw = raw[:, complete]
+        donor_names = [n for n, keep in zip(donor_names, complete, strict=True) if keep]
     covered = (~np.isnan(raw)).mean(axis=1) >= MIN_DONOR_COVERAGE
     raw = raw[covered]
     periods = [
