@@ -50,6 +50,20 @@ Congestion Pricing in New York City"; revised through August 2026). [V]
     PM2.5 effects were not significant and imprecise.
 - *Limitations:* headline numbers changed across versions. Comparisons with other cities do not
   rule out shocks specific to NYC. Confidence intervals are not in the abstract.
+- *Full-text details (read 2026-11-09; version "March 2025, revised August 2026"):*
+  - **Data and window:** Google data cover Sep 2024 – Jun 2026, so the pre-period is about 4
+    months.
+  - **Estimator:** `gsynth` (Xu 2017) with interactive factors. Donors are Philadelphia, Boston,
+    Chicago, Atlanta, and Baltimore.
+  - **Inference:** the paper describes it two ways. The text says "parametric" SEs; the figure
+    notes say SEs are clustered by city, and there are only 6 cities.
+  - **Estimates:** CBD segment speed +11% (7.14 → 7.69 mph), about +15% through April 2025 and
+    about +10% after. Trip speeds: to the CBD +3.7%, from the CBD +6.2%, and outside the CBD
+    +0.5%. PM2.5 is null, with a lower 95% bound of about −0.36 µg/m³. Intervals appear mostly
+    only in figures.
+  - **Robustness:** a placebo test with Boston as the treated city shows positive effects.
+  - **Replicability:** the core speed estimates are not replicable with public data. A public
+    proxy is TLC trip-level speeds.
 
 **2. Fraser, T., Park, Y., Lu, M., Tayarani, M., Deng, S., & Gao, H. O. (2025). "A first look into
 congestion pricing in the United States: PM2.5 impacts after six months of New York City cordon
@@ -69,6 +83,17 @@ pricing."** *npj Clean Air* 1:39. doi:10.1038/s44407-025-00037-2 (Author Correct
   reflect simulation rather than design-based variance. There is no clean control group and the
   post-period is six months. Some internal inconsistencies in day counts. The size of the effect
   conflicts with sources 1 and 8.
+- *Full-text details (read 2026-11-09):*
+  - **Design:** the "treatment" is a time-only post indicator applied to *all* monitors. There is
+    no untreated comparison monitor. The counterfactual comes from the 2024 pre-period plus a
+    covariate measuring background PM2.5 at four upwind NJ monitors.
+  - **Model:** the dependent variable is √(daily-max PM2.5), with week-of-year and day-of-week
+    FE. Weather comes from a commercial API.
+  - **Inference:** regression SEs are not clustered.
+  - **Consistency:** the reported N differs between table and text. The −3.05 µg/m³ ATT cannot be
+    reproduced from the printed √-scale coefficients (−0.19 for the CRZ model) without the
+    unprinted day-counter term.
+  - **Code:** reported at github.com/timothyfraser/nyc_congestion_rep (not yet inspected).
 
 **3. Chikish, Y., Colman, G., Dave, D., Humphreys, B., Santamaria, S., & Winship, C. "Congestion
 Pricing and Emergency Medical Service Response: Evidence from New York City."** NBER Working
@@ -79,6 +104,12 @@ Paper 35414 (July 2026, revised August 2026). [V]
 - *Findings:* vehicle traffic near the boundary fell 18–21%; pedestrian and bicycle activity
   rose; EMS travel time fell 63–70 seconds (5–6%), mostly in hospital transport. The authors
   report little displacement to adjacent areas.
+- *Full-text details:*
+  - **Main estimate:** total EMS travel time −63.2 s (SE 18.0) within a 5 km bandwidth.
+  - **Fragility:** the result is not significant with a 2 km bandwidth (−27.0, SE 21.6) or with a
+    quadratic fit (−29.9, SE 22.5).
+  - **Traffic first stage:** passenger vehicles −20.6%, from about 9 weeks of post-period camera
+    data.
 - *Limitations:* estimates are local to the boundary.
 
 **4. Zhang, Y., Sang, Y., & Wu, M. (2026). "Congestion pricing in New York city: Effects on
@@ -97,7 +128,10 @@ doi:10.32866/001c.155761. [V]
 <https://findingspress.org/article/155761-the-effect-of-the-new-york-city-congestion-toll-on-trips-served-by-transportation-network-companies>
 - *Data and method:* TLC trip records, weekdays, weeks 1–14 of 2025 vs 2024. DiD on
   ln(1+trips) by taxi zone, SEs clustered by zone, event study. Controls are Manhattan zones north
-  of 60th St (alternatives: Brooklyn, Queens).
+  of 60th St (alternatives: Brooklyn, Queens). The regression is a pooled 2×2
+  (treat, post, treat×post) without zone or week fixed effects. Control-zone counts exclude trips
+  that go into the CBD. The week convention is not stated, so 2025 "week 1" may include pre-toll
+  days (Jan 1–3).
 - *Findings:* ride-hail trips −6.1 log points (SE 0.016), about −5.95%, and −3.8% to −7.2% across
   control groups. Shared-ride requests −38% and matched shared trips −51%.
 - *Limitations:* imperfect pre-trends for shared trips. Upper Manhattan as a control assumes no
@@ -132,9 +166,19 @@ estimates unverified]
 - *Findings:* CRZ pollution was stable or slightly lower, with differences from the projection
   not statistically significant. There was no toll-attributable increase along environmental
   justice highway corridors (Major Deegan, Cross Bronx, BQE, SIE, FDR, Trans-Manhattan).
-- *Limitations:* a single control site, one post-year, and no numeric estimates in the text
-  (they are in charts and an appendix). Note that the report was co-authored by the toll
-  operator.
+- *Numeric estimates (observed − projected, 95% CI, from the report's chart data files):*
+
+  | Area | PM2.5 (µg/m³) | NO2 (ppb) |
+  |---|---|---|
+  | CRZ | −0.29 (−3.01, 2.42) | −0.66 (−4.85, 3.54) |
+  | Rest of city | −0.25 (−2.98, 2.48) | −0.55 (−3.51, 2.41) |
+
+  Every environmental-justice site interval includes zero except one: NO at the BQE,
+  +4.08 ppb (0.21, 7.95).
+- *Data:* the integrated NYCCAS samples come from filter-based, two-week measurements available
+  on request, not as open data.
+- *Limitations:* a single control site and one post-year. The model equation and SE method are
+  not published. Note that the toll operator co-authored the report.
 
 **9. MTA / Office of the Governor (Jan 5, 2026). One-year results.** [V-partial]
 <https://www.governor.ny.gov/news/less-traffic-better-transit-its-first-anniversary-governor-hochul-celebrates-transformational>
@@ -236,8 +280,8 @@ NYC congestion pricing."** arXiv:2510.06416 (v3, May 2026); *Transportation Rese
    as controls (source 2). Cordon relates estimated spillover changes to neighborhood income and
    health indicators from public ACS and city data, presented as associations, not causal claims.
 
-Open follow-ups for Phase 1:
-- Read the full texts of sources 1, 2, 4, 6, and 8 to extract exact specifications and intervals
-  to replicate against.
-- Verify source 7's authors and estimates.
-- Check for state or city comptroller and NY Fed evaluations, none found so far.
+Status of Phase 0 follow-ups:
+- Sources 1, 2, 3, 5, and 8 were read in full on 2026-11-09. The details are folded in above, and
+  the replication targets are in `docs/analysis-plan.md`.
+- Still open: full texts of sources 4 and 6, and the authors and estimates for source 7. No
+  comptroller or NY Fed evaluations of measured effects have been found.
