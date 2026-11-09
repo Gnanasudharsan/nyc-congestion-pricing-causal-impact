@@ -54,6 +54,7 @@ class DidOutcome:
     log_scale: bool = True
     unit_label: str = "log points"
     weather: bool = False
+    weather_columns: tuple[str, ...] = specs.WEATHER_COLUMNS
     primary_inference: str = "cluster"  # "cluster" or "randomization"
     bootstrap: bool = True  # wild cluster bootstrap check
     clusters_label: str = "unit"
@@ -150,6 +151,18 @@ DID_OUTCOMES = [
         log_scale=False,
         unit_label="µg/m³",
         weather=True,
+        primary_inference="randomization",
+        clusters_label="site",
+    ),
+    DidOutcome(
+        "A3_pbl",
+        "check",
+        "A3 with boundary-layer height added, complete-case days only (deviation 11)",
+        panels.air_builder("pm25", ["crz_core"], ["far_core"]),
+        log_scale=False,
+        unit_label="µg/m³",
+        weather=True,
+        weather_columns=specs.WEATHER_COLUMNS_WITH_PBL,
         primary_inference="randomization",
         clusters_label="site",
     ),
@@ -348,7 +361,13 @@ def run_did(outcome: DidOutcome, tables: Tables, weather: pl.DataFrame) -> None:
     w = weather if outcome.weather else None
     adjustments = [(False, outcome.weather), (True, outcome.weather)]
     for trends, use_weather in adjustments:
-        pooled = specs.DidSpec("pooled", outcome.frequency, trends=trends, weather=use_weather)
+        pooled = specs.DidSpec(
+            "pooled",
+            outcome.frequency,
+            trends=trends,
+            weather=use_weather,
+            weather_columns=outcome.weather_columns,
+        )
         design = specs.build_design(rows, pooled, weather=w)
         estimate = did.fit(design)
         LOG.info(
@@ -393,7 +412,13 @@ def run_did(outcome: DidOutcome, tables: Tables, weather: pl.DataFrame) -> None:
         if not trends:
             tables.crosschecks.append(pyfixest_crosscheck(outcome, design, estimate))
 
-        study = specs.DidSpec("event_study", outcome.frequency, trends=trends, weather=use_weather)
+        study = specs.DidSpec(
+            "event_study",
+            outcome.frequency,
+            trends=trends,
+            weather=use_weather,
+            weather_columns=outcome.weather_columns,
+        )
         es = specs.relative_to_reference(did.fit(specs.build_design(rows, study, weather=w)))
         tables.event_study.extend(event_study_rows(outcome, study, es))
         tables.pretrends.append(pretrend_test(outcome, rows, study, es, w))

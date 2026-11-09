@@ -95,29 +95,20 @@ def centre(series: FloatArray, windows: Windows, detrend: bool) -> FloatArray:
 
 
 def fit_weights(target: FloatArray, donors: FloatArray) -> FloatArray:
-    """Non-negative weights summing to 1 that minimise ||target - donors @ w||^2."""
-    n_donors = donors.shape[1]
-    gram = donors.T @ donors
-    cross = donors.T @ target
+    """Non-negative weights summing to 1 that minimise ||target - donors @ w||^2.
 
-    def objective(w: FloatArray) -> float:
-        return float(w @ gram @ w - 2 * cross @ w)
-
-    def gradient(w: FloatArray) -> FloatArray:
-        return np.asarray(2 * gram @ w - 2 * cross, dtype=np.float64)
-
-    result = optimize.minimize(
-        objective,
-        x0=np.full(n_donors, 1.0 / n_donors),
-        jac=gradient,
-        method="SLSQP",
-        bounds=[(0.0, 1.0)] * n_donors,
-        constraints=[{"type": "eq", "fun": lambda w: float(w.sum() - 1.0)}],
-        options={"ftol": 1e-12, "maxiter": 2000},
-    )
-    if not result.success:
-        raise RuntimeError(f"synthetic-control weights did not converge: {result.message}")
-    weights = np.clip(result.x, 0.0, None)
+    Solved exactly with non-negative least squares (an active-set method, so no
+    convergence tuning). The sum-to-one constraint is imposed by appending a row
+    of ones with a very large weight: any departure from sum(w) = 1 costs far more
+    than the fit can gain.
+    """
+    n_periods, n_donors = donors.shape
+    penalty = 1e4 * max(1.0, float(np.abs(donors).max())) * np.sqrt(n_periods)
+    augmented = np.vstack([donors, np.full((1, n_donors), penalty)])
+    rhs = np.concatenate([target, [penalty]])
+    weights, _ = optimize.nnls(augmented, rhs, maxiter=50 * n_donors)
+    if weights.sum() <= 0:
+        raise RuntimeError("synthetic-control weights are all zero")
     return np.asarray(weights / weights.sum(), dtype=np.float64)
 
 

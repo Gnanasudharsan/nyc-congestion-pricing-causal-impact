@@ -41,7 +41,11 @@ from cordon.designs import windows
 from cordon.designs.did import Design, Estimate, fit
 from cordon.designs.fixed_effects import encode
 
-WEATHER_COLUMNS = ("temp_mean_c", "rh_mean_pct", "wind_mean_kmh", "precip_mm", "pbl_mean_m")
+# Boundary-layer height is missing at the source (Open-Meteo) for 2023-12-31 to
+# 2024-06-30, so the primary weather adjustment omits it; a check adds it back on
+# complete-case days (deviation 11).
+WEATHER_COLUMNS = ("temp_mean_c", "rh_mean_pct", "wind_mean_kmh", "precip_mm")
+WEATHER_COLUMNS_WITH_PBL = (*WEATHER_COLUMNS, "pbl_mean_m")
 
 
 @dataclass(frozen=True)
@@ -53,6 +57,7 @@ class DidSpec:
     window: str = "year1"  # "year1" or "extended"
     trends: bool = False
     weather: bool = False
+    weather_columns: tuple[str, ...] = WEATHER_COLUMNS
 
     @property
     def label(self) -> str:
@@ -61,7 +66,7 @@ class DidSpec:
         if self.trends:
             parts.append("detrended")
         if self.weather:
-            parts.append("weather")
+            parts.append("weather" if self.weather_columns == WEATHER_COLUMNS else "weather_pbl")
         return "_".join(parts)
 
 
@@ -142,7 +147,7 @@ def adjustment(
         joined = frame.select("period").join(
             weather.rename({"date": "period"}), on="period", how="left"
         )
-        numeric = joined.select(WEATHER_COLUMNS).to_numpy()
+        numeric = joined.select(spec.weather_columns).to_numpy()
         sectors = joined["wind_sector"].to_numpy()
         levels = sorted(set(sectors.tolist()))[1:]  # first sector is the baseline
         dummies = np.column_stack([sectors == level for level in levels]).astype(np.float64)
@@ -165,8 +170,11 @@ def build_design(
     """
     frame = sample(label_rows(rows, spec.frequency), spec.window)
     if spec.weather and weather is not None:
+        complete = weather.filter(
+            pl.all_horizontal(pl.col(c).is_not_nan() for c in spec.weather_columns)
+        )
         frame = frame.join(
-            weather.select("date").rename({"date": "period"}), on="period", how="semi"
+            complete.select("date").rename({"date": "period"}), on="period", how="semi"
         )
     if treated_units is None:
         treated = (frame["group"] == "treated").to_numpy()
