@@ -28,13 +28,24 @@ import argparse
 import logging
 import time
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 
 import duckdb
 import polars as pl
 
-from cordon.config import FINAL_DIR, INTERIM_DIR, PROCESSED_DIR
+from cordon.config import (
+    FINAL_DIR,
+    INTERIM_DIR,
+    MANIFEST_PATH,
+    PROCESSED_DIR,
+    RAW_DIR,
+    REPO_ROOT,
+    TIMEZONE,
+)
+from cordon.ingest.download import download_with_resume
 from cordon.ingest.tlc import file_url, month_range
+from cordon.manifest import ManifestEntry, sha256_file, upsert_entry
 
 LOG = logging.getLogger(__name__)
 BASE_URL = "https://d37ci6vzurychx.cloudfront.net/trip-data"
@@ -43,7 +54,9 @@ ZONE_GROUPS = FINAL_DIR / "zone_groups.csv"
 MAX_ATTEMPTS = 6
 BACKOFF_SECONDS = 60
 # Pause between files so sustained runs stay well below CloudFront's rate limits.
-PAUSE_BETWEEN_FILES_SECONDS = 15
+PAUSE_BETWEEN_FILES_SECONDS = 5
+RAW_TLC_DIR = RAW_DIR / "tlc"
+KEEP_RAW = False  # monthly files total ~25 GB; provenance is kept in the manifest
 
 
 @dataclass(frozen=True)
@@ -77,11 +90,11 @@ def month_bounds(month: str) -> tuple[str, str]:
     return f"{year:04d}-{number:02d}-01", f"{next_year:04d}-{next_number:02d}-01"
 
 
-def aggregation_sql(service: str, month: str) -> str:
+def aggregation_sql(service: str, month: str, source: str | None = None) -> str:
     """Build the SQL that aggregates one monthly file, reading only needed columns."""
     cols = SERVICES[service]
     start, end = month_bounds(month)
-    url = file_url(BASE_URL, service, month)
+    url = source or file_url(BASE_URL, service, month)
     if cols.shared_request and cols.shared_match:
         shared_columns = (
             f"{cols.shared_request} AS shared_request, {cols.shared_match} AS shared_match"
@@ -137,32 +150,82 @@ def connect(zone_groups: Path = ZONE_GROUPS) -> duckdb.DuckDBPyConnection:
 
 
 def aggregate_month(connection: duckdb.DuckDBPyConnection, service: str, month: str) -> Path:
-    """Aggregate one file to data/interim/tlc/<service>_<month>.parquet (skip if done)."""
+    """Aggregate one month to data/interim/tlc/<service>_<month>.parquet (skip if done).
+
+    The file is downloaded in a single streamed request (resumable, size-checked),
+    recorded in data/MANIFEST.json with its SHA-256, aggregated locally, then
+    deleted. Reading remote parquet directly issues many small range requests,
+    which trips the TLC CDN's rate limiting on sustained runs.
+    """
     destination = OUT_DIR / f"{service}_{month}.parquet"
     if destination.exists():
         return destination
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    partial = destination.with_name(destination.name + ".part")
-    # CloudFront occasionally answers 403/5xx under sustained load; back off and retry.
+    url = file_url(BASE_URL, service, month)
+    local = RAW_TLC_DIR / f"{service}_tripdata_{month}.parquet"
     for attempt in range(1, MAX_ATTEMPTS + 1):
         try:
-            connection.execute(
-                f"COPY ({aggregation_sql(service, month)}) TO '{partial}' (FORMAT parquet)"
-            )
+            download_with_resume(url, local)
             break
-        except duckdb.HTTPException as error:
+        except (RuntimeError, OSError) as error:
             if attempt == MAX_ATTEMPTS:
                 raise
-            LOG.warning("tlc %s %s attempt %d failed: %s", service, month, attempt, error)
+            LOG.warning("tlc %s %s download attempt %d failed: %s", service, month, attempt, error)
             time.sleep(BACKOFF_SECONDS * attempt)
+    rows = connection.execute(f"SELECT count(*) FROM read_parquet('{local}')").fetchall()[0][0]
+    start, end = month_bounds(month)
+    upsert_entry(
+        MANIFEST_PATH,
+        ManifestEntry(
+            dataset=f"tlc_{service}",
+            source_url=url,
+            local_path=str(local.relative_to(REPO_ROOT)),
+            downloaded_at=datetime.now(TIMEZONE).isoformat(timespec="seconds"),
+            sha256=sha256_file(local),
+            rows=int(rows),
+            coverage_start=start,
+            coverage_end=end,
+            notes="Deleted after aggregation to data/interim/tlc; re-downloaded by make data.",
+        ),
+    )
+    partial = destination.with_name(destination.name + ".part")
+    connection.execute(
+        f"COPY ({aggregation_sql(service, month, str(local))}) TO '{partial}' (FORMAT parquet)"
+    )
     partial.rename(destination)
+    if not KEEP_RAW:
+        local.unlink()
     return destination
 
 
+PANEL_SCHEMA = {
+    "service": pl.Utf8,
+    "date": pl.Date,
+    "pu_location_id": pl.Int32,
+    "is_peak": pl.Boolean,
+    "do_group": pl.Utf8,
+    "trips": pl.Int64,
+    "shared_requests": pl.Int64,
+    "shared_matches": pl.Int64,
+    "speed_trips": pl.Int64,
+    "speed_miles": pl.Float64,
+    "speed_seconds": pl.Float64,
+}
+
+
 def combine(out_dir: Path = OUT_DIR) -> pl.DataFrame:
-    """Stack all monthly aggregates into one panel."""
-    frame = pl.read_parquet(sorted(out_dir.glob("*.parquet")))
-    return frame.sort("service", "date", "pu_location_id", "is_peak", "do_group")
+    """Stack all monthly aggregates, casting to one schema.
+
+    TLC files are not consistent across months (e.g. zone IDs are Int32 in some
+    files and Int64 in others), so each monthly aggregate is cast before stacking.
+    """
+    frames = [
+        pl.read_parquet(path).select(
+            [pl.col(name).cast(dtype) for name, dtype in PANEL_SCHEMA.items()]
+        )
+        for path in sorted(out_dir.glob("*.parquet"))
+    ]
+    return pl.concat(frames).sort("service", "date", "pu_location_id", "is_peak", "do_group")
 
 
 def main() -> None:
