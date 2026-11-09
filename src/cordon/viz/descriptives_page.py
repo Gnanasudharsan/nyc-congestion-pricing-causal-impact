@@ -135,7 +135,7 @@ def main() -> None:
             figures(),
         ]
     )
-    PAGE.write_text(page + "\n")
+    PAGE.write_text(page.rstrip() + "\n")  # exactly one trailing newline
 
 
 if __name__ == "__main__":
