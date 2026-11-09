@@ -89,6 +89,17 @@
       "coverage_end": "2026-05-31",
       "notes": ""
     },
+    "data/raw/honestdid/ehec_data.dta": {
+      "dataset": "honestdid_ehec_example",
+      "source_url": "https://raw.githubusercontent.com/Mixtape-Sessions/Advanced-DID/main/Exercises/Data/ehec_data.dta",
+      "local_path": "data/raw/honestdid/ehec_data.dta",
+      "downloaded_at": "2026-11-09T20:58:57+00:00",
+      "sha256": "449ba2e38df82c935c7ce78883c9a8768a90fb2e016990841fd96cd5e1523419",
+      "rows": null,
+      "coverage_start": null,
+      "coverage_end": null,
+      "notes": "Validation data for the HonestDiD port (ADR 0006); not an analysis input."
+    },
     "data/raw/nyccas/2022/01.csv": {
       "dataset": "nyccas_hourly_pm25",
       "source_url": "https://raw.githubusercontent.com/nychealth/nyccas-data/a6f327e959045aff2377faa16f5ff2df3359efb1/hist/csv/2022/1.csv",
