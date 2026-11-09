@@ -1,7 +1,7 @@
 # Cordon build entry points. `make all` rebuilds everything from raw downloads.
 # Stages are filled in phase by phase; unimplemented stages say so and exit 0.
 
-.PHONY: help setup data analysis report all test lint format typecheck clean
+.PHONY: help setup audit catalog data analysis report all test lint format typecheck clean
 
 UV ?= uv
 RUN = $(UV) run
@@ -12,6 +12,13 @@ help:  ## List targets
 setup:  ## Create the pinned environment (core + dev + causal) and install git hooks
 	$(UV) sync --all-groups
 	$(RUN) pre-commit install
+
+audit:  ## Profile every candidate dataset (coverage, rows); downloads small tables, EPA, NYCCAS, weather
+	$(RUN) python -m cordon.ingest.audit
+	$(RUN) python -m cordon.ingest.catalog
+
+catalog:  ## Regenerate the coverage table in docs/data-catalog.md from data/catalog/profiles.json
+	$(RUN) python -m cordon.ingest.catalog
 
 data:  ## Download raw data, update data/MANIFEST.json, build processed panels
 	@echo "make data: ingest pipeline arrives in Phase 1-2 (not yet implemented)."
