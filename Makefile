@@ -1,7 +1,7 @@
 # Cordon build entry points. `make all` rebuilds everything from raw downloads.
 # Stages are filled in phase by phase; unimplemented stages say so and exit 0.
 
-.PHONY: help setup audit catalog data analysis report all test lint format typecheck clean
+.PHONY: help setup audit catalog data validate descriptives analysis report all test lint format typecheck clean
 
 UV ?= uv
 RUN = $(UV) run
@@ -20,10 +20,28 @@ audit:  ## Profile every candidate dataset (coverage, rows); downloads small tab
 catalog:  ## Regenerate the coverage table in docs/data-catalog.md from data/catalog/profiles.json
 	$(RUN) python -m cordon.ingest.catalog
 
-data:  ## Download raw data, update data/MANIFEST.json, build processed panels
-	@echo "make data: ingest pipeline arrives in Phase 1-2 (not yet implemented)."
+data:  ## Download raw data (audit), build features and processed panels, run data tests
+	$(RUN) python -m cordon.ingest.audit
+	$(RUN) python -m cordon.ingest.catalog
+	$(RUN) python -m cordon.features.geography
+	$(RUN) python -m cordon.features.build
+	$(RUN) python -m cordon.clean.bt
+	$(RUN) python -m cordon.clean.tlc
+	$(RUN) python -m cordon.clean.ntd
+	$(RUN) python -m cordon.clean.air
+	$(RUN) python -m cordon.clean.subway
+	$(RUN) python -m cordon.clean.bus
+	$(MAKE) validate
 
-analysis: data  ## Run every pre-registered design and write results/
+validate:  ## Run data tests on every processed panel (writes data/catalog/validation.json)
+	$(RUN) python -m cordon.clean.validate
+
+descriptives:  ## Phase 2 figures, pre-period MDEs, and docs/descriptives.md (no effect estimates)
+	$(RUN) python -m cordon.viz.descriptive
+	$(RUN) python -m cordon.robustness.mde
+	$(RUN) python -m cordon.viz.descriptives_page
+
+analysis: descriptives  ## Run every pre-registered design and write results/
 	@echo "make analysis: designs arrive in Phase 3-5 (not yet implemented)."
 
 report: analysis  ## Render the Quarto paper (PDF) and website
