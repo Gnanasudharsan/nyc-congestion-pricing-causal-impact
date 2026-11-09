@@ -26,13 +26,14 @@ SD is itself imprecise. The MDEs are a planning guide, not a test.
 from __future__ import annotations
 
 import logging
+from collections.abc import Callable
 from datetime import date, timedelta
 
 import numpy as np
 import polars as pl
 
-from cordon.config import FINAL_DIR
-from cordon.designs import panels
+from cordon.config import FINAL_DIR, REPO_ROOT
+from cordon.designs import panels, synth
 from cordon.features.calendar import PRE_START
 from cordon.viz import descriptive
 
@@ -131,12 +132,61 @@ def compute() -> pl.DataFrame:
     return pl.DataFrame(results)
 
 
+# --------------------------------------------------------------------------- Phase 3 update
+
+FITTED_OUTPUT = REPO_ROOT / "results" / "mde_fitted_sc.csv"
+
+
+def fitted_sc_estimate(panel: panels.SyntheticPanel, placebo: date) -> float:
+    """Placebo effect from the fitted (demeaned) synthetic control, pre-period data only."""
+    keep = np.array([p <= PRE_END for p in panel.periods])
+    periods = [p for p, k in zip(panel.periods, keep, strict=True) if k]
+    before = np.array([p < placebo for p in periods])
+    masks = synth.Windows(
+        pre=before,
+        anticipation=np.zeros(len(periods), dtype=bool),
+        post_year1=~before,
+        post_extended=np.zeros(len(periods), dtype=bool),
+        years=panel.windows.years[keep],
+    )
+    return synth.fit_one(panel.target[keep], panel.donors[keep], masks, detrend=False).effect_year1
+
+
+def fitted_sc_mdes() -> pl.DataFrame:
+    """Deviation 2 follow-up: MDEs for R1 and A1 using the fitted synthetic control."""
+    builders: dict[str, tuple[Callable[[], panels.SyntheticPanel], float, str]] = {
+        "R1": (lambda: panels.ntd_synthetic("treated_r1", "donor_r1"), 100.0, "log points x 100"),
+        "A1": (lambda: panels.air_synthetic("pm25", ["crz_core"]), 1.0, "PM2.5 µg/m³"),
+    }
+    rows = []
+    for key, (build, scale, unit) in builders.items():
+        panel = build()
+        estimates = np.array([fitted_sc_estimate(panel, d) for d in placebo_dates()])
+        sd = float(estimates.std(ddof=1))
+        rows.append(
+            {
+                "key": key,
+                "method": "sc_fitted_weights",
+                "unit": unit,
+                "placebos": len(estimates),
+                "placebo_mean": round(float(estimates.mean()) * scale, 3),
+                "placebo_sd": round(sd * scale, 3),
+                "mde_80pct_power": round(POWER_MULTIPLIER * sd * scale, 3),
+            }
+        )
+    table = pl.DataFrame(rows)
+    FITTED_OUTPUT.parent.mkdir(exist_ok=True)
+    table.write_csv(FITTED_OUTPUT)
+    return table
+
+
 def main() -> None:
-    """Write data/final/mde_pre_period.csv."""
+    """Write data/final/mde_pre_period.csv (Phase 2) and results/mde_fitted_sc.csv."""
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s")
     table = compute()
     table.write_csv(OUTPUT)
     print(table)
+    print(fitted_sc_mdes())
 
 
 if __name__ == "__main__":
