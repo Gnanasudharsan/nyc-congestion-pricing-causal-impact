@@ -155,6 +155,39 @@ DID_OUTCOMES = [
         clusters_label="sites",
     ),
     DidOutcome(
+        "S2",
+        "spillover",
+        "Crossings at spillover facilities (RFK plazas, Henry Hudson) vs control bridges",
+        panels.bt_builder("control", "spillover"),
+        primary_inference="randomization",
+        clusters_label="facilities",
+    ),
+    DidOutcome(
+        "S3",
+        "spillover",
+        "Taxi + FHV trips in upper Manhattan + Bronx (both ends outside the CRZ) vs far control",
+        lambda: panels.tlc_count_panel("upper_manhattan_bronx"),
+        clusters_label="taxi zones",
+    ),
+    DidOutcome(
+        "S4",
+        "spillover",
+        "Peak speed of trips within the border ring vs within far-control zones",
+        panels.tlc_speed_builder("border_ring"),
+        clusters_label="taxi zones",
+    ),
+    DidOutcome(
+        "A2b",
+        "spillover",
+        "NO2 at the Bronx sites (IS 52, Pfizer Lab) vs Queens College sites, weather-adjusted",
+        panels.air_builder("no2", ["spillover_no2", "spillover_no2_secondary"], ["far_core"]),
+        log_scale=False,
+        unit_label="ppb",
+        weather=True,
+        primary_inference="randomization",
+        clusters_label="sites",
+    ),
+    DidOutcome(
         "A3_pbl",
         "check",
         "A3 with boundary-layer height added, complete-case days only (deviation 11)",
@@ -169,6 +202,22 @@ DID_OUTCOMES = [
 ]
 
 SYNTHETIC_OUTCOMES = [
+    SyntheticOutcome(
+        "S5",
+        "spillover",
+        "PM2.5 at the Cross Bronx Expwy monitor vs out-of-region monitors",
+        lambda: panels.air_synthetic("pm25", ["spillover_core"]),
+        log_scale=False,
+        unit_label="µg/m³",
+    ),
+    SyntheticOutcome(
+        "A2",
+        "spillover",
+        "NO2 at IS 52 (South Bronx) vs out-of-region monitors",
+        lambda: panels.air_synthetic("no2", ["spillover_no2"]),
+        log_scale=False,
+        unit_label="ppb",
+    ),
     SyntheticOutcome(
         "R1",
         "primary",
@@ -548,12 +597,38 @@ def holm_table(estimates: pl.DataFrame) -> pl.DataFrame:
     )
 
 
+SPILLOVER_FAMILY = {
+    "S2": "pooled_year1",
+    "S3": "pooled_year1",
+    "S4": "pooled_year1",
+    "S5": "synthetic",
+    "A2": "synthetic",
+}
+
+
+def spillover_bh_table(estimates: pl.DataFrame) -> pl.DataFrame:
+    """BH q-values across the spillover family S2-S5 + A2 (analysis plan section 5.3)."""
+    rows = [
+        estimates.filter(
+            (pl.col("key") == key) & (pl.col("spec") == spec) & (pl.col("term") == "post_year1")
+        )
+        for key, spec in SPILLOVER_FAMILY.items()
+    ]
+    family = pl.concat(rows, how="diagonal_relaxed").select(
+        "key", "design", "spec", "reported", "reported_unit", "p_value", "p_method"
+    )
+    return family.with_columns(
+        pl.Series("q_bh", multiple.benjamini_hochberg(family["p_value"].to_list()))
+    )
+
+
 def write(tables: Tables) -> None:
     """Write every table to results/."""
     RESULTS_DIR.mkdir(exist_ok=True)
     estimates = pl.DataFrame(tables.estimates, infer_schema_length=None)
     estimates.write_csv(RESULTS_DIR / "estimates.csv")
     holm_table(estimates).write_csv(RESULTS_DIR / "primary_holm.csv")
+    spillover_bh_table(estimates).write_csv(RESULTS_DIR / "spillover_bh.csv")
     for name, rows in (
         ("event_study", tables.event_study),
         ("pretrend_tests", tables.pretrends),

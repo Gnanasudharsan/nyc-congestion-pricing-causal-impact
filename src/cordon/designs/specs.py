@@ -157,6 +157,17 @@ def adjustment(
     return np.column_stack(blocks)
 
 
+def period_keys(frame: pl.DataFrame) -> np.ndarray:
+    """Labels for the period fixed effect: ``period_key`` if present, else the period.
+
+    Stacked heterogeneity designs set ``period_key`` = period|level so that each
+    level gets its own common shocks (equivalent to separate regressions).
+    """
+    if "period_key" in frame.columns:
+        return frame["period_key"].to_numpy()
+    return frame["period"].cast(pl.Utf8).to_numpy()
+
+
 def build_design(
     rows: pl.DataFrame,
     spec: DidSpec,
@@ -182,7 +193,7 @@ def build_design(
         treated = frame["unit"].is_in(list(treated_units)).to_numpy()
     x, names = regressors(frame, spec, treated)
     unit_season = encode((frame["unit"] + "_" + frame["season"].cast(pl.Utf8)).to_numpy())
-    period = encode(frame["period"].cast(pl.Utf8).to_numpy())
+    period = encode(period_keys(frame))
     z = adjustment(frame, spec, treated, weather)
     return Design(
         y=frame["value"].to_numpy().astype(np.float64),

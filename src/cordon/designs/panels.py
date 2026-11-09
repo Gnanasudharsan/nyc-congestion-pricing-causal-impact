@@ -45,15 +45,23 @@ def to_weekly(rows: pl.DataFrame) -> pl.DataFrame:
 # --------------------------------------------------------------------------- builders
 
 
-def bt_builder(control_group: str, treated_group: str) -> Callable[[], pl.DataFrame]:
-    """B&T: log daily crossings per facility, weekly, excluding flagged closures."""
+def bt_builder(
+    control_group: str, treated_group: str, measure: str = "crossings"
+) -> Callable[[], pl.DataFrame]:
+    """B&T: log daily crossings per facility, excluding flagged closures.
+
+    ``measure`` selects a column of the facility-day panel: ``crossings`` (all), or
+    a split such as ``crossings_car``, ``crossings_truck``, ``crossings_peak``.
+    """
 
     def build() -> pl.DataFrame:
         panel = pl.read_parquet(PROCESSED_DIR / "bt_facility_day.parquet").filter(
-            ~pl.col("is_closure") & pl.col("facility_group").is_in([control_group, treated_group])
+            ~pl.col("is_closure")
+            & pl.col("facility_group").is_in([control_group, treated_group])
+            & (pl.col(measure) > 0)
         )
         panel = panel.with_columns(
-            pl.col("crossings").log().alias("log_crossings"),
+            pl.col(measure).log().alias("log_crossings"),
             pl.when(pl.col("facility_group") == treated_group)
             .then(pl.lit("treated"))
             .otherwise(pl.lit("control"))
@@ -99,8 +107,11 @@ def tlc_trips_builder(treated_group: str) -> Callable[[], pl.DataFrame]:
     return build
 
 
-def tlc_speed_builder(treated_group: str) -> Callable[[], pl.DataFrame]:
-    """TLC: log distance-weighted speed of same-group trips, peak hours, by pickup zone."""
+def tlc_speed_builder(treated_group: str, peak: bool = True) -> Callable[[], pl.DataFrame]:
+    """TLC: log distance-weighted speed of same-group trips by pickup zone.
+
+    Peak toll hours by default (T3, S4); ``peak=False`` gives overnight hours.
+    """
 
     def build() -> pl.DataFrame:
         groups = pl.read_csv(FINAL_DIR / "zone_groups.csv").select(
@@ -109,7 +120,7 @@ def tlc_speed_builder(treated_group: str) -> Callable[[], pl.DataFrame]:
         panel = (
             pl.read_parquet(PROCESSED_DIR / "tlc_zone_day.parquet")
             .join(groups, on="pu_location_id", how="inner")
-            .filter(pl.col("is_peak") & (pl.col("pu_group") == pl.col("do_group")))
+            .filter((pl.col("is_peak") == peak) & (pl.col("pu_group") == pl.col("do_group")))
             .filter(pl.col("pu_group").is_in([treated_group, "far_control"]))
         )
         daily = (
@@ -246,13 +257,17 @@ def fill_missing_days(daily: pl.DataFrame, unit: str, count: str) -> pl.DataFram
 
 
 def tlc_count_panel(
-    treated_group: str, measure: str = "trips", services: tuple[str, ...] | None = None
+    treated_group: str,
+    measure: str = "trips",
+    services: tuple[str, ...] | None = None,
+    peak: bool | None = None,
 ) -> pl.DataFrame:
     """log(1 + daily count) by pickup zone with the plan's counting rules (T2, S1, S3, T5).
 
     CRZ zones count every pickup. Every other zone counts only trips whose
     drop-off is also outside the CRZ. ``measure`` is ``trips`` or
-    ``shared_requests``; ``services`` restricts to yellow, green, or fhvhv.
+    ``shared_requests``; ``services`` restricts to yellow, green, or fhvhv;
+    ``peak`` restricts to peak (True) or overnight (False) toll hours.
     """
     groups = pl.read_csv(FINAL_DIR / "zone_groups.csv").select(
         pl.col("location_id").alias("pu_location_id"), pl.col("group").alias("pu_group")
@@ -262,6 +277,8 @@ def tlc_count_panel(
     )
     if services is not None:
         panel = panel.filter(pl.col("service").is_in(list(services)))
+    if peak is not None:
+        panel = panel.filter(pl.col("is_peak") == peak)
     if treated_group == "crz":
         treated = panel.filter(pl.col("pu_group") == "crz")
     else:
