@@ -138,3 +138,21 @@ _Generated from `data/catalog/profiles.json` (audited 2026-11-09T13:08:35-05:00)
 | PurpleAir | Requires an API key. Used by Cook et al.; a possible extension if the user registers |
 | Google Maps, Advan, card spending | Proprietary |
 | Port Authority crossing traffic | No machine-readable pre-period series found yet; Phase 2 checks monthly PDF reports |
+
+## Processed panels (Phase 2)
+
+Built by `make data` into `data/processed/` (gitignored). Validated by `make validate`; results
+are in `data/catalog/validation.json`.
+
+| Panel | Unit × time | Built by | Key rules |
+|---|---|---|---|
+| `zone_groups.csv` (committed, `data/final/`) | taxi zone | `cordon.features.geography` | ADR 0010 groups from geometry only; committed before any outcome was joined |
+| `calendar.parquet` | day | `cordon.features.build` | Study periods and 4-week event bins (ADR 0007); federal and NY holidays |
+| `weather_daily.parquet` | day | `cordon.features.build` | Open-Meteo requested in UTC, converted to New York time (23/25-hour days on DST dates). The Central Park request snaps to the reanalysis cell centred at 40.81 N, 74.02 W |
+| `smoke_days.parquet` | day | `cordon.features.build` | Densest NOAA HMS smoke polygon intersecting Manhattan; Medium/Heavy = smoke day |
+| `bt_facility_day.parquet` | facility plaza × day | `cordon.clean.bt` | Server-side sums of `ebfx-2m7v`. Closure flag at < 20% of same-weekday median; the flagged days are snowstorm days in Jan–Feb 2026 |
+| `tlc_zone_day.parquet` | service × day × pickup zone × peak flag × dropoff group | `cordon.clean.tlc` | Each monthly file is downloaded, checksummed into the manifest, aggregated, then deleted. Only trips whose pickup falls inside the file's month are kept, so no trip is counted twice. Speed-valid filters per plan §4.3 |
+| `ntd_unit_month.parquet` | agency-mode × month | `cordon.clean.ntd` | UPT summed over type of service; donor eligibility per plan §5.1 |
+| `air_site_day.parquet` | source × pollutant × site × day | `cordon.clean.air` | NYCCAS UTC→local; AQS instruments averaged per hour; valid day ≥ 18 hours; donors per plan §5.2. The FDR NYCCAS site sits about 20 m outside the CRZ polygon, on the exempt FDR's service road; it is in the robustness set only |
+| `subway_station_day.parquet` | station complex × day | `cordon.clean.subway` | Weekly server-side chunks that never cross the 2024/2025 table seam; complexes flagged CRZ if any station has `cbd = true` |
+| `bus_route_month.parquet` | route × CBD relation × period × month | `cordon.clean.bus` | Speed = Σ miles / Σ hours, not an average of published averages |

@@ -1,7 +1,11 @@
 # Deviations from the pre-registered analysis plan
 
 The plan is tagged `analysis-plan-v1` (Phase 1). Every change after that tag is logged here.
+No treatment-effect estimate existed when any of the entries below were made.
 
-| Date | Section of plan | Change | Reason | Made before or after seeing related estimates? |
-|---|---|---|---|---|
-| — | — | No deviations yet. Plan v1 tagged `analysis-plan-v1` on 2026-11-09. | — | — |
+| # | Date | Section of plan | Change | Reason | Before or after seeing related estimates? |
+|---|---|---|---|---|---|
+| 1 | 2026-11-09 | §10 Data handling (holidays) | **NYC public-school closure indicators are not built in Phase 2.** Federal and NY State holiday indicators, and holiday-week flags, are built. | No machine-readable NYC DOE calendar was found on NYC Open Data. School closures enter only one robustness check. Phase 5 will either hand-code closure dates from the published DOE calendars (with source links, committed as data) or drop the check and say so here. | Before (no estimates exist) |
+| 2 | 2026-11-09 | §8 Decision rules (MDEs) | For the synthetic-control outcomes (R1, A1), the Phase 2 MDE uses an **equal-weight donor average** as a proxy for the fitted synthetic control. DiD outcomes use the pre-registered specification. | The synthetic-control estimator is implemented and unit-tested in Phase 3. Fitted weights track the treated unit at least as well as equal weights, so the proxy MDE is expected to be conservative (too large). MDEs will be recomputed with the fitted estimator in Phase 3 and both versions reported. | Before |
+| 3 | 2026-11-09 | §4.3 T3/S4 speeds | **A zone-day enters the speed panel only if it has ≥ 20 speed-valid trips** in peak hours within its own group. | Unspecified in the plan. Zone-days with very few internal trips produce extremely noisy speeds. Phase 5 adds a robustness check with no minimum and observations weighted by trip count. | Before |
+| 4 | 2026-11-09 | §5.2 A1/A3 (smoke-day rule) | "Medium or heavy HMS smoke covering New York County" is implemented as any Medium/Heavy HMS polygon **intersecting** the union of Manhattan's taxi-zone polygons. | Makes the plan's wording operational. "Covering" could mean full coverage or any overlap; we use any overlap, the more conservative choice, which excludes more days. | Before |
