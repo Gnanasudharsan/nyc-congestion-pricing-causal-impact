@@ -41,8 +41,13 @@ descriptives:  ## Phase 2 figures, pre-period MDEs, and docs/descriptives.md (no
 	$(RUN) python -m cordon.robustness.mde
 	$(RUN) python -m cordon.viz.descriptives_page
 
-analysis: descriptives  ## Run every pre-registered design and write results/
-	@echo "make analysis: designs arrive in Phase 3-5 (not yet implemented)."
+analysis: descriptives  ## Run every pre-registered design and write results/ (about 30 min)
+	$(RUN) python -m cordon.robustness.honest
+	$(RUN) python -m cordon.designs.run
+	$(RUN) python -m cordon.designs.replication
+	$(RUN) python -m cordon.designs.bayesian_sc
+	$(RUN) python -m cordon.viz.estimates
+	$(RUN) python -m cordon.designs.results_page
 
 report: analysis  ## Render the Quarto paper (PDF) and website
 	@echo "make report: Quarto paper and site arrive in Phase 6 (not yet implemented)."
