@@ -10,7 +10,8 @@ import zipfile
 from pathlib import Path
 
 import duckdb
-import requests
+
+from cordon.ingest.download import download_with_resume
 
 # Counties for the NYC study area and nearby same-airshed donors.
 # NY: Bronx 005, Kings 047, New York 061, Queens 081, Richmond 085.
@@ -23,22 +24,9 @@ def hourly_file_name(parameter: str, year: int) -> str:
 
 
 def download_hourly(base_url: str, parameter: str, year: int, raw_dir: Path) -> Path:
-    """Download one hourly zip if it is not already on disk."""
-    destination = raw_dir / hourly_file_name(parameter, year)
-    if destination.exists():
-        return destination
-    raw_dir.mkdir(parents=True, exist_ok=True)
+    """Download one hourly zip (resumable, size-verified) if not already on disk."""
     url = f"{base_url}/{hourly_file_name(parameter, year)}"
-    # Write to a temporary name and rename at the end, so an interrupted download
-    # never leaves a truncated file that a later run would mistake for complete.
-    partial = destination.with_suffix(".zip.part")
-    with requests.get(url, stream=True, timeout=600) as response:
-        response.raise_for_status()
-        with partial.open("wb") as handle:
-            for chunk in response.iter_content(chunk_size=1 << 20):
-                handle.write(chunk)
-    partial.rename(destination)
-    return destination
+    return download_with_resume(url, raw_dir / hourly_file_name(parameter, year))
 
 
 def extract_csv(zip_path: Path, interim_dir: Path) -> Path:

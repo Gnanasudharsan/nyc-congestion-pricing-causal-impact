@@ -17,6 +17,7 @@ from cordon.ingest.audit import PROFILES_PATH
 CATALOG_PATH = REPO_ROOT / "docs" / "data-catalog.md"
 BEGIN = "<!-- BEGIN GENERATED COVERAGE TABLE -->"
 END = "<!-- END GENERATED COVERAGE TABLE -->"
+CORE_SITE_SHARE = 0.75
 
 
 def _date(value: Any) -> str:
@@ -92,7 +93,37 @@ def render_table(profiles: dict[str, Any]) -> str:
         "| Key | Source | Rows | Coverage start | Coverage end | ≥1 yr pre-period | Role |",
         "|---|---|---|---|---|---|---|",
     ]
-    return "\n".join([*header, *socrata_rows(profiles), *other_rows(profiles), END])
+    body = [*header, *socrata_rows(profiles), *other_rows(profiles), *nyccas_rows(profiles)]
+    return "\n".join([*body, END])
+
+
+def nyccas_rows(profiles: dict[str, Any]) -> list[str]:
+    """NYCCAS site table: start date and pre-period weekly completeness (75% rule)."""
+    info = profiles.get("nyccas", {})
+    completeness = info.get("pre_period_completeness", {})
+    if not completeness:
+        return []
+    lines = [
+        "",
+        f"**NYCCAS sites** (commit `{info.get('commit_sha', '?')[:10]}`): share of the 2023-01-01 "
+        "to 2024-11-13 pre-period weeks with ≥5 days of ≥18 valid hours.",
+        "",
+        "| Site | First reading | Valid pre-period weeks | Core (≥75%)? |",
+        "|---|---|---|---|",
+    ]
+    starts: dict[str, str] = {}
+    names: dict[str, str] = {}
+    for site in info.get("sites", []):
+        starts.setdefault(site["site_id"], site["start"][:10])
+        names.setdefault(site["site_id"], site["name"])
+    ranked = sorted(completeness.items(), key=lambda item: -item[1]["share"])
+    for site_id, stats in ranked:
+        lines.append(
+            f"| {names.get(site_id, site_id)} | {starts.get(site_id, '?')} | "
+            f"{stats['valid_weeks']}/{stats['total_weeks']} ({stats['share']:.0%}) | "
+            f"{'yes' if stats['share'] >= CORE_SITE_SHARE else 'no'} |"
+        )
+    return lines
 
 
 def update_catalog(catalog_path: Path = CATALOG_PATH) -> None:

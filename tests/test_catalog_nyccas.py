@@ -78,3 +78,32 @@ def test_update_catalog_preserves_surrounding_text(
     text = doc.read_text()
     assert text.startswith("intro\n") and text.endswith("outro\n")
     assert "old" not in text and "t6yz-b64h" in text
+
+
+def _write_hours(path: Path, site: str, day: str, hours: int) -> list[str]:
+    # Local midnight in winter is 05:00 UTC; write `hours` consecutive readings.
+    from datetime import datetime, timedelta
+
+    start = datetime.fromisoformat(f"{day} 05:00:00")
+    return [
+        f"{i},{site},{(start + timedelta(hours=i)).isoformat(' ')}.000,7.5" for i in range(hours)
+    ]
+
+
+def test_weekly_completeness_applies_day_and_week_rules(tmp_path: Path) -> None:
+    lines = ["ID,SiteID,ObservationTimeUTC,Value"]
+    # Site A: week of 2024-01-08 has 5 full days -> valid; week of 2024-01-15 has 4 -> invalid.
+    for day in ["2024-01-08", "2024-01-09", "2024-01-10", "2024-01-11", "2024-01-12"]:
+        lines += _write_hours(tmp_path, "A", day, 24)
+    for day in ["2024-01-15", "2024-01-16", "2024-01-17", "2024-01-18"]:
+        lines += _write_hours(tmp_path, "A", day, 24)
+    # Site B: 5 days but only 17 hours each -> no valid days.
+    for day in ["2024-01-08", "2024-01-09", "2024-01-10", "2024-01-11", "2024-01-12"]:
+        lines += _write_hours(tmp_path, "B", day, 17)
+    month_dir = tmp_path / "2024"
+    month_dir.mkdir()
+    (month_dir / "01.csv").write_text("\n".join(lines) + "\n")
+
+    result = nyccas.weekly_completeness(tmp_path, "2024-01-08", "2024-01-21")
+    assert result["A"] == {"valid_weeks": 1, "total_weeks": 2, "share": 0.5}
+    assert "B" not in result

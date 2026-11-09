@@ -16,6 +16,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+from collections.abc import Callable
 from dataclasses import asdict
 from datetime import date, datetime
 from pathlib import Path
@@ -127,7 +128,11 @@ def audit_socrata(entry: dict[str, Any], download: bool) -> dict[str, Any]:
     )
     if download and profile.row_count <= FULL_DOWNLOAD_MAX_ROWS:
         path = RAW_DIR / "socrata" / f"{entry['key']}.csv"
-        socrata.download_csv(entry["domain"], entry["id"], path)
+        try:
+            socrata.download_csv(entry["domain"], entry["id"], path)
+        except Exception as error:  # keep the profile even if the bulk export fails
+            result["download_error"] = str(error)
+            return result
         rows = count_csv_rows(path)
         record_download(
             entry["key"], result["url"], path, rows, profile.coverage_start, profile.coverage_end
@@ -226,6 +231,9 @@ def audit_nyccas(config: dict[str, Any], download: bool) -> dict[str, Any]:
                 f"{year}-{month:02d}",
                 f"{year}-{month:02d}",
             )
+    output["pre_period_completeness"] = nyccas.weekly_completeness(
+        raw_dir, "2023-01-01", "2024-11-13"
+    )
     with location_path.open() as handle:
         header = handle.readline().strip().split(",")
         sites = [dict(zip(header, line.strip().split(","), strict=False)) for line in handle]
@@ -280,6 +288,15 @@ def audit_weather(config: dict[str, Any], download: bool) -> dict[str, Any]:
     return output
 
 
+def run_isolated(name: str, step: Callable[[], dict[str, Any]]) -> dict[str, Any]:
+    """Run one source's audit; record a failure instead of stopping the whole audit."""
+    try:
+        return step()
+    except Exception as error:
+        LOG.warning("failed %s: %s", name, error)
+        return {"kind": name, "error": str(error)}
+
+
 def main() -> None:
     """Run the audit for all sources, or the subset named on the command line."""
     parser = argparse.ArgumentParser(description=__doc__)
@@ -311,19 +328,32 @@ def main() -> None:
         save_profiles(profiles)
 
     if selected("tlc"):
-        profiles["tlc"] = audit_tlc(registry["tlc"])
+        profiles["tlc"] = run_isolated("tlc", lambda: audit_tlc(registry["tlc"]))
         save_profiles(profiles)
     if selected("epa_aqs"):
-        profiles["epa_aqs"] = audit_epa(registry["epa_aqs"], download)
+        profiles["epa_aqs"] = run_isolated(
+            "epa_aqs", lambda: audit_epa(registry["epa_aqs"], download)
+        )
         save_profiles(profiles)
-    if selected("nyccas"):
-        profiles["nyccas"] = audit_nyccas(registry["nyccas"], download)
+    if selected("nyccas_completeness") and "nyccas" in profiles:
+        profiles["nyccas"]["pre_period_completeness"] = nyccas.weekly_completeness(
+            RAW_DIR / "nyccas", "2023-01-01", "2024-11-13"
+        )
+        save_profiles(profiles)
+    if selected("nyccas") and not selected("nyccas_completeness"):
+        profiles["nyccas"] = run_isolated(
+            "nyccas", lambda: audit_nyccas(registry["nyccas"], download)
+        )
         save_profiles(profiles)
     if selected("citibike"):
-        profiles["citibike"] = audit_citibike(registry["citibike"])
+        profiles["citibike"] = run_isolated(
+            "citibike", lambda: audit_citibike(registry["citibike"])
+        )
         save_profiles(profiles)
     if selected("open_meteo"):
-        profiles["open_meteo"] = audit_weather(registry["open_meteo"], download)
+        profiles["open_meteo"] = run_isolated(
+            "open_meteo", lambda: audit_weather(registry["open_meteo"], download)
+        )
         save_profiles(profiles)
 
 
