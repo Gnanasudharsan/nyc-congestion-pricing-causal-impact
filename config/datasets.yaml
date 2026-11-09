@@ -1,0 +1,248 @@
+# Registry of every candidate dataset. One entry per source table.
+# `python -m cordon.ingest.audit` profiles each entry (coverage, rows, category levels)
+# and writes data/catalog/profiles.json. Roles are proposals reviewed in docs/data-catalog.md.
+#
+# kind: socrata | tlc | epa_aqs | citibike | open_meteo
+# role: outcome | covariate | geography | descriptive_only
+
+socrata:
+  # ---------------------------------------------------------------- traffic
+  - key: bt_hourly_crossings
+    title: MTA Bridges and Tunnels Hourly Crossings (Beginning 2019)
+    domain: data.ny.gov
+    id: ebfx-2m7v
+    date_column: date
+    group_columns: [facility, vehicle_class_category, payment_method]
+    role: outcome
+    domain_area: traffic
+  - key: bt_hourly_reconciled
+    title: MTA Bridges & Tunnels Hourly Reconciled Crossings (2019-2024)
+    domain: data.ny.gov
+    id: rtih-nq26
+    date_column: date
+    group_columns: [facility]
+    role: outcome
+    domain_area: traffic
+  - key: cbd_vmt
+    title: MTA Vehicle Miles Traveled in the CBD (Beginning 2024)
+    domain: data.ny.gov
+    id: jbxx-kxff
+    date_column: date
+    group_columns: [area]
+    role: outcome
+    domain_area: traffic
+  - key: cbd_taxi_fhv_trips
+    title: MTA CBD Taxi and For-Hire Vehicle Trips (Beginning May 2019)
+    domain: data.ny.gov
+    id: d3qp-nhf8
+    date_column: month
+    group_columns: [service_type, cbd_relation, time_period]
+    role: outcome
+    domain_area: traffic
+  - key: cbd_taxi_fhv_speeds
+    title: MTA CBD Taxi and For-Hire Vehicle Speeds (Beginning October 2019)
+    domain: data.ny.gov
+    id: 6p29-6xqn
+    date_column: month
+    group_columns: [zone]
+    role: outcome
+    domain_area: traffic
+  - key: crz_entries
+    title: MTA Congestion Relief Zone Vehicle Entries (Beginning 2025)
+    domain: data.ny.gov
+    id: t6yz-b64h
+    date_column: toll_date
+    group_columns: [detection_group, vehicle_class]
+    role: descriptive_only
+    domain_area: traffic
+  - key: dot_traffic_speeds
+    title: NYC DOT Traffic Speeds (real-time sensor links)
+    domain: data.cityofnewyork.us
+    id: i4gi-tjb9
+    date_column: data_as_of
+    probe_dates: ["2019-01-01", "2022-01-11", "2023-01-10", "2024-01-09", "2024-11-12", "2025-01-07", "2025-06-10", "2026-01-13", "2026-11-03"]
+    role: outcome
+    domain_area: traffic
+  - key: dot_atr_counts
+    title: NYC DOT Automated Traffic Volume Counts
+    domain: data.cityofnewyork.us
+    id: 7ym2-wayt
+    date_column: yr
+    group_columns: [boro]
+    role: outcome
+    domain_area: traffic
+  - key: tlc_zone_monthly
+    title: TLC Pickups and Drop-offs by Taxi Zone and Industry (monthly)
+    domain: data.cityofnewyork.us
+    id: c5iv-bn4s
+    date_column: metric_month
+    group_columns: [industry]
+    role: outcome
+    domain_area: traffic
+
+  # ---------------------------------------------------------------- transit
+  - key: subway_hourly_2020_2024
+    title: MTA Subway Hourly Ridership (2020-2024)
+    domain: data.ny.gov
+    id: wujg-7c2s
+    date_column: transit_timestamp
+    group_columns: [borough, payment_method]
+    role: outcome
+    domain_area: transit
+  - key: subway_hourly_2025
+    title: MTA Subway Hourly Ridership (Beginning 2025)
+    domain: data.ny.gov
+    id: 5wq4-mkjj
+    date_column: transit_timestamp
+    group_columns: [borough, payment_method]
+    role: outcome
+    domain_area: transit
+  - key: bus_hourly_2020_2024
+    title: MTA Bus Hourly Ridership (2020-2024)
+    domain: data.ny.gov
+    id: kv7t-n8in
+    date_column: transit_timestamp
+    group_columns: [payment_method]
+    role: outcome
+    domain_area: transit
+  - key: bus_hourly_2025
+    title: MTA Bus Hourly Ridership (Beginning 2025)
+    domain: data.ny.gov
+    id: gxb3-akrn
+    date_column: transit_timestamp
+    group_columns: [payment_method]
+    role: outcome
+    domain_area: transit
+  - key: mta_daily_ridership
+    title: MTA Daily Ridership and Traffic (Beginning 2020)
+    domain: data.ny.gov
+    id: sayj-mze2
+    date_column: date
+    group_columns: [mode]
+    role: outcome
+    domain_area: transit
+  - key: regional_transit_monthly
+    title: MTA Regional Transit Ridership (monthly, includes PATH and NJ Transit)
+    domain: data.ny.gov
+    id: sv2g-g4mz
+    date_column: month
+    group_columns: [transit_operator, mode]
+    role: outcome
+    domain_area: transit
+  - key: cbd_bus_speeds
+    title: MTA CBD Bus Speeds (Beginning 2023)
+    domain: data.ny.gov
+    id: r6db-kkzj
+    date_column: month
+    group_columns: [cbd_relation, route_type, time_period]
+    role: outcome
+    domain_area: transit
+  - key: bus_speeds_monthly
+    title: MTA Bus Speeds (route-month, Beginning 2015)
+    domain: data.ny.gov
+    id: cudb-vcni
+    date_column: month
+    group_columns: [borough, period]
+    role: outcome
+    domain_area: transit
+  - key: bus_segment_speeds_2023_2024
+    title: MTA Bus Route Segment Speeds (2023-2024)
+    domain: data.ny.gov
+    id: 58t6-89vi
+    date_column: timestamp
+    group_columns: [borough]
+    role: outcome
+    domain_area: transit
+  - key: bus_segment_speeds_2025
+    title: MTA Bus Route Segment Speeds (Beginning 2025)
+    domain: data.ny.gov
+    id: kufs-yh3x
+    date_column: timestamp
+    group_columns: [borough]
+    role: outcome
+    domain_area: transit
+
+  - key: ntd_monthly_ridership
+    title: National Transit Database Complete Monthly Ridership (all US agencies, 2002+)
+    domain: datahub.transportation.gov
+    id: 8bui-9xvu
+    date_column: date
+    group_columns: [mode]
+    role: outcome
+    domain_area: transit
+
+  # ---------------------------------------------------------------- geography
+  - key: cbd_geofence
+    title: MTA CBD Geofence (polygon)
+    domain: data.ny.gov
+    id: srxy-5nxn
+    role: geography
+    domain_area: geography
+  - key: cbd_taxi_zones
+    title: MTA CBD Taxi Zones (taxi zones inside the CRZ)
+    domain: data.ny.gov
+    id: yfdc-w5jh
+    role: geography
+    domain_area: geography
+  - key: subway_stations
+    title: MTA Subway Stations (with CBD flag)
+    domain: data.ny.gov
+    id: 39hk-dx4f
+    group_columns: [cbd, borough]
+    role: geography
+    domain_area: geography
+  - key: taxi_zones
+    title: NYC TLC Taxi Zones
+    domain: data.cityofnewyork.us
+    id: 8meu-9t5y
+    group_columns: [borough]
+    role: geography
+    domain_area: geography
+  - key: nta_2020
+    title: 2020 Neighborhood Tabulation Areas
+    domain: data.cityofnewyork.us
+    id: 9nt8-h7nd
+    group_columns: [boroname]
+    role: geography
+    domain_area: geography
+
+# Trip-level TLC parquet files (profiled remotely with DuckDB, one file per month).
+tlc:
+  base_url: https://d37ci6vzurychx.cloudfront.net/trip-data
+  services:
+    yellow: {pickup_column: tpep_pickup_datetime}
+    green: {pickup_column: lpep_pickup_datetime}
+    fhvhv: {pickup_column: pickup_datetime}
+  first_month: "2023-01"
+  probe_months: ["2023-01", "2024-12", "2025-01", "2026-09"]
+  role: outcome
+  domain_area: traffic
+
+# EPA AQS pre-generated hourly files (no API key needed).
+epa_aqs:
+  base_url: https://aqs.epa.gov/aqsweb/airdata
+  parameters:
+    "88101": PM2.5 FRM/FEM mass
+    "42602": NO2
+  years: [2023, 2024, 2025, 2026]
+  role: outcome
+  domain_area: air
+
+# NYC Health Department real-time PM2.5 network (corrected DustTrak sensors).
+nyccas:
+  repo: https://github.com/nychealth/nyccas-data
+  years: [2022, 2023, 2024, 2025, 2026]
+  role: outcome
+  domain_area: air
+
+citibike:
+  bucket_url: https://s3.amazonaws.com/tripdata/
+  role: outcome
+  domain_area: mobility
+
+open_meteo:
+  archive_url: https://archive-api.open-meteo.com/v1/archive
+  latitude: 40.7812   # Central Park
+  longitude: -73.9665
+  role: covariate
+  domain_area: controls
