@@ -3,8 +3,9 @@
 [![CI](https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact/actions/workflows/ci.yml/badge.svg)](https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-> **Status: Phase 0 of 7 complete (foundation and literature).** No effect estimates exist yet.
-> The analysis plan will be pre-registered (tag `analysis-plan-v1`) before any estimate is computed.
+> **Status: Phase 1 of 7 complete (data audit and pre-registered analysis plan).**
+> The plan was committed and tagged `analysis-plan-v1` before any effect estimate was computed.
+> No effect estimates exist yet.
 
 ## Question
 
@@ -21,6 +22,20 @@ Published studies and agency reports already cover headline traffic and PM2.5 ef
 transparent, pre-registered methods on public data, and to **extend** them with a spillover and
 equity analysis of bordering neighborhoods, the Bronx, upper Manhattan, and New Jersey approaches.
 
+**Pre-registered design** ([docs/analysis-plan.md](docs/analysis-plan.md)): six primary outcomes,
+Holm-adjusted:
+
+| ID | Outcome | Design |
+|---|---|---|
+| T1 | Crossings at MTA tunnels feeding the zone | Facility DiD, randomization inference |
+| T2 | Taxi + FHV trips from the zone | Taxi-zone DiD/event study |
+| T3 | Taxi + FHV trip speeds inside the zone | Taxi-zone DiD/event study |
+| R1 | Subway ridership | Synthetic control vs other US systems (NTD) |
+| A1 | PM2.5 at zone monitors | Synthetic control with out-of-region donors |
+| S1 | Taxi + FHV trips in the border ring | DiD vs far-away zones |
+
+Data sources and their coverage are in [docs/data-catalog.md](docs/data-catalog.md).
+
 The project reports what the data shows, including null or unfavorable results, with
 uncertainty, and gives competing explanations (see [docs/confounders.md](docs/confounders.md))
 real space.
@@ -30,8 +45,8 @@ real space.
 | Phase | Scope | Status |
 |---|---|---|
 | 0 | Foundation, literature review, confounder timeline | ✅ Done |
-| 1 | Data audit, `data/MANIFEST.json`, pre-registered analysis plan | ⏳ Next |
-| 2 | Cleaning pipelines, data tests, descriptive and pre-trend plots | — |
+| 1 | Data audit, `data/MANIFEST.json`, pre-registered analysis plan | ✅ Done |
+| 2 | Cleaning pipelines, data tests, descriptive and pre-trend plots | ⏳ Next |
 | 3 | Core causal estimates (DiD / event study, synthetic control, ITS) | — |
 | 4 | Spillovers, heterogeneity, equity lens | — |
 | 5 | Robustness, placebo tests, parallel-trends sensitivity, DoWhy refuters | — |
