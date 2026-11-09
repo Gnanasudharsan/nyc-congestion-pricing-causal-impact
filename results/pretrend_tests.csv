@@ -1,0 +1,23 @@
+key,spec,n_pre_bins,statistic,p_value,method,flag_p_below_0_10,max_abs_pre_bin
+T1,event_study_year1,10,0.022165054184277756,0.047619047619047616,"randomization inference, sum of squared pre bins (21 assignments)",true,0.07209422672466692
+T1,event_study_year1_detrended,10,0.021565571456133432,0.047619047619047616,"randomization inference, sum of squared pre bins (21 assignments)",true,0.07201569959936915
+T2,event_study_year1,10,4.93123325612535,4.8723917760446776e-6,"cluster Wald F(10, 130)",true,0.020192442109859085
+T2,event_study_year1_detrended,10,5.883982277523016,2.6994017421915177e-7,"cluster Wald F(10, 130)",true,0.03691033608065372
+T3,event_study_year1,10,114.6970523882172,6.909624867827159e-59,"cluster Wald F(10, 128)",true,0.04353278727696596
+T3,event_study_year1_detrended,10,107.99843602244357,2.1327579073465635e-57,"cluster Wald F(10, 128)",true,0.03835038415304479
+S1,event_study_year1,10,3.590525082252964,0.0003277467763285683,"cluster Wald F(10, 124)",true,0.02343767487072799
+S1,event_study_year1_detrended,10,3.599737731333236,0.0003185766064525684,"cluster Wald F(10, 124)",true,0.02674242180860347
+T5a,event_study_year1,10,10.546288476182397,6.395087825217719e-13,"cluster Wald F(10, 130)",true,0.18226889594565254
+T5a,event_study_year1_detrended,10,11.799011729165398,2.779393396680128e-14,"cluster Wald F(10, 130)",true,0.17035575934947644
+T5b,event_study_year1,10,12.125621539785019,1.2545558467945835e-14,"cluster Wald F(10, 130)",true,0.043025413969938094
+T5b,event_study_year1_detrended,10,12.336312260649114,7.545434699380956e-15,"cluster Wald F(10, 130)",true,0.042404433145400745
+T5c,event_study_year1,10,56.4094935321074,1.980048460382243e-42,"cluster Wald F(10, 130)",true,0.4919944353573673
+T5c,event_study_year1_detrended,10,52.0924432592552,1.2110580320199002e-40,"cluster Wald F(10, 130)",true,0.4910778375539173
+R2,event_study_year1,10,1.8077693246485649,0.05720630452808778,"cluster Wald F(10, 425)",true,0.09969017121532826
+R2,event_study_year1_detrended,10,1.4475743371320828,0.15685950452430225,"cluster Wald F(10, 425)",false,0.1014512249681393
+R3,event_study_year1,8,9.828455438322873,2.381992459819101e-12,"cluster Wald F(8, 353)",true,0.042431262368542846
+R3,event_study_year1_detrended,8,9.963889445435335,1.5807876534849905e-12,"cluster Wald F(8, 353)",true,0.04246986117107168
+A3,event_study_year1_weather,10,57.38763723285311,0.3333333333333333,"randomization inference, sum of squared pre bins (6 assignments)",false,4.417729542710466
+A3,event_study_year1_detrended_weather,10,57.13723523009157,0.3333333333333333,"randomization inference, sum of squared pre bins (6 assignments)",false,4.045892339888539
+A3_pbl,event_study_year1_weather_pbl,3,39.0132051162143,0.16666666666666666,"randomization inference, sum of squared pre bins (6 assignments)",false,4.542518141533763
+A3_pbl,event_study_year1_detrended_weather_pbl,3,26.32728734484802,0.3333333333333333,"randomization inference, sum of squared pre bins (6 assignments)",false,3.71256477596447

@@ -1,0 +1,3 @@
+key,method,unit,placebos,placebo_mean,placebo_sd,mde_80pct_power
+R1,sc_fitted_weights,log points x 100,14,-3.585,2.061,5.771
+A1,sc_fitted_weights,PM2.5 µg/m³,14,-1.687,0.908,2.543
