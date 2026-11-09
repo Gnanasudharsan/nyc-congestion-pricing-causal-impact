@@ -1,0 +1,2365 @@
+{
+  "_audited_at": "2026-11-09T13:08:35-05:00",
+  "bt_hourly_crossings": {
+    "dataset_id": "ebfx-2m7v",
+    "name": "MTA Bridges and Tunnels Hourly Crossings: Beginning 2019",
+    "columns": [
+      "transit_timestamp",
+      "date",
+      "hour",
+      "facility_id",
+      "facility",
+      "direction",
+      "payment_method",
+      "vehicle_class",
+      "vehicle_class_description",
+      "vehicle_class_category",
+      "traffic_count"
+    ],
+    "rows_updated_at": 1793641977,
+    "row_count": 13753877,
+    "coverage_start": "2019-01-01T00:00:00.000",
+    "coverage_end": "2026-10-20T00:00:00.000",
+    "levels": {
+      "facility": {
+        "Throgs Neck Bridge": 2033127,
+        "Bronx - Whitestone Bridge": 2009737,
+        "Robert F. Kennedy Bridge Bronx": 1935590,
+        "Verrazzano - Narrows Bridge": 1898460,
+        "Queens Midtown Tunnel": 1287644,
+        "Cross Bay Bridge": 1159352,
+        "Hugh L. Carey Tunnel": 1065232,
+        "Marine Parkway Bridge": 916530,
+        "Robert F. Kennedy Bridge Manhattan": 730300,
+        "Henry Hudson Bridge": 717905
+      },
+      "vehicle_class_category": {
+        "Truck": 7373345,
+        "Car": 3914712,
+        "Motorcycle": 1376961,
+        "Bus": 1088859
+      },
+      "payment_method": {
+        "E-ZPass": 7890870,
+        "Tolls by Mail": 5863007
+      }
+    },
+    "kind": "socrata",
+    "domain": "data.ny.gov",
+    "role": "outcome",
+    "domain_area": "traffic",
+    "url": "https://data.ny.gov/d/ebfx-2m7v",
+    "pre_period_days": 2196,
+    "usable_pre_period": true,
+    "downloaded": false
+  },
+  "bt_hourly_reconciled": {
+    "dataset_id": "rtih-nq26",
+    "name": "MTA Bridges & Tunnels Hourly Reconciled Crossings: 2019 - 2024",
+    "columns": [
+      "transit_timestamp",
+      "date",
+      "hour",
+      "facility_id",
+      "facility",
+      "direction",
+      "vehicle_class",
+      "vehicle_class_description",
+      "vehicle_class_category",
+      "payment_method",
+      "transaction_type",
+      "traffic_count",
+      "revenue_collected"
+    ],
+    "rows_updated_at": 1758295029,
+    "row_count": 21726299,
+    "coverage_start": "2019-01-01T00:00:00.000",
+    "coverage_end": "2024-12-31T00:00:00.000",
+    "levels": {
+      "facility": {
+        "Verrazzano - Narrows Bridge": 3401868,
+        "Throgs Neck Bridge": 3343845,
+        "Bronx - Whitestone Bridge": 3230136,
+        "Robert F. Kennedy Bridge Bronx": 3073768,
+        "Queens Midtown Tunnel": 1938018,
+        "Hugh L. Carey Tunnel": 1652726,
+        "Cross Bay Bridge": 1555123,
+        "Marine Parkway Bridge": 1203351,
+        "Henry Hudson Bridge": 1201492,
+        "Robert F. Kennedy Bridge Manhattan": 1125972
+      }
+    },
+    "kind": "socrata",
+    "domain": "data.ny.gov",
+    "role": "outcome",
+    "domain_area": "traffic",
+    "url": "https://data.ny.gov/d/rtih-nq26",
+    "pre_period_days": 2196,
+    "usable_pre_period": true,
+    "downloaded": false
+  },
+  "cbd_vmt": {
+    "dataset_id": "jbxx-kxff",
+    "name": "MTA Vehicle Miles Traveled in the Central Business District: Beginning 2024",
+    "columns": [
+      "date",
+      "area",
+      "year",
+      "month",
+      "daily_vmt_agps",
+      "daily_vmt_cvd",
+      "indexed_average_vmt"
+    ],
+    "rows_updated_at": 1792768822,
+    "row_count": 60,
+    "coverage_start": "2024-01-01T00:00:00.000",
+    "coverage_end": "2026-06-01T00:00:00.000",
+    "levels": {
+      "area": {
+        "ER": 30,
+        "CRZ": 30
+      }
+    },
+    "kind": "socrata",
+    "domain": "data.ny.gov",
+    "role": "outcome",
+    "domain_area": "traffic",
+    "url": "https://data.ny.gov/d/jbxx-kxff",
+    "pre_period_days": 370,
+    "usable_pre_period": true,
+    "downloaded": true,
+    "downloaded_rows": 60
+  },
+  "cbd_taxi_fhv_trips": {
+    "dataset_id": "d3qp-nhf8",
+    "name": "MTA Central Business District Taxi and For-Hire Vehicle Trips: Beginning May 2019",
+    "columns": [
+      "month",
+      "service_type",
+      "cbd_relation",
+      "day_type",
+      "time_period",
+      "trips"
+    ],
+    "rows_updated_at": 1792769034,
+    "row_count": 5011,
+    "coverage_start": "2019-05-01T00:00:00.000",
+    "coverage_end": "2026-08-01T00:00:00.000",
+    "levels": {
+      "service_type": {
+        "yellow": 1408,
+        "fhv": 1392,
+        "fhvhv": 1131,
+        "green": 1080
+      },
+      "cbd_relation": {
+        "Entering CBD": 1404,
+        "Leaving CBD": 1381,
+        "Within CBD": 1340,
+        "CBD-Null": 886
+      },
+      "time_period": {
+        "Peak": 2565,
+        "Overnight": 2446
+      }
+    },
+    "kind": "socrata",
+    "domain": "data.ny.gov",
+    "role": "outcome",
+    "domain_area": "traffic",
+    "url": "https://data.ny.gov/d/d3qp-nhf8",
+    "pre_period_days": 2076,
+    "usable_pre_period": true,
+    "downloaded": true,
+    "downloaded_rows": 5011
+  },
+  "cbd_taxi_fhv_speeds": {
+    "dataset_id": "6p29-6xqn",
+    "name": "MTA Central Business District Taxi and For-Hire Vehicle Speeds: Beginning October 2019",
+    "columns": [
+      "month",
+      "zone",
+      "zonal_speed"
+    ],
+    "rows_updated_at": 1792768032,
+    "row_count": 213,
+    "coverage_start": "2019-10-01T00:00:00.000",
+    "coverage_end": "2025-08-01T00:00:00.000",
+    "levels": {
+      "zone": {
+        "CBD": 71,
+        "CBD Adjacent": 71,
+        "Greater NYC": 71
+      }
+    },
+    "kind": "socrata",
+    "domain": "data.ny.gov",
+    "role": "outcome",
+    "domain_area": "traffic",
+    "url": "https://data.ny.gov/d/6p29-6xqn",
+    "pre_period_days": 1923,
+    "usable_pre_period": true,
+    "downloaded": true,
+    "downloaded_rows": 213
+  },
+  "crz_entries": {
+    "dataset_id": "t6yz-b64h",
+    "name": "MTA Congestion Relief Zone Vehicle Entries: Beginning 2025",
+    "columns": [
+      "toll_date",
+      "toll_hour",
+      "toll_10_minute_block",
+      "minute_of_hour",
+      "hour_of_day",
+      "day_of_week_int",
+      "day_of_week",
+      "toll_week",
+      "time_period",
+      "vehicle_class",
+      "detection_group",
+      "detection_region",
+      "crz_entries",
+      "excluded_roadway_entries"
+    ],
+    "rows_updated_at": 1793906804,
+    "row_count": 6894288,
+    "coverage_start": "2025-01-05T00:00:00.000",
+    "coverage_end": "2026-10-31T00:00:00.000",
+    "levels": {
+      "detection_group": {
+        "Brooklyn Bridge": 574524,
+        "East 60th St": 574524,
+        "FDR Drive at 60th St": 574524,
+        "Holland Tunnel": 574524,
+        "Hugh L. Carey Tunnel": 574524,
+        "Lincoln Tunnel": 574524,
+        "Manhattan Bridge": 574524,
+        "Queensboro Bridge": 574524,
+        "Queens Midtown Tunnel": 574524,
+        "West 60th St": 574524,
+        "West Side Highway at 60th St": 574524,
+        "Williamsburg Bridge": 574524
+      },
+      "vehicle_class": {
+        "1 - Cars, Pickups and Vans": 1149048,
+        "2 - Single-Unit Trucks": 1149048,
+        "3 - Multi-Unit Trucks": 1149048,
+        "4 - Buses": 1149048,
+        "5 - Motorcycles": 1149048,
+        "TLC Taxi/FHV": 1149048
+      }
+    },
+    "kind": "socrata",
+    "domain": "data.ny.gov",
+    "role": "descriptive_only",
+    "domain_area": "traffic",
+    "url": "https://data.ny.gov/d/t6yz-b64h",
+    "pre_period_days": 0,
+    "usable_pre_period": false,
+    "downloaded": false
+  },
+  "dot_traffic_speeds": {
+    "kind": "socrata",
+    "dataset_id": "i4gi-tjb9",
+    "id": "i4gi-tjb9",
+    "domain": "data.cityofnewyork.us",
+    "role": "outcome",
+    "domain_area": "traffic",
+    "url": "https://data.cityofnewyork.us/d/i4gi-tjb9",
+    "probe_only": true,
+    "probes": {
+      "2019-01-01": 5,
+      "2022-01-11": 0,
+      "2023-01-10": 5,
+      "2024-01-09": 5,
+      "2024-11-12": 5,
+      "2025-01-07": 5,
+      "2025-06-10": 5,
+      "2026-01-13": 5,
+      "2026-11-03": 5
+    },
+    "row_count": null,
+    "coverage_start": "2019-01-01",
+    "coverage_end": "2026-11-03",
+    "pre_period_days": 2196,
+    "usable_pre_period": true,
+    "downloaded": false,
+    "notes": "Too large to aggregate server-side; coverage from dated probes only."
+  },
+  "dot_atr_counts": {
+    "kind": "socrata",
+    "id": "7ym2-wayt",
+    "error": "503 Server Error: Service Unavailable for url: https://data.cityofnewyork.us/api/views/7ym2-wayt/rows.csv?accessType=DOWNLOAD"
+  },
+  "tlc_zone_monthly": {
+    "kind": "socrata",
+    "id": "c5iv-bn4s",
+    "error": "503 Server Error: Service Unavailable for url: https://data.cityofnewyork.us/api/views/c5iv-bn4s/rows.csv?accessType=DOWNLOAD"
+  },
+  "subway_hourly_2020_2024": {
+    "dataset_id": "wujg-7c2s",
+    "name": "MTA Subway Hourly Ridership: 2020-2024",
+    "columns": [
+      "transit_timestamp",
+      "transit_mode",
+      "station_complex_id",
+      "station_complex",
+      "borough",
+      "payment_method",
+      "fare_class_category",
+      "ridership",
+      "transfers",
+      "latitude",
+      "longitude",
+      "georeference"
+    ],
+    "rows_updated_at": 1760534363,
+    "row_count": 120855567,
+    "coverage_start": "2020-01-01T00:00:00.000",
+    "coverage_end": "2024-12-31T23:00:00.000",
+    "levels": {
+      "borough": {
+        "Brooklyn": 42977444,
+        "Manhattan": 36828057,
+        "Queens": 21243130,
+        "Bronx": 19347157,
+        "Staten Island": 459779
+      },
+      "payment_method": {
+        "metrocard": 101399153,
+        "omny": 19456414
+      }
+    },
+    "kind": "socrata",
+    "domain": "data.ny.gov",
+    "role": "outcome",
+    "domain_area": "transit",
+    "url": "https://data.ny.gov/d/wujg-7c2s",
+    "pre_period_days": 1831,
+    "usable_pre_period": true,
+    "downloaded": false
+  },
+  "subway_hourly_2025": {
+    "dataset_id": "5wq4-mkjj",
+    "name": "MTA Subway Hourly Ridership: Beginning 2025",
+    "columns": [
+      "transit_timestamp",
+      "transit_mode",
+      "station_complex_id",
+      "station_complex",
+      "borough",
+      "payment_method",
+      "fare_class_category",
+      "ridership",
+      "transfers",
+      "latitude",
+      "longitude",
+      "georeference"
+    ],
+    "rows_updated_at": 1793807545,
+    "row_count": 47409293,
+    "coverage_start": "2025-01-01T00:00:00.000",
+    "coverage_end": "2026-10-29T23:00:00.000",
+    "levels": {
+      "borough": {
+        "Brooklyn": 16766168,
+        "Manhattan": 14635525,
+        "Queens": 8243953,
+        "Bronx": 7579261,
+        "Staten Island": 184386
+      },
+      "payment_method": {
+        "omny": 27013960,
+        "metrocard": 20395333
+      }
+    },
+    "kind": "socrata",
+    "domain": "data.ny.gov",
+    "role": "outcome",
+    "domain_area": "transit",
+    "url": "https://data.ny.gov/d/5wq4-mkjj",
+    "pre_period_days": 4,
+    "usable_pre_period": false,
+    "downloaded": false
+  },
+  "bus_hourly_2020_2024": {
+    "dataset_id": "kv7t-n8in",
+    "name": "MTA Bus Hourly Ridership: 2020-2024",
+    "columns": [
+      "transit_timestamp",
+      "bus_route",
+      "payment_method",
+      "fare_class_category",
+      "ridership",
+      "transfers"
+    ],
+    "rows_updated_at": 1760500258,
+    "row_count": 447249600,
+    "coverage_start": "2020-01-01T00:00:00.000",
+    "coverage_end": "2024-12-31T23:00:00.000",
+    "levels": {
+      "payment_method": {
+        "metrocard": 223624800,
+        "omny": 223624800
+      }
+    },
+    "kind": "socrata",
+    "domain": "data.ny.gov",
+    "role": "outcome",
+    "domain_area": "transit",
+    "url": "https://data.ny.gov/d/kv7t-n8in",
+    "pre_period_days": 1831,
+    "usable_pre_period": true,
+    "downloaded": false
+  },
+  "bus_hourly_2025": {
+    "dataset_id": "gxb3-akrn",
+    "name": "MTA Bus Hourly Ridership: Beginning 2025",
+    "columns": [
+      "transit_timestamp",
+      "bus_route",
+      "payment_method",
+      "fare_class_category",
+      "ridership",
+      "transfers"
+    ],
+    "rows_updated_at": 1793641457,
+    "row_count": 170690976,
+    "coverage_start": "2025-01-01T00:00:00.000",
+    "coverage_end": "2026-10-27T23:00:00.000",
+    "levels": {
+      "payment_method": {
+        "metrocard": 85345488,
+        "omny": 85345488
+      }
+    },
+    "kind": "socrata",
+    "domain": "data.ny.gov",
+    "role": "outcome",
+    "domain_area": "transit",
+    "url": "https://data.ny.gov/d/gxb3-akrn",
+    "pre_period_days": 4,
+    "usable_pre_period": false,
+    "downloaded": false
+  },
+  "mta_daily_ridership": {
+    "dataset_id": "sayj-mze2",
+    "name": "MTA Daily Ridership and Traffic: Beginning 2020",
+    "columns": [
+      "date",
+      "mode",
+      "count"
+    ],
+    "rows_updated_at": 1794006338,
+    "row_count": 18421,
+    "coverage_start": "2020-03-01T00:00:00.000",
+    "coverage_end": "2026-11-05T00:00:00.000",
+    "levels": {
+      "mode": {
+        "Bus": 2441,
+        "SIR": 2441,
+        "AAR": 2441,
+        "Subway": 2441,
+        "BT": 2441,
+        "MNR": 2441,
+        "LIRR": 2441,
+        "CRZ Entries": 667,
+        "CBD Entries": 667
+      }
+    },
+    "kind": "socrata",
+    "domain": "data.ny.gov",
+    "role": "outcome",
+    "domain_area": "transit",
+    "url": "https://data.ny.gov/d/sayj-mze2",
+    "pre_period_days": 1771,
+    "usable_pre_period": true,
+    "downloaded": true,
+    "downloaded_rows": 18421
+  },
+  "regional_transit_monthly": {
+    "dataset_id": "sv2g-g4mz",
+    "name": "MTA Regional Transit Ridership: Beginning 2021",
+    "columns": [
+      "month",
+      "transit_operator",
+      "mode",
+      "ridership"
+    ],
+    "rows_updated_at": 1792768814,
+    "row_count": 823,
+    "coverage_start": "2021-01-01T00:00:00.000",
+    "coverage_end": "2026-12-01T00:00:00.000",
+    "levels": {
+      "transit_operator": {
+        "MTA": 360,
+        "New Jersey Transit Corporation": 204,
+        "NYC Economic Development Corporation": 68,
+        "New York City Department of Transportation": 67,
+        "Port Authority of New York/New Jersey": 67,
+        "Roosevelt Island Operating Corporation": 57
+      },
+      "mode": {
+        "Bus": 140,
+        "Long Island Rail Road": 72,
+        "Access-A-Ride": 72,
+        "Metro-North Railroad": 72,
+        "Subway": 72,
+        "Commuter Rail": 68,
+        "New York City Ferry": 68,
+        "Demand Response": 68,
+        "Staten Island Ferry": 67,
+        "PATH": 67,
+        "Tram": 57
+      }
+    },
+    "kind": "socrata",
+    "domain": "data.ny.gov",
+    "role": "outcome",
+    "domain_area": "transit",
+    "url": "https://data.ny.gov/d/sv2g-g4mz",
+    "pre_period_days": 1465,
+    "usable_pre_period": true,
+    "downloaded": true,
+    "downloaded_rows": 823
+  },
+  "cbd_bus_speeds": {
+    "dataset_id": "r6db-kkzj",
+    "name": "MTA Central Business District Bus Speeds: Beginning 2023",
+    "columns": [
+      "month",
+      "day_type",
+      "hour_of_day",
+      "time_period",
+      "route_type",
+      "route_id",
+      "cbd_relation",
+      "sum_mileage",
+      "sum_time",
+      "average_road_speed"
+    ],
+    "rows_updated_at": 1792768811,
+    "row_count": 686145,
+    "coverage_start": "2023-01-01T00:00:00.000",
+    "coverage_end": "2026-09-01T00:00:00.000",
+    "levels": {
+      "cbd_relation": {
+        "Non-CBD": 553182,
+        "CBD": 132963
+      },
+      "route_type": {
+        "Local": 465555,
+        "Express": 133594,
+        "SBS": 39669,
+        "Limited": 37731,
+        "School": 9228,
+        "School Limited": 368
+      },
+      "time_period": {
+        "Peak": 468084,
+        "Overnight": 218061
+      }
+    },
+    "kind": "socrata",
+    "domain": "data.ny.gov",
+    "role": "outcome",
+    "domain_area": "transit",
+    "url": "https://data.ny.gov/d/r6db-kkzj",
+    "pre_period_days": 735,
+    "usable_pre_period": true,
+    "downloaded": true,
+    "downloaded_rows": 686145
+  },
+  "bus_speeds_monthly": {
+    "dataset_id": "cudb-vcni",
+    "name": "MTA Bus Speeds: Beginning 2015",
+    "columns": [
+      "month",
+      "borough",
+      "day_type",
+      "trip_type",
+      "route_id",
+      "period",
+      "total_operating_time",
+      "total_mileage",
+      "average_speed"
+    ],
+    "rows_updated_at": 1792769034,
+    "row_count": 112388,
+    "coverage_start": "2019-01-01T00:00:00.000",
+    "coverage_end": "2026-09-01T00:00:00.000",
+    "levels": {
+      "borough": {
+        "Queens": 37132,
+        "Brooklyn": 24100,
+        "Bronx": 20459,
+        "Staten Island": 15507,
+        "Manhattan": 15190
+      },
+      "period": {
+        "Off-Peak": 56203,
+        "Peak": 56185
+      }
+    },
+    "kind": "socrata",
+    "domain": "data.ny.gov",
+    "role": "outcome",
+    "domain_area": "transit",
+    "url": "https://data.ny.gov/d/cudb-vcni",
+    "pre_period_days": 2196,
+    "usable_pre_period": true,
+    "downloaded": true,
+    "downloaded_rows": 112388
+  },
+  "bus_segment_speeds_2023_2024": {
+    "dataset_id": "58t6-89vi",
+    "name": "MTA Bus Route Segment Speeds: 2023 - 2024",
+    "columns": [
+      "year",
+      "month",
+      "timestamp",
+      "day_of_week",
+      "hour_of_day",
+      "route_id",
+      "direction",
+      "borough",
+      "route_type",
+      "stop_order",
+      "timepoint_stop_id",
+      "timepoint_stop_name",
+      "timepoint_stop_latitude",
+      "timepoint_stop_longitude",
+      "next_timepoint_stop_id",
+      "next_timepoint_stop_name",
+      "next_timepoint_stop_latitude",
+      "next_timepoint_stop_longitude",
+      "road_distance",
+      "average_travel_time",
+      "average_road_speed",
+      "bus_trip_count",
+      "timepoint_stop_georeference",
+      "next_timepoint_stop_georeference"
+    ],
+    "rows_updated_at": 1737741362,
+    "row_count": 11656097,
+    "coverage_start": "2023-01-01T00:00:00.000",
+    "coverage_end": "2024-12-01T23:00:00.000",
+    "levels": {
+      "borough": {
+        "Queens": 3409192,
+        "Brooklyn": 2936896,
+        "Bronx": 2134693,
+        "Manhattan": 1615720,
+        "Staten Island": 1138802,
+        "Other": 420794
+      }
+    },
+    "kind": "socrata",
+    "domain": "data.ny.gov",
+    "role": "outcome",
+    "domain_area": "transit",
+    "url": "https://data.ny.gov/d/58t6-89vi",
+    "pre_period_days": 735,
+    "usable_pre_period": true,
+    "downloaded": false
+  },
+  "bus_segment_speeds_2025": {
+    "dataset_id": "kufs-yh3x",
+    "name": "MTA Bus Route Segment Speeds: Beginning 2025",
+    "columns": [
+      "year",
+      "month",
+      "timestamp",
+      "day_of_week",
+      "hour_of_day",
+      "route_id",
+      "direction",
+      "borough",
+      "route_type",
+      "stop_order",
+      "timepoint_stop_id",
+      "timepoint_stop_name",
+      "timepoint_stop_latitude",
+      "timepoint_stop_longitude",
+      "next_timepoint_stop_id",
+      "next_timepoint_stop_name",
+      "next_timepoint_stop_latitude",
+      "next_timepoint_stop_longitude",
+      "road_distance",
+      "average_travel_time",
+      "average_road_speed",
+      "bus_trip_count",
+      "timepoint_stop_georeference",
+      "next_timepoint_stop_georeference"
+    ],
+    "rows_updated_at": 1792773091,
+    "row_count": 10217290,
+    "coverage_start": "2025-01-01T00:00:00.000",
+    "coverage_end": "2026-09-01T23:00:00.000",
+    "levels": {
+      "borough": {
+        "Queens": 2961862,
+        "Brooklyn": 2606878,
+        "Bronx": 1884747,
+        "Manhattan": 1428322,
+        "Staten Island": 990634,
+        "Other": 344847
+      }
+    },
+    "kind": "socrata",
+    "domain": "data.ny.gov",
+    "role": "outcome",
+    "domain_area": "transit",
+    "url": "https://data.ny.gov/d/kufs-yh3x",
+    "pre_period_days": 4,
+    "usable_pre_period": false,
+    "downloaded": false
+  },
+  "cbd_geofence": {
+    "dataset_id": "srxy-5nxn",
+    "name": "MTA Central Business District Geofence: Beginning June 2024",
+    "columns": [
+      "polygon"
+    ],
+    "rows_updated_at": 1736522522,
+    "row_count": 7,
+    "coverage_start": null,
+    "coverage_end": null,
+    "levels": {},
+    "kind": "socrata",
+    "domain": "data.ny.gov",
+    "role": "geography",
+    "domain_area": "geography",
+    "url": "https://data.ny.gov/d/srxy-5nxn",
+    "pre_period_days": 0,
+    "usable_pre_period": false,
+    "downloaded": true,
+    "downloaded_rows": 7
+  },
+  "cbd_taxi_zones": {
+    "dataset_id": "yfdc-w5jh",
+    "name": "MTA Central Business District Taxi Zones",
+    "columns": [
+      "taxi_zone",
+      "polygon"
+    ],
+    "rows_updated_at": 1723833005,
+    "row_count": 38,
+    "coverage_start": null,
+    "coverage_end": null,
+    "levels": {},
+    "kind": "socrata",
+    "domain": "data.ny.gov",
+    "role": "geography",
+    "domain_area": "geography",
+    "url": "https://data.ny.gov/d/yfdc-w5jh",
+    "pre_period_days": 0,
+    "usable_pre_period": false,
+    "downloaded": true,
+    "downloaded_rows": 38
+  },
+  "subway_stations": {
+    "dataset_id": "39hk-dx4f",
+    "name": "MTA Subway Stations",
+    "columns": [
+      "gtfs_stop_id",
+      "station_id",
+      "complex_id",
+      "division",
+      "line",
+      "stop_name",
+      "borough",
+      "cbd",
+      "daytime_routes",
+      "structure",
+      "gtfs_latitude",
+      "gtfs_longitude",
+      "north_direction_label",
+      "south_direction_label",
+      "ada",
+      "ada_northbound",
+      "ada_southbound",
+      "ada_notes",
+      "georeference"
+    ],
+    "rows_updated_at": 1794240504,
+    "row_count": 496,
+    "coverage_start": null,
+    "coverage_end": null,
+    "levels": {
+      "cbd": {
+        "false": 401,
+        "true": 95
+      },
+      "borough": {
+        "Bk": 169,
+        "M": 153,
+        "Q": 83,
+        "Bx": 70,
+        "SI": 21
+      }
+    },
+    "kind": "socrata",
+    "domain": "data.ny.gov",
+    "role": "geography",
+    "domain_area": "geography",
+    "url": "https://data.ny.gov/d/39hk-dx4f",
+    "pre_period_days": 0,
+    "usable_pre_period": false,
+    "downloaded": true,
+    "downloaded_rows": 496
+  },
+  "taxi_zones": {
+    "dataset_id": "8meu-9t5y",
+    "name": "NYC Taxi Zones",
+    "columns": [
+      "the_geom",
+      "shape_leng",
+      "shape_area",
+      "zone",
+      "locationid",
+      "borough"
+    ],
+    "rows_updated_at": 1749489142,
+    "row_count": 263,
+    "coverage_start": null,
+    "coverage_end": null,
+    "levels": {
+      "borough": {
+        "Queens": 69,
+        "Manhattan": 69,
+        "Brooklyn": 61,
+        "Bronx": 43,
+        "Staten Island": 20,
+        "EWR": 1
+      }
+    },
+    "kind": "socrata",
+    "domain": "data.cityofnewyork.us",
+    "role": "geography",
+    "domain_area": "geography",
+    "url": "https://data.cityofnewyork.us/d/8meu-9t5y",
+    "pre_period_days": 0,
+    "usable_pre_period": false,
+    "downloaded": true,
+    "downloaded_rows": 263
+  },
+  "nta_2020": {
+    "kind": "socrata",
+    "id": "9nt8-h7nd",
+    "error": "503 Server Error: Service Unavailable for url: https://data.cityofnewyork.us/api/views/9nt8-h7nd/rows.csv?accessType=DOWNLOAD"
+  },
+  "tlc": {
+    "kind": "tlc",
+    "role": "outcome",
+    "services": {
+      "yellow": {
+        "months_available": [
+          "2023-01",
+          "2023-02",
+          "2023-03",
+          "2023-04",
+          "2023-05",
+          "2023-06",
+          "2023-07",
+          "2023-08",
+          "2023-09",
+          "2023-10",
+          "2023-11",
+          "2023-12",
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09",
+          "2024-10",
+          "2024-11",
+          "2024-12",
+          "2025-01",
+          "2025-02",
+          "2025-03",
+          "2025-04",
+          "2025-05",
+          "2025-06",
+          "2025-07",
+          "2025-08",
+          "2025-09",
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09"
+        ],
+        "coverage_start": "2023-01",
+        "coverage_end": "2026-09",
+        "usable_pre_period": true,
+        "probes": [
+          {
+            "service": "yellow",
+            "month": "2023-01",
+            "url": "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2023-01.parquet",
+            "columns": [
+              "VendorID",
+              "tpep_pickup_datetime",
+              "tpep_dropoff_datetime",
+              "passenger_count",
+              "trip_distance",
+              "RatecodeID",
+              "store_and_fwd_flag",
+              "PULocationID",
+              "DOLocationID",
+              "payment_type",
+              "fare_amount",
+              "extra",
+              "mta_tax",
+              "tip_amount",
+              "tolls_amount",
+              "improvement_surcharge",
+              "total_amount",
+              "congestion_surcharge",
+              "airport_fee"
+            ],
+            "rows": 3066766,
+            "pickup_min": "2008-12-31 23:01:42",
+            "pickup_max": "2023-02-01 00:56:53",
+            "has_cbd_congestion_fee": false
+          },
+          {
+            "service": "yellow",
+            "month": "2024-12",
+            "url": "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-12.parquet",
+            "columns": [
+              "VendorID",
+              "tpep_pickup_datetime",
+              "tpep_dropoff_datetime",
+              "passenger_count",
+              "trip_distance",
+              "RatecodeID",
+              "store_and_fwd_flag",
+              "PULocationID",
+              "DOLocationID",
+              "payment_type",
+              "fare_amount",
+              "extra",
+              "mta_tax",
+              "tip_amount",
+              "tolls_amount",
+              "improvement_surcharge",
+              "total_amount",
+              "congestion_surcharge",
+              "Airport_fee"
+            ],
+            "rows": 3668371,
+            "pickup_min": "2008-12-31 23:03:59",
+            "pickup_max": "2025-03-23 20:42:06",
+            "has_cbd_congestion_fee": false
+          },
+          {
+            "service": "yellow",
+            "month": "2025-01",
+            "url": "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2025-01.parquet",
+            "columns": [
+              "VendorID",
+              "tpep_pickup_datetime",
+              "tpep_dropoff_datetime",
+              "passenger_count",
+              "trip_distance",
+              "RatecodeID",
+              "store_and_fwd_flag",
+              "PULocationID",
+              "DOLocationID",
+              "payment_type",
+              "fare_amount",
+              "extra",
+              "mta_tax",
+              "tip_amount",
+              "tolls_amount",
+              "improvement_surcharge",
+              "total_amount",
+              "congestion_surcharge",
+              "Airport_fee",
+              "cbd_congestion_fee"
+            ],
+            "rows": 3475226,
+            "pickup_min": "2024-12-31 20:47:55",
+            "pickup_max": "2025-02-01 00:00:44",
+            "has_cbd_congestion_fee": true
+          },
+          {
+            "service": "yellow",
+            "month": "2026-09",
+            "url": "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2026-09.parquet",
+            "columns": [
+              "VendorID",
+              "tpep_pickup_datetime",
+              "tpep_dropoff_datetime",
+              "passenger_count",
+              "trip_distance",
+              "RatecodeID",
+              "store_and_fwd_flag",
+              "PULocationID",
+              "DOLocationID",
+              "payment_type",
+              "fare_amount",
+              "extra",
+              "mta_tax",
+              "tip_amount",
+              "tolls_amount",
+              "improvement_surcharge",
+              "total_amount",
+              "congestion_surcharge",
+              "Airport_fee",
+              "cbd_congestion_fee",
+              "request_source"
+            ],
+            "rows": 3876044,
+            "pickup_min": "2009-01-01 09:32:44",
+            "pickup_max": "2026-10-07 07:40:40",
+            "has_cbd_congestion_fee": true
+          }
+        ]
+      },
+      "green": {
+        "months_available": [
+          "2023-01",
+          "2023-02",
+          "2023-03",
+          "2023-04",
+          "2023-05",
+          "2023-06",
+          "2023-07",
+          "2023-08",
+          "2023-09",
+          "2023-10",
+          "2023-11",
+          "2023-12",
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09",
+          "2024-10",
+          "2024-11",
+          "2024-12",
+          "2025-01",
+          "2025-02",
+          "2025-03",
+          "2025-04",
+          "2025-05",
+          "2025-06",
+          "2025-07",
+          "2025-08",
+          "2025-09",
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09"
+        ],
+        "coverage_start": "2023-01",
+        "coverage_end": "2026-09",
+        "usable_pre_period": true,
+        "probes": [
+          {
+            "service": "green",
+            "month": "2023-01",
+            "url": "https://d37ci6vzurychx.cloudfront.net/trip-data/green_tripdata_2023-01.parquet",
+            "columns": [
+              "VendorID",
+              "lpep_pickup_datetime",
+              "lpep_dropoff_datetime",
+              "store_and_fwd_flag",
+              "RatecodeID",
+              "PULocationID",
+              "DOLocationID",
+              "passenger_count",
+              "trip_distance",
+              "fare_amount",
+              "extra",
+              "mta_tax",
+              "tip_amount",
+              "tolls_amount",
+              "ehail_fee",
+              "improvement_surcharge",
+              "total_amount",
+              "payment_type",
+              "trip_type",
+              "congestion_surcharge"
+            ],
+            "rows": 68211,
+            "pickup_min": "2009-01-01 20:21:27",
+            "pickup_max": "2023-02-01 03:10:05",
+            "has_cbd_congestion_fee": false
+          },
+          {
+            "service": "green",
+            "month": "2024-12",
+            "url": "https://d37ci6vzurychx.cloudfront.net/trip-data/green_tripdata_2024-12.parquet",
+            "columns": [
+              "VendorID",
+              "lpep_pickup_datetime",
+              "lpep_dropoff_datetime",
+              "store_and_fwd_flag",
+              "RatecodeID",
+              "PULocationID",
+              "DOLocationID",
+              "passenger_count",
+              "trip_distance",
+              "fare_amount",
+              "extra",
+              "mta_tax",
+              "tip_amount",
+              "tolls_amount",
+              "ehail_fee",
+              "improvement_surcharge",
+              "total_amount",
+              "payment_type",
+              "trip_type",
+              "congestion_surcharge"
+            ],
+            "rows": 53994,
+            "pickup_min": "2008-12-31 23:08:01",
+            "pickup_max": "2025-01-01 22:21:15",
+            "has_cbd_congestion_fee": false
+          },
+          {
+            "service": "green",
+            "month": "2025-01",
+            "url": "https://d37ci6vzurychx.cloudfront.net/trip-data/green_tripdata_2025-01.parquet",
+            "columns": [
+              "VendorID",
+              "lpep_pickup_datetime",
+              "lpep_dropoff_datetime",
+              "store_and_fwd_flag",
+              "RatecodeID",
+              "PULocationID",
+              "DOLocationID",
+              "passenger_count",
+              "trip_distance",
+              "fare_amount",
+              "extra",
+              "mta_tax",
+              "tip_amount",
+              "tolls_amount",
+              "ehail_fee",
+              "improvement_surcharge",
+              "total_amount",
+              "payment_type",
+              "trip_type",
+              "congestion_surcharge",
+              "cbd_congestion_fee"
+            ],
+            "rows": 48326,
+            "pickup_min": "2024-12-25 23:13:15",
+            "pickup_max": "2025-02-05 18:46:24",
+            "has_cbd_congestion_fee": true
+          },
+          {
+            "service": "green",
+            "month": "2026-09",
+            "url": "https://d37ci6vzurychx.cloudfront.net/trip-data/green_tripdata_2026-09.parquet",
+            "columns": [
+              "VendorID",
+              "lpep_pickup_datetime",
+              "lpep_dropoff_datetime",
+              "store_and_fwd_flag",
+              "RatecodeID",
+              "PULocationID",
+              "DOLocationID",
+              "passenger_count",
+              "trip_distance",
+              "fare_amount",
+              "extra",
+              "mta_tax",
+              "tip_amount",
+              "tolls_amount",
+              "ehail_fee",
+              "improvement_surcharge",
+              "total_amount",
+              "payment_type",
+              "trip_type",
+              "congestion_surcharge",
+              "cbd_congestion_fee",
+              "request_source"
+            ],
+            "rows": 46676,
+            "pickup_min": "2026-08-25 22:36:17",
+            "pickup_max": "2026-09-30 23:57:38",
+            "has_cbd_congestion_fee": true
+          }
+        ]
+      },
+      "fhvhv": {
+        "months_available": [
+          "2023-01",
+          "2023-02",
+          "2023-03",
+          "2023-04",
+          "2023-05",
+          "2023-06",
+          "2023-07",
+          "2023-08",
+          "2023-09",
+          "2023-10",
+          "2023-11",
+          "2023-12",
+          "2024-01",
+          "2024-02",
+          "2024-03",
+          "2024-04",
+          "2024-05",
+          "2024-06",
+          "2024-07",
+          "2024-08",
+          "2024-09",
+          "2024-10",
+          "2024-11",
+          "2024-12",
+          "2025-01",
+          "2025-02",
+          "2025-03",
+          "2025-04",
+          "2025-05",
+          "2025-06",
+          "2025-07",
+          "2025-08",
+          "2025-09",
+          "2025-10",
+          "2025-11",
+          "2025-12",
+          "2026-01",
+          "2026-02",
+          "2026-03",
+          "2026-04",
+          "2026-05",
+          "2026-06",
+          "2026-07",
+          "2026-08",
+          "2026-09"
+        ],
+        "coverage_start": "2023-01",
+        "coverage_end": "2026-09",
+        "usable_pre_period": true,
+        "probes": [
+          {
+            "service": "fhvhv",
+            "month": "2023-01",
+            "url": "https://d37ci6vzurychx.cloudfront.net/trip-data/fhvhv_tripdata_2023-01.parquet",
+            "columns": [
+              "hvfhs_license_num",
+              "dispatching_base_num",
+              "originating_base_num",
+              "request_datetime",
+              "on_scene_datetime",
+              "pickup_datetime",
+              "dropoff_datetime",
+              "PULocationID",
+              "DOLocationID",
+              "trip_miles",
+              "trip_time",
+              "base_passenger_fare",
+              "tolls",
+              "bcf",
+              "sales_tax",
+              "congestion_surcharge",
+              "airport_fee",
+              "tips",
+              "driver_pay",
+              "shared_request_flag",
+              "shared_match_flag",
+              "access_a_ride_flag",
+              "wav_request_flag",
+              "wav_match_flag"
+            ],
+            "rows": 18479031,
+            "pickup_min": "2023-01-01 00:00:00",
+            "pickup_max": "2023-01-31 23:59:59",
+            "has_cbd_congestion_fee": false
+          },
+          {
+            "service": "fhvhv",
+            "month": "2024-12",
+            "url": "https://d37ci6vzurychx.cloudfront.net/trip-data/fhvhv_tripdata_2024-12.parquet",
+            "columns": [
+              "hvfhs_license_num",
+              "dispatching_base_num",
+              "originating_base_num",
+              "request_datetime",
+              "on_scene_datetime",
+              "pickup_datetime",
+              "dropoff_datetime",
+              "PULocationID",
+              "DOLocationID",
+              "trip_miles",
+              "trip_time",
+              "base_passenger_fare",
+              "tolls",
+              "bcf",
+              "sales_tax",
+              "congestion_surcharge",
+              "airport_fee",
+              "tips",
+              "driver_pay",
+              "shared_request_flag",
+              "shared_match_flag",
+              "access_a_ride_flag",
+              "wav_request_flag",
+              "wav_match_flag"
+            ],
+            "rows": 21068851,
+            "pickup_min": "2024-12-01 00:00:00",
+            "pickup_max": "2024-12-31 23:59:59",
+            "has_cbd_congestion_fee": false
+          },
+          {
+            "service": "fhvhv",
+            "month": "2025-01",
+            "url": "https://d37ci6vzurychx.cloudfront.net/trip-data/fhvhv_tripdata_2025-01.parquet",
+            "columns": [
+              "hvfhs_license_num",
+              "dispatching_base_num",
+              "originating_base_num",
+              "request_datetime",
+              "on_scene_datetime",
+              "pickup_datetime",
+              "dropoff_datetime",
+              "PULocationID",
+              "DOLocationID",
+              "trip_miles",
+              "trip_time",
+              "base_passenger_fare",
+              "tolls",
+              "bcf",
+              "sales_tax",
+              "congestion_surcharge",
+              "airport_fee",
+              "tips",
+              "driver_pay",
+              "shared_request_flag",
+              "shared_match_flag",
+              "access_a_ride_flag",
+              "wav_request_flag",
+              "wav_match_flag",
+              "cbd_congestion_fee"
+            ],
+            "rows": 20405666,
+            "pickup_min": "2025-01-01 00:00:00",
+            "pickup_max": "2025-01-31 23:59:59",
+            "has_cbd_congestion_fee": true
+          },
+          {
+            "service": "fhvhv",
+            "month": "2026-09",
+            "url": "https://d37ci6vzurychx.cloudfront.net/trip-data/fhvhv_tripdata_2026-09.parquet",
+            "columns": [
+              "hvfhs_license_num",
+              "dispatching_base_num",
+              "originating_base_num",
+              "request_datetime",
+              "on_scene_datetime",
+              "pickup_datetime",
+              "dropoff_datetime",
+              "PULocationID",
+              "DOLocationID",
+              "trip_miles",
+              "trip_time",
+              "base_passenger_fare",
+              "tolls",
+              "bcf",
+              "sales_tax",
+              "congestion_surcharge",
+              "airport_fee",
+              "tips",
+              "driver_pay",
+              "shared_request_flag",
+              "shared_match_flag",
+              "access_a_ride_flag",
+              "wav_request_flag",
+              "wav_match_flag",
+              "cbd_congestion_fee"
+            ],
+            "rows": 20987681,
+            "pickup_min": "2026-09-01 00:00:00",
+            "pickup_max": "2026-09-30 23:59:59",
+            "has_cbd_congestion_fee": true
+          }
+        ]
+      }
+    }
+  },
+  "ntd_monthly_ridership": {
+    "dataset_id": "8bui-9xvu",
+    "name": "Complete Monthly Ridership (with Adjustments and Estimates)",
+    "columns": [
+      "ntd_id",
+      "legacy_ntd_id",
+      "agency",
+      "mode_type_of_service_status",
+      "reporter_type",
+      "uace_cd",
+      "uza_name",
+      "mode",
+      "tos",
+      "_3_mode",
+      "date",
+      "upt",
+      "voms",
+      "vrh",
+      "vrm",
+      "agency_mode_tos_date",
+      "state",
+      "fta_region"
+    ],
+    "rows_updated_at": 1793717493,
+    "row_count": 374103,
+    "coverage_start": "2002-01-01T00:00:00.000",
+    "coverage_end": "2026-09-01T00:00:00.000",
+    "levels": {
+      "mode": {
+        "DR": 154065,
+        "MB": 145589,
+        "VP": 21061,
+        "CB": 15388,
+        "LR": 7478,
+        "CR": 7312,
+        "FB": 6856,
+        "HR": 4435,
+        "SR": 3427,
+        "RB": 2246,
+        "MG": 1616,
+        "TB": 1596,
+        "IP": 1023,
+        "YR": 979,
+        "CC": 297,
+        "PB": 285,
+        "AR": 249,
+        "TR": 177,
+        "OR": 24
+      }
+    },
+    "kind": "socrata",
+    "domain": "datahub.transportation.gov",
+    "role": "outcome",
+    "domain_area": "transit",
+    "url": "https://datahub.transportation.gov/d/8bui-9xvu",
+    "pre_period_days": 8405,
+    "usable_pre_period": true,
+    "downloaded": true,
+    "downloaded_rows": 374103
+  },
+  "epa_aqs": {
+    "kind": "epa_aqs",
+    "role": "outcome",
+    "files": {
+      "88101_2023": {
+        "rows": 9350315,
+        "coverage_start": "2023-01-01",
+        "coverage_end": "2023-12-31",
+        "n_sites_national": 864,
+        "nyc_sites": [
+          {
+            "site": "36-005-0110",
+            "county": "Bronx",
+            "latitude": 40.816,
+            "longitude": -73.902,
+            "n_instruments": 2,
+            "rows": 13378,
+            "start": "2023-01-01",
+            "end": "2023-12-31"
+          },
+          {
+            "site": "36-005-0112",
+            "county": "Bronx",
+            "latitude": 40.81551,
+            "longitude": -73.88553,
+            "n_instruments": 1,
+            "rows": 3964,
+            "start": "2023-07-17",
+            "end": "2023-12-31"
+          },
+          {
+            "site": "36-047-0052",
+            "county": "Kings",
+            "latitude": 40.64182,
+            "longitude": -74.01871,
+            "n_instruments": 1,
+            "rows": 4158,
+            "start": "2023-07-07",
+            "end": "2023-12-31"
+          },
+          {
+            "site": "36-047-0118",
+            "county": "Kings",
+            "latitude": 40.69454,
+            "longitude": -73.92769,
+            "n_instruments": 1,
+            "rows": 3413,
+            "start": "2023-07-05",
+            "end": "2023-12-31"
+          },
+          {
+            "site": "36-081-0124",
+            "county": "Queens",
+            "latitude": 40.73614,
+            "longitude": -73.82153,
+            "n_instruments": 2,
+            "rows": 13377,
+            "start": "2023-01-01",
+            "end": "2023-12-31"
+          }
+        ],
+        "parameter_label": "PM2.5 FRM/FEM mass"
+      },
+      "88101_2024": {
+        "rows": 8139551,
+        "coverage_start": "2024-01-01",
+        "coverage_end": "2024-12-31",
+        "n_sites_national": 925,
+        "nyc_sites": [
+          {
+            "site": "36-005-0110",
+            "county": "Bronx",
+            "latitude": 40.816,
+            "longitude": -73.902,
+            "n_instruments": 1,
+            "rows": 8628,
+            "start": "2024-01-01",
+            "end": "2024-12-31"
+          },
+          {
+            "site": "36-005-0112",
+            "county": "Bronx",
+            "latitude": 40.81551,
+            "longitude": -73.88553,
+            "n_instruments": 1,
+            "rows": 8776,
+            "start": "2024-01-01",
+            "end": "2024-12-31"
+          },
+          {
+            "site": "36-047-0052",
+            "county": "Kings",
+            "latitude": 40.64182,
+            "longitude": -74.01871,
+            "n_instruments": 1,
+            "rows": 8688,
+            "start": "2024-01-01",
+            "end": "2024-12-31"
+          },
+          {
+            "site": "36-047-0118",
+            "county": "Kings",
+            "latitude": 40.69454,
+            "longitude": -73.92769,
+            "n_instruments": 1,
+            "rows": 8772,
+            "start": "2024-01-01",
+            "end": "2024-12-31"
+          },
+          {
+            "site": "36-081-0124",
+            "county": "Queens",
+            "latitude": 40.73614,
+            "longitude": -73.82153,
+            "n_instruments": 1,
+            "rows": 8702,
+            "start": "2024-01-01",
+            "end": "2024-12-31"
+          },
+          {
+            "site": "36-081-0125",
+            "county": "Queens",
+            "latitude": 40.739264,
+            "longitude": -73.817694,
+            "n_instruments": 1,
+            "rows": 8319,
+            "start": "2024-01-19",
+            "end": "2024-12-31"
+          }
+        ],
+        "parameter_label": "PM2.5 FRM/FEM mass"
+      },
+      "88101_2025": {
+        "rows": 8367660,
+        "coverage_start": "2025-01-01",
+        "coverage_end": "2025-12-31",
+        "n_sites_national": 946,
+        "nyc_sites": [
+          {
+            "site": "36-005-0110",
+            "county": "Bronx",
+            "latitude": 40.816,
+            "longitude": -73.902,
+            "n_instruments": 1,
+            "rows": 8686,
+            "start": "2025-01-01",
+            "end": "2025-12-31"
+          },
+          {
+            "site": "36-005-0112",
+            "county": "Bronx",
+            "latitude": 40.81551,
+            "longitude": -73.88553,
+            "n_instruments": 1,
+            "rows": 8676,
+            "start": "2025-01-01",
+            "end": "2025-12-31"
+          },
+          {
+            "site": "36-047-0052",
+            "county": "Kings",
+            "latitude": 40.64182,
+            "longitude": -74.01871,
+            "n_instruments": 1,
+            "rows": 8748,
+            "start": "2025-01-01",
+            "end": "2025-12-31"
+          },
+          {
+            "site": "36-047-0118",
+            "county": "Kings",
+            "latitude": 40.69454,
+            "longitude": -73.92769,
+            "n_instruments": 1,
+            "rows": 8484,
+            "start": "2025-01-01",
+            "end": "2025-12-31"
+          },
+          {
+            "site": "36-061-0134",
+            "county": "New York",
+            "latitude": 40.71436,
+            "longitude": -73.99518,
+            "n_instruments": 1,
+            "rows": 7990,
+            "start": "2025-01-29",
+            "end": "2025-12-31"
+          },
+          {
+            "site": "36-061-0135",
+            "county": "New York",
+            "latitude": 40.81976,
+            "longitude": -73.94825,
+            "n_instruments": 1,
+            "rows": 8745,
+            "start": "2025-01-01",
+            "end": "2025-12-31"
+          },
+          {
+            "site": "36-081-0124",
+            "county": "Queens",
+            "latitude": 40.73614,
+            "longitude": -73.82153,
+            "n_instruments": 1,
+            "rows": 8671,
+            "start": "2025-01-01",
+            "end": "2025-12-31"
+          },
+          {
+            "site": "36-081-0125",
+            "county": "Queens",
+            "latitude": 40.739264,
+            "longitude": -73.817694,
+            "n_instruments": 1,
+            "rows": 8741,
+            "start": "2025-01-01",
+            "end": "2025-12-31"
+          },
+          {
+            "site": "36-085-0111",
+            "county": "Richmond",
+            "latitude": 40.58027,
+            "longitude": -74.19832,
+            "n_instruments": 1,
+            "rows": 8721,
+            "start": "2025-01-01",
+            "end": "2025-12-31"
+          }
+        ],
+        "parameter_label": "PM2.5 FRM/FEM mass"
+      },
+      "88101_2026": {
+        "rows": 1979862,
+        "coverage_start": "2026-01-01",
+        "coverage_end": "2026-05-31",
+        "n_sites_national": 783,
+        "nyc_sites": [
+          {
+            "site": "36-005-0110",
+            "county": "Bronx",
+            "latitude": 40.816,
+            "longitude": -73.902,
+            "n_instruments": 1,
+            "rows": 3614,
+            "start": "2026-01-01",
+            "end": "2026-05-31"
+          },
+          {
+            "site": "36-005-0112",
+            "county": "Bronx",
+            "latitude": 40.81551,
+            "longitude": -73.88553,
+            "n_instruments": 1,
+            "rows": 3617,
+            "start": "2026-01-01",
+            "end": "2026-05-31"
+          },
+          {
+            "site": "36-047-0052",
+            "county": "Kings",
+            "latitude": 40.64182,
+            "longitude": -74.01871,
+            "n_instruments": 1,
+            "rows": 3513,
+            "start": "2026-01-01",
+            "end": "2026-05-31"
+          },
+          {
+            "site": "36-047-0118",
+            "county": "Kings",
+            "latitude": 40.69454,
+            "longitude": -73.92769,
+            "n_instruments": 1,
+            "rows": 3571,
+            "start": "2026-01-01",
+            "end": "2026-05-31"
+          },
+          {
+            "site": "36-061-0134",
+            "county": "New York",
+            "latitude": 40.71436,
+            "longitude": -73.99518,
+            "n_instruments": 1,
+            "rows": 3614,
+            "start": "2026-01-01",
+            "end": "2026-05-31"
+          },
+          {
+            "site": "36-061-0135",
+            "county": "New York",
+            "latitude": 40.81976,
+            "longitude": -73.94825,
+            "n_instruments": 1,
+            "rows": 3615,
+            "start": "2026-01-01",
+            "end": "2026-05-31"
+          },
+          {
+            "site": "36-081-0124",
+            "county": "Queens",
+            "latitude": 40.73614,
+            "longitude": -73.82153,
+            "n_instruments": 1,
+            "rows": 3617,
+            "start": "2026-01-01",
+            "end": "2026-05-31"
+          },
+          {
+            "site": "36-081-0125",
+            "county": "Queens",
+            "latitude": 40.739264,
+            "longitude": -73.817694,
+            "n_instruments": 1,
+            "rows": 2989,
+            "start": "2026-01-01",
+            "end": "2026-05-31"
+          },
+          {
+            "site": "36-085-0111",
+            "county": "Richmond",
+            "latitude": 40.58027,
+            "longitude": -74.19832,
+            "n_instruments": 1,
+            "rows": 3617,
+            "start": "2026-01-01",
+            "end": "2026-05-31"
+          }
+        ],
+        "parameter_label": "PM2.5 FRM/FEM mass"
+      },
+      "42602_2023": {
+        "rows": 3590973,
+        "coverage_start": "2023-01-01",
+        "coverage_end": "2023-12-31",
+        "n_sites_national": 446,
+        "nyc_sites": [
+          {
+            "site": "36-005-0110",
+            "county": "Bronx",
+            "latitude": 40.816,
+            "longitude": -73.902,
+            "n_instruments": 1,
+            "rows": 8182,
+            "start": "2023-01-01",
+            "end": "2023-12-31"
+          },
+          {
+            "site": "36-005-0133",
+            "county": "Bronx",
+            "latitude": 40.8679,
+            "longitude": -73.87809,
+            "n_instruments": 1,
+            "rows": 8371,
+            "start": "2023-01-01",
+            "end": "2023-12-31"
+          },
+          {
+            "site": "36-081-0124",
+            "county": "Queens",
+            "latitude": 40.73614,
+            "longitude": -73.82153,
+            "n_instruments": 1,
+            "rows": 8218,
+            "start": "2023-01-01",
+            "end": "2023-12-31"
+          },
+          {
+            "site": "36-081-0125",
+            "county": "Queens",
+            "latitude": 40.739264,
+            "longitude": -73.817694,
+            "n_instruments": 1,
+            "rows": 8216,
+            "start": "2023-01-01",
+            "end": "2023-12-31"
+          }
+        ],
+        "parameter_label": "NO2"
+      },
+      "42602_2024": {
+        "rows": 3547016,
+        "coverage_start": "2024-01-01",
+        "coverage_end": "2024-12-31",
+        "n_sites_national": 460,
+        "nyc_sites": [
+          {
+            "site": "36-005-0110",
+            "county": "Bronx",
+            "latitude": 40.816,
+            "longitude": -73.902,
+            "n_instruments": 1,
+            "rows": 8199,
+            "start": "2024-01-01",
+            "end": "2024-12-31"
+          },
+          {
+            "site": "36-005-0133",
+            "county": "Bronx",
+            "latitude": 40.8679,
+            "longitude": -73.87809,
+            "n_instruments": 1,
+            "rows": 8621,
+            "start": "2024-01-01",
+            "end": "2024-12-31"
+          },
+          {
+            "site": "36-081-0124",
+            "county": "Queens",
+            "latitude": 40.73614,
+            "longitude": -73.82153,
+            "n_instruments": 1,
+            "rows": 8500,
+            "start": "2024-01-01",
+            "end": "2024-12-31"
+          },
+          {
+            "site": "36-081-0125",
+            "county": "Queens",
+            "latitude": 40.739264,
+            "longitude": -73.817694,
+            "n_instruments": 1,
+            "rows": 7887,
+            "start": "2024-01-01",
+            "end": "2024-12-31"
+          }
+        ],
+        "parameter_label": "NO2"
+      },
+      "42602_2025": {
+        "rows": 3489728,
+        "coverage_start": "2025-01-01",
+        "coverage_end": "2025-12-31",
+        "n_sites_national": 436,
+        "nyc_sites": [
+          {
+            "site": "36-005-0110",
+            "county": "Bronx",
+            "latitude": 40.816,
+            "longitude": -73.902,
+            "n_instruments": 1,
+            "rows": 8211,
+            "start": "2025-01-01",
+            "end": "2025-12-22"
+          },
+          {
+            "site": "36-005-0133",
+            "county": "Bronx",
+            "latitude": 40.8679,
+            "longitude": -73.87809,
+            "n_instruments": 1,
+            "rows": 7595,
+            "start": "2025-01-01",
+            "end": "2025-12-31"
+          },
+          {
+            "site": "36-081-0124",
+            "county": "Queens",
+            "latitude": 40.73614,
+            "longitude": -73.82153,
+            "n_instruments": 1,
+            "rows": 6959,
+            "start": "2025-01-01",
+            "end": "2025-12-31"
+          },
+          {
+            "site": "36-081-0125",
+            "county": "Queens",
+            "latitude": 40.739264,
+            "longitude": -73.817694,
+            "n_instruments": 1,
+            "rows": 8337,
+            "start": "2025-01-01",
+            "end": "2025-12-31"
+          }
+        ],
+        "parameter_label": "NO2"
+      },
+      "42602_2026": {
+        "rows": 805803,
+        "coverage_start": "2026-01-01",
+        "coverage_end": "2026-05-31",
+        "n_sites_national": 358,
+        "nyc_sites": [
+          {
+            "site": "36-005-0110",
+            "county": "Bronx",
+            "latitude": 40.816,
+            "longitude": -73.902,
+            "n_instruments": 1,
+            "rows": 36,
+            "start": "2026-05-29",
+            "end": "2026-05-31"
+          },
+          {
+            "site": "36-005-0133",
+            "county": "Bronx",
+            "latitude": 40.8679,
+            "longitude": -73.87809,
+            "n_instruments": 1,
+            "rows": 2677,
+            "start": "2026-01-01",
+            "end": "2026-04-30"
+          },
+          {
+            "site": "36-081-0124",
+            "county": "Queens",
+            "latitude": 40.73614,
+            "longitude": -73.82153,
+            "n_instruments": 1,
+            "rows": 2773,
+            "start": "2026-01-01",
+            "end": "2026-04-30"
+          },
+          {
+            "site": "36-081-0125",
+            "county": "Queens",
+            "latitude": 40.739264,
+            "longitude": -73.817694,
+            "n_instruments": 1,
+            "rows": 2796,
+            "start": "2026-01-01",
+            "end": "2026-04-30"
+          }
+        ],
+        "parameter_label": "NO2"
+      }
+    }
+  },
+  "nyccas": {
+    "kind": "nyccas",
+    "role": "outcome",
+    "commit_sha": "a6f327e959045aff2377faa16f5ff2df3359efb1",
+    "months": [
+      "2022-01",
+      "2022-02",
+      "2022-03",
+      "2022-04",
+      "2022-05",
+      "2022-06",
+      "2022-07",
+      "2022-08",
+      "2022-09",
+      "2022-10",
+      "2022-11",
+      "2023-01",
+      "2023-02",
+      "2023-03",
+      "2023-04",
+      "2023-05",
+      "2023-06",
+      "2023-07",
+      "2023-08",
+      "2023-09",
+      "2023-10",
+      "2023-11",
+      "2023-12",
+      "2024-01",
+      "2024-02",
+      "2024-03",
+      "2024-04",
+      "2024-05",
+      "2024-06",
+      "2024-07",
+      "2024-08",
+      "2024-09",
+      "2024-10",
+      "2024-11",
+      "2024-12",
+      "2025-01",
+      "2025-02",
+      "2025-03",
+      "2025-04",
+      "2025-05",
+      "2025-06",
+      "2025-07",
+      "2025-08",
+      "2025-09",
+      "2025-10",
+      "2025-11",
+      "2025-12",
+      "2026-01",
+      "2026-02",
+      "2026-03",
+      "2026-04",
+      "2026-05",
+      "2026-06",
+      "2026-07",
+      "2026-08",
+      "2026-09",
+      "2026-10",
+      "2026-11"
+    ],
+    "coverage_start": "2022-01",
+    "coverage_end": "2026-11",
+    "rows": 363035,
+    "sites": [
+      {
+        "site_id": "36047NY07974",
+        "name": "BQE",
+        "start": "2024-08-15 10:00",
+        "end": "2026-11-09 09:00",
+        "pre_period_days": 143,
+        "usable_pre_period": false
+      },
+      {
+        "site_id": "36061NY09734",
+        "name": "Broadway/35th St",
+        "start": "2019-06-07 12:00",
+        "end": "2026-11-09 09:00",
+        "pre_period_days": 2039,
+        "usable_pre_period": true
+      },
+      {
+        "site_id": "36005NY12387",
+        "name": "Cross Bronx Expy",
+        "start": "2019-07-25 01:00",
+        "end": "2026-11-09 09:00",
+        "pre_period_days": 1991,
+        "usable_pre_period": true
+      },
+      {
+        "site_id": "36061NY08653",
+        "name": "FDR",
+        "start": "2023-12-01 12:00",
+        "end": "2026-11-09 09:00",
+        "pre_period_days": 401,
+        "usable_pre_period": true
+      },
+      {
+        "site_id": "36081NY08198",
+        "name": "Glendale",
+        "start": "2024-07-02 04:00",
+        "end": "2025-10-13 09:00",
+        "pre_period_days": 187,
+        "usable_pre_period": false
+      },
+      {
+        "site_id": "36081NY08198",
+        "name": "Glendale",
+        "start": "2023-10-26 12:00",
+        "end": "2024-07-01 07:00",
+        "pre_period_days": 437,
+        "usable_pre_period": true
+      },
+      {
+        "site_id": "36061NY12380",
+        "name": "Hamilton Bridge",
+        "start": "2024-05-20 10:00",
+        "end": "2026-11-09 09:00",
+        "pre_period_days": 230,
+        "usable_pre_period": false
+      },
+      {
+        "site_id": "36005NY11790",
+        "name": "Hunts Point",
+        "start": "2022-04-14 01:00",
+        "end": "2026-11-09 09:00",
+        "pre_period_days": 997,
+        "usable_pre_period": true
+      },
+      {
+        "site_id": "36061NY08454",
+        "name": "Manhattan Bridge",
+        "start": "2020-02-04 10:00",
+        "end": "2026-11-09 09:00",
+        "pre_period_days": 1797,
+        "usable_pre_period": true
+      },
+      {
+        "site_id": "36061NY09929",
+        "name": "Midtown-DOT",
+        "start": "2019-06-06 10:00",
+        "end": "2026-07-23 10:00",
+        "pre_period_days": 2040,
+        "usable_pre_period": true
+      },
+      {
+        "site_id": "36061NY09929",
+        "name": "Midtown-DOT",
+        "start": "2026-07-23 11:00",
+        "end": "2026-11-09 09:00",
+        "pre_period_days": 0,
+        "usable_pre_period": false
+      },
+      {
+        "site_id": "36005NY11534",
+        "name": "Mott Haven",
+        "start": "2024-04-10 09:00",
+        "end": "2026-11-09 09:00",
+        "pre_period_days": 270,
+        "usable_pre_period": false
+      },
+      {
+        "site_id": "36085NY04805",
+        "name": "Port Richmond",
+        "start": "2024-05-21 12:00",
+        "end": "2024-08-03 03:00",
+        "pre_period_days": 229,
+        "usable_pre_period": false
+      },
+      {
+        "site_id": "36081NY09285",
+        "name": "Queens College",
+        "start": "2019-05-07 10:00",
+        "end": "2026-11-09 09:00",
+        "pre_period_days": 2070,
+        "usable_pre_period": true
+      },
+      {
+        "site_id": "36061NY10130",
+        "name": "Queensboro Bridge",
+        "start": "2020-03-02 10:00",
+        "end": "2026-11-09 09:00",
+        "pre_period_days": 1770,
+        "usable_pre_period": true
+      },
+      {
+        "site_id": "36085NY03820",
+        "name": "SI Expwy",
+        "start": "2024-08-13 12:00",
+        "end": "2026-11-09 09:00",
+        "pre_period_days": 145,
+        "usable_pre_period": false
+      },
+      {
+        "site_id": "36081NY07615",
+        "name": "Van Wyck",
+        "start": "2024-02-22 12:00",
+        "end": "2026-11-09 09:00",
+        "pre_period_days": 318,
+        "usable_pre_period": false
+      },
+      {
+        "site_id": "36047NY08274",
+        "name": "Williamsburg",
+        "start": "2019-05-08 09:00",
+        "end": "2020-01-08 09:00",
+        "pre_period_days": 2069,
+        "usable_pre_period": true
+      },
+      {
+        "site_id": "36061NY08552",
+        "name": "Williamsburg Bridge",
+        "start": "2020-04-06 01:00",
+        "end": "2026-11-09 09:00",
+        "pre_period_days": 1735,
+        "usable_pre_period": true
+      }
+    ],
+    "pre_period_completeness": {
+      "36085NY04805": {
+        "valid_weeks": 11,
+        "total_weeks": 98,
+        "share": 0.11224489795918367
+      },
+      "36005NY11790": {
+        "valid_weeks": 29,
+        "total_weeks": 98,
+        "share": 0.29591836734693877
+      },
+      "36061NY08653": {
+        "valid_weeks": 37,
+        "total_weeks": 98,
+        "share": 0.37755102040816324
+      },
+      "36061NY12380": {
+        "valid_weeks": 21,
+        "total_weeks": 98,
+        "share": 0.21428571428571427
+      },
+      "36061NY10130": {
+        "valid_weeks": 78,
+        "total_weeks": 98,
+        "share": 0.7959183673469388
+      },
+      "36061NY09929": {
+        "valid_weeks": 21,
+        "total_weeks": 98,
+        "share": 0.21428571428571427
+      },
+      "36081NY08198": {
+        "valid_weeks": 22,
+        "total_weeks": 98,
+        "share": 0.22448979591836735
+      },
+      "36081NY07615": {
+        "valid_weeks": 30,
+        "total_weeks": 98,
+        "share": 0.30612244897959184
+      },
+      "36005NY11534": {
+        "valid_weeks": 30,
+        "total_weeks": 98,
+        "share": 0.30612244897959184
+      },
+      "36081NY09285": {
+        "valid_weeks": 78,
+        "total_weeks": 98,
+        "share": 0.7959183673469388
+      },
+      "36085NY03820": {
+        "valid_weeks": 9,
+        "total_weeks": 98,
+        "share": 0.09183673469387756
+      },
+      "36005NY12387": {
+        "valid_weeks": 81,
+        "total_weeks": 98,
+        "share": 0.826530612244898
+      },
+      "36061NY09734": {
+        "valid_weeks": 90,
+        "total_weeks": 98,
+        "share": 0.9183673469387755
+      },
+      "36061NY08552": {
+        "valid_weeks": 52,
+        "total_weeks": 98,
+        "share": 0.5306122448979592
+      },
+      "36061NY08454": {
+        "valid_weeks": 79,
+        "total_weeks": 98,
+        "share": 0.8061224489795918
+      },
+      "36047NY07974": {
+        "valid_weeks": 12,
+        "total_weeks": 98,
+        "share": 0.12244897959183673
+      }
+    }
+  },
+  "citibike": {
+    "kind": "citibike",
+    "role": "outcome",
+    "files": [
+      "2013-citibike-tripdata.zip",
+      "2014-citibike-tripdata.zip",
+      "2015-citibike-tripdata.zip",
+      "2016-citibike-tripdata.zip",
+      "2017-citibike-tripdata.zip",
+      "2018-citibike-tripdata.zip",
+      "2019-citibike-tripdata.zip",
+      "2020-citibike-tripdata.zip",
+      "2021-citibike-tripdata.zip",
+      "2022-citibike-tripdata.zip",
+      "2023-citibike-tripdata.zip",
+      "202401-citibike-tripdata.zip",
+      "202402-citibike-tripdata.zip",
+      "202403-citibike-tripdata.zip",
+      "202404-citibike-tripdata.zip",
+      "202405-citibike-tripdata.zip",
+      "202406-citibike-tripdata.zip",
+      "202407-citibike-tripdata.zip",
+      "202408-citibike-tripdata.zip",
+      "202409-citibike-tripdata.zip",
+      "202410-citibike-tripdata.zip",
+      "202411-citibike-tripdata.zip",
+      "202412-citibike-tripdata.zip",
+      "202501-citibike-tripdata.zip",
+      "202502-citibike-tripdata.zip",
+      "202503-citibike-tripdata.zip",
+      "202504-citibike-tripdata.zip",
+      "202505-citibike-tripdata.zip",
+      "202506-citibike-tripdata.zip",
+      "202507-citibike-tripdata.zip",
+      "202508-citibike-tripdata.zip",
+      "202509-citibike-tripdata.zip",
+      "202510-citibike-tripdata.zip",
+      "202511-citibike-tripdata.zip",
+      "202512-citibike-tripdata.zip",
+      "202601-citibike-tripdata.zip",
+      "202602-citibike-tripdata.zip",
+      "202603-citibike-tripdata.zip",
+      "202604-citibike-tripdata.zip",
+      "202605-citibike-tripdata.zip",
+      "202606-citibike-tripdata.zip",
+      "202607-citibike-tripdata.zip",
+      "202608-citibike-tripdata.zip",
+      "202609-citibike-tripdata.zip",
+      "202610-citibike-tripdata.zip"
+    ],
+    "coverage_start": "2013",
+    "coverage_end": "202610",
+    "usable_pre_period": true
+  },
+  "open_meteo": {
+    "kind": "open_meteo",
+    "role": "covariate",
+    "rows": 42576,
+    "coverage_start": "2022-01-01",
+    "coverage_end": "2026-11-09"
+  }
+}
