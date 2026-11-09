@@ -89,6 +89,83 @@
       "coverage_end": "2026-05-31",
       "notes": ""
     },
+    "data/raw/equity/NTA2010.topo.json": {
+      "dataset": "ehdp_nta2010_boundaries",
+      "source_url": "https://raw.githubusercontent.com/nychealth/EHDP-data/547482b9df589006543e13e8cdf6546e00ed9998/geography/NTA2010.topo.json",
+      "local_path": "data/raw/equity/NTA2010.topo.json",
+      "downloaded_at": "2026-11-09T22:56:40+00:00",
+      "sha256": "7a00a0abe4eb39eae5ee3d4472a0384987686dd65c87d76e8b9ce608da19c60f",
+      "rows": null,
+      "coverage_start": null,
+      "coverage_end": null,
+      "notes": "Phase 4 equity input (cross-sectional; not an outcome)."
+    },
+    "data/raw/equity/acsdt5y2023-b01003.dat": {
+      "dataset": "acs5_2023_b01003",
+      "source_url": "https://www2.census.gov/programs-surveys/acs/summary_file/2023/table-based-SF/data/5YRData/acsdt5y2023-b01003.dat",
+      "local_path": "data/raw/equity/acsdt5y2023-b01003.dat",
+      "downloaded_at": "2026-11-09T22:53:00+00:00",
+      "sha256": "24ae3f523b4c54332ce0a71ba534569685a8a729056f975915d860d1eb943565",
+      "rows": null,
+      "coverage_start": null,
+      "coverage_end": null,
+      "notes": "Phase 4 equity input (cross-sectional; not an outcome)."
+    },
+    "data/raw/equity/acsdt5y2023-b08201.dat": {
+      "dataset": "acs5_2023_b08201",
+      "source_url": "https://www2.census.gov/programs-surveys/acs/summary_file/2023/table-based-SF/data/5YRData/acsdt5y2023-b08201.dat",
+      "local_path": "data/raw/equity/acsdt5y2023-b08201.dat",
+      "downloaded_at": "2026-11-09T22:53:06+00:00",
+      "sha256": "71e502d0d2b456cb49af97cf9ff2d43fcbd9a7f9c2ee737fdb41721f9ad87a8b",
+      "rows": null,
+      "coverage_start": null,
+      "coverage_end": null,
+      "notes": "Phase 4 equity input (cross-sectional; not an outcome)."
+    },
+    "data/raw/equity/acsdt5y2023-b17001.dat": {
+      "dataset": "acs5_2023_b17001",
+      "source_url": "https://www2.census.gov/programs-surveys/acs/summary_file/2023/table-based-SF/data/5YRData/acsdt5y2023-b17001.dat",
+      "local_path": "data/raw/equity/acsdt5y2023-b17001.dat",
+      "downloaded_at": "2026-11-09T22:53:09+00:00",
+      "sha256": "578e998daf0823a16e923e937cdff470392fcdd5fc1b0f963487ba5672c1c0b7",
+      "rows": null,
+      "coverage_start": null,
+      "coverage_end": null,
+      "notes": "Phase 4 equity input (cross-sectional; not an outcome)."
+    },
+    "data/raw/equity/acsdt5y2023-b19013.dat": {
+      "dataset": "acs5_2023_b19013",
+      "source_url": "https://www2.census.gov/programs-surveys/acs/summary_file/2023/table-based-SF/data/5YRData/acsdt5y2023-b19013.dat",
+      "local_path": "data/raw/equity/acsdt5y2023-b19013.dat",
+      "downloaded_at": "2026-11-09T22:53:04+00:00",
+      "sha256": "c9007017b7bb29ba758c77612ec9a4a0b897a4ed931d527754629866f580a110",
+      "rows": null,
+      "coverage_start": null,
+      "coverage_end": null,
+      "notes": "Phase 4 equity input (cross-sectional; not an outcome)."
+    },
+    "data/raw/equity/ehdp_indicator_2384.json": {
+      "dataset": "ehdp_asthma_ed_adults_nta",
+      "source_url": "https://raw.githubusercontent.com/nychealth/EHDP-data/547482b9df589006543e13e8cdf6546e00ed9998/indicators/data/2384.json",
+      "local_path": "data/raw/equity/ehdp_indicator_2384.json",
+      "downloaded_at": "2026-11-09T22:56:40+00:00",
+      "sha256": "9d1702c85c46437cfe9d916a7b05303e020a08110713f54d5cbd6adfccbce695",
+      "rows": null,
+      "coverage_start": null,
+      "coverage_end": null,
+      "notes": "Phase 4 equity input (cross-sectional; not an outcome)."
+    },
+    "data/raw/equity/tl_2023_36_tract.zip": {
+      "dataset": "tiger_2023_tracts_ny",
+      "source_url": "https://www2.census.gov/geo/tiger/TIGER2023/TRACT/tl_2023_36_tract.zip",
+      "local_path": "data/raw/equity/tl_2023_36_tract.zip",
+      "downloaded_at": "2026-11-09T22:53:10+00:00",
+      "sha256": "010dfd8893c8a2a6482c7a0420b0113a8c0a0029137d0f904635014f39ffb918",
+      "rows": null,
+      "coverage_start": null,
+      "coverage_end": null,
+      "notes": "Phase 4 equity input (cross-sectional; not an outcome)."
+    },
     "data/raw/honestdid/ehec_data.dta": {
       "dataset": "honestdid_ehec_example",
       "source_url": "https://raw.githubusercontent.com/Mixtape-Sessions/Advanced-DID/main/Exercises/Data/ehec_data.dta",
