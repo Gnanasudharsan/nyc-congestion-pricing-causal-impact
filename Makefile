@@ -31,6 +31,8 @@ data:  ## Download raw data (audit), build features and processed panels, run da
 	$(RUN) python -m cordon.clean.air
 	$(RUN) python -m cordon.clean.subway
 	$(RUN) python -m cordon.clean.bus
+	$(RUN) python -m cordon.ingest.equity
+	$(RUN) python -m cordon.features.equity
 	$(MAKE) validate
 
 validate:  ## Run data tests on every processed panel (writes data/catalog/validation.json)
@@ -41,11 +43,13 @@ descriptives:  ## Phase 2 figures, pre-period MDEs, and docs/descriptives.md (no
 	$(RUN) python -m cordon.robustness.mde
 	$(RUN) python -m cordon.viz.descriptives_page
 
-analysis: descriptives  ## Run every pre-registered design and write results/ (about 30 min)
+analysis: descriptives  ## Run every pre-registered design and write results/ (about 45 min)
 	$(RUN) python -m cordon.robustness.honest
 	$(RUN) python -m cordon.designs.run
 	$(RUN) python -m cordon.designs.replication
 	$(RUN) python -m cordon.designs.bayesian_sc
+	$(RUN) python -m cordon.designs.heterogeneity
+	$(RUN) python -m cordon.designs.zone_effects
 	$(RUN) python -m cordon.viz.estimates
 	$(RUN) python -m cordon.designs.results_page
 
