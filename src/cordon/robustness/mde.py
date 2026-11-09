@@ -32,6 +32,7 @@ import numpy as np
 import polars as pl
 
 from cordon.config import FINAL_DIR
+from cordon.designs import panels
 from cordon.features.calendar import PRE_START
 from cordon.viz import descriptive
 
@@ -107,7 +108,7 @@ def compute() -> pl.DataFrame:
             LOG.warning("skipped %s: %s", key, error)
             continue
         if key == "A1":
-            rows = descriptive.to_weekly(rows)  # the plan's A1 outcome is weekly
+            rows = panels.to_weekly(rows)  # the plan's A1 outcome is weekly
         rows = pre_period(rows)
         estimator = did_placebo_estimate if key in DID_KEYS else sc_proxy_estimate
         estimates = np.array([estimator(rows, d) for d in placebo_dates()])

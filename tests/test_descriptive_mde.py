@@ -5,6 +5,7 @@ import numpy as np
 import polars as pl
 import pytest
 
+from cordon.designs import panels
 from cordon.robustness import mde
 from cordon.viz import descriptive
 
@@ -64,5 +65,5 @@ def test_to_weekly_requires_five_days() -> None:
     rows = pl.DataFrame(
         {"period": days, "group": "treated", "unit": "u", "value": [1.0] * len(days)}
     )
-    weekly = descriptive.to_weekly(rows)
+    weekly = panels.to_weekly(rows)
     assert weekly["period"].to_list() == [date(2024, 1, 1)]
