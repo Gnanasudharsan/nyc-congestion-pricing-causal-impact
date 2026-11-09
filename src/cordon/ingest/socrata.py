@@ -138,3 +138,26 @@ def probe_dates(
         )
         found[day] = len(rows)
     return found
+
+
+PAGE_ROWS = 50_000
+
+
+def query_all(domain: str, dataset_id: str, params: dict[str, str]) -> list[dict[str, Any]]:
+    """Run a SoQL query and page through all result rows.
+
+    ``params`` must include an ``$order`` clause so that paging is stable.
+    """
+    if "$order" not in params:
+        raise ValueError("paged SoQL queries need an $order clause for stable paging")
+    rows: list[dict[str, Any]] = []
+    offset = 0
+    while True:
+        page = _get_json(
+            resource_url(domain, dataset_id),
+            {**params, "$limit": str(PAGE_ROWS), "$offset": str(offset)},
+        )
+        rows.extend(page)
+        if len(page) < PAGE_ROWS:
+            return rows
+        offset += PAGE_ROWS

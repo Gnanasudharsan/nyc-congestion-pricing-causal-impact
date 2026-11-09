@@ -51,14 +51,18 @@ def download_open_meteo(
     end: str,
     destination: Path,
 ) -> Path:
-    """Download hourly reanalysis weather as CSV in America/New_York local time."""
+    """Download hourly reanalysis weather as CSV with UTC timestamps.
+
+    Open-Meteo's ``timezone=America/New_York`` option returns a fixed UTC-5 offset
+    with no daylight saving time, so we request GMT and convert in our own code.
+    """
     params = {
         "latitude": str(latitude),
         "longitude": str(longitude),
         "start_date": start,
         "end_date": end,
         "hourly": ",".join(HOURLY_WEATHER_VARIABLES),
-        "timezone": "America/New_York",
+        "timezone": "GMT",
         "format": "csv",
     }
     response = requests.get(archive_url, params=params, timeout=300)
