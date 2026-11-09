@@ -3,9 +3,10 @@
 [![CI](https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact/actions/workflows/ci.yml/badge.svg)](https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-> **Status: Phase 1 of 7 complete (data audit and pre-registered analysis plan).**
-> The plan was committed and tagged `analysis-plan-v1` before any effect estimate was computed.
-> No effect estimates exist yet.
+> **Status: Phase 2 of 7 complete (clean data and descriptive analysis).**
+> The analysis plan was tagged `analysis-plan-v1` before any effect estimate was computed.
+> No effect estimates exist yet. Pre-trend plots and pre-period MDEs are in
+> [docs/descriptives.md](docs/descriptives.md).
 
 ## Question
 
@@ -46,8 +47,8 @@ real space.
 |---|---|---|
 | 0 | Foundation, literature review, confounder timeline | ✅ Done |
 | 1 | Data audit, `data/MANIFEST.json`, pre-registered analysis plan | ✅ Done |
-| 2 | Cleaning pipelines, data tests, descriptive and pre-trend plots | ⏳ Next |
-| 3 | Core causal estimates (DiD / event study, synthetic control, ITS) | — |
+| 2 | Cleaning pipelines, data tests, descriptive and pre-trend plots | ✅ Done |
+| 3 | Core causal estimates (DiD / event study, synthetic control, ITS) | ⏳ Next |
 | 4 | Spillovers, heterogeneity, equity lens | — |
 | 5 | Robustness, placebo tests, parallel-trends sensitivity, DoWhy refuters | — |
 | 6 | Quarto paper (PDF) and website (GitHub Pages) | — |
@@ -58,9 +59,11 @@ real space.
 Requires [uv](https://docs.astral.sh/uv/) (and, from Phase 6, [Quarto](https://quarto.org/)).
 
 ```bash
-make setup   # pinned Python 3.12 environment + pre-commit hooks
-make test    # unit tests
-make all     # full rebuild from raw downloads (filled in phase by phase)
+make setup         # pinned Python 3.12 environment + pre-commit hooks
+make test          # unit tests
+make data          # download raw data, build and validate processed panels (~1-2 hours)
+make descriptives  # figures, pre-period MDEs, docs/descriptives.md
+make all           # full rebuild from raw downloads (filled in phase by phase)
 ```
 
 ## Repository layout

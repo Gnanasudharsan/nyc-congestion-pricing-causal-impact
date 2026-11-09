@@ -3,6 +3,27 @@
 All notable changes are documented here. Format follows Keep a Changelog; phases are tagged
 `phase-N`.
 
+## [phase-2] — 2026-11-09
+### Added
+- Spatial groups for every taxi zone (`data/final/zone_groups.csv`), committed before any outcome
+  was joined (ADR 0010).
+- Covariates: calendar with study periods and event bins, DST-correct daily weather, NOAA HMS
+  smoke days.
+- Processed panels: B&T facility-day, TLC zone-day (135 monthly files, each checksummed in the
+  manifest), NTD agency-mode-month, air site-day (NYCCAS plus AQS NYC and donor monitors),
+  subway station-day, CBD bus route-month.
+- `make data`, `make validate` (data tests for every panel), and `make descriptives`.
+- Pre-trend figures for every planned comparison (pre-period only), citywide before/after
+  trends, seasonality, and pre-period MDEs. All of it is summarised in the generated
+  `docs/descriptives.md`.
+- Deviations 1–4 logged in `docs/deviations.md`.
+### Fixed
+- Open-Meteo local-time output ignores DST; weather is now requested in UTC and converted.
+- TLC remote reads tripped CDN rate limits; files are now downloaded whole, aggregated, then
+  deleted.
+- Subway ridership is fetched one day at a time (week and month queries hit server timeouts).
+  The Roosevelt Island Tram (`TRAM1`, `TRAM2`) is dropped from the subway panel.
+
 ## [phase-1] — 2026-11-09
 ### Added
 - Dataset registry (`config/datasets.yaml`) and audit runner (`python -m cordon.ingest.audit`)
