@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Install Python and dependencies (core + dev, locked)
+        run: uv sync --locked --group dev
+      - name: Lint
+        run: make lint
+      - name: Test
+        run: make test
+      - name: Check committed data size (< 20 MB)
+        run: |
+          size=$(git ls-files -z data results report | xargs -0 du -ck 2>/dev/null | tail -1 | cut -f1)
+          echo "Committed data/results/report: ${size} KB"
+          test "${size}" -lt 20480
