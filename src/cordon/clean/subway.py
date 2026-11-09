@@ -4,10 +4,14 @@ Two source tables are stitched at the year boundary:
 - 2020-2024: data.ny.gov wujg-7c2s
 - 2025 onward: data.ny.gov 5wq4-mkjj
 
-Aggregation runs on the server one month at a time so each query stays small.
+Aggregation runs on the server one day at a time so each query stays small.
 Timestamps are local wall-clock hours. Station complexes are flagged as CRZ
 using the ``cbd`` field of the MTA Subway Stations table (39hk-dx4f); a complex
 counts as CRZ if any of its stations is flagged.
+
+The ridership tables also report the Roosevelt Island Tram (complex IDs
+``TRAM1`` and ``TRAM2``, about 0.2% of entries). It is not a subway station and
+has no row in the stations table, so it is dropped from the panel.
 """
 
 from __future__ import annotations
@@ -28,6 +32,7 @@ OUT_DIR = INTERIM_DIR / "subway"
 STATIONS_CSV = RAW_DIR / "socrata" / "subway_stations.csv"
 FIRST_DAY = date(2023, 1, 1)
 LAST_DAY = date(2026, 10, 29)  # last day in the 2025+ table at audit time
+NON_SUBWAY_COMPLEXES = ("TRAM1", "TRAM2")  # Roosevelt Island Tram
 
 
 def table_for(day: date) -> str:
@@ -86,6 +91,7 @@ def main() -> None:
         if day.day == 1:
             LOG.info("subway %s done", day)
     panel = pl.read_parquet(sorted(OUT_DIR.glob("*.parquet")))
+    panel = panel.filter(~pl.col("station_complex_id").is_in(NON_SUBWAY_COMPLEXES))
     panel = panel.join(crz_complexes(), on="station_complex_id", how="left").sort(
         "station_complex_id", "date"
     )
