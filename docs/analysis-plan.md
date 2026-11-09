@@ -3,6 +3,9 @@
 - **Status:** pre-registered. This document is committed and tagged `analysis-plan-v1`
   before any treatment-effect estimate is computed. Every later change is logged in
   [deviations.md](deviations.md).
+- **Amendment 1** (tag `analysis-plan-v1.1`, 2026-11-09, before any treatment-effect estimate):
+  adds a pre-period-detrended secondary specification. See §11 and
+  [ADR 0011](adr/0011-detrended-secondary-specification.md).
 - **Author:** Gnanasudharsan Ashokumar. **Date:** 2026-11-09.
 - **Data basis:** the Phase 1 audit ([data-catalog.md](data-catalog.md),
   `data/catalog/profiles.json`). No outcome has been compared between treated and control units
@@ -283,7 +286,8 @@ feasible with open data.** This is reported as a limitation, not worked around.
 
 1. **Pre-trends.** A joint Wald test of pre-period event-study bins with p < 0.10 flags the
    design. We then rely on the HonestDiD-style bound
-   ([ADR 0006](adr/0006-parallel-trends-sensitivity.md)).
+   ([ADR 0006](adr/0006-parallel-trends-sensitivity.md)). Every design is also re-estimated on
+   pre-period-detrended outcomes (§11).
 2. **Placebo date.** 2024-01-07, estimated with data before 2024-11-14 only. An "effect" of
    similar size to the real estimate undermines the result.
 3. **Placebo outcomes.**
@@ -311,6 +315,9 @@ Each headline claim gets one label in the Phase 5 robustness table:
   permutation p is ≤ 0.10 and the result survives leave-one-out.
 - **Fragile:** significant, but it fails at least one of the checks above. Every failure is
   reported.
+- **Extra condition for outcomes flagged in §11** (T2, R4, A1, A3, R2): "robust" also requires
+  the detrended estimate to match the primary estimate's sign, with a 95% CI that excludes
+  zero (Holm-adjusted for primary outcomes). If not, the claim is fragile.
 - **Not supported:** the primary interval includes zero. We then report the range of effects
   the interval rules out (for example, "declines larger than X% are ruled out at 95%").
 
@@ -352,3 +359,28 @@ only.
   indicators in robustness checks. Holiday weeks are excluded in a robustness check.
 - **Data versions:** every input is recorded in `data/MANIFEST.json` with its SHA-256. TLC files
   are recorded by URL and ETag, since they are read remotely.
+
+## 11. Amendment 1 — pre-period-detrended secondary specification
+
+Added 2026-11-09 after the Phase 2 pre-period descriptives and **before any treatment-effect
+estimate**. Full rationale and method in
+[ADR 0011](adr/0011-detrended-secondary-specification.md); logged as deviation 5.
+
+- **Trigger.** The seasonally aligned pre-period gap drifted away from zero for T2, R4, A1, A3
+  and R2 ([descriptives.md](descriptives.md)).
+- **What is added.**
+  - Every DiD and synthetic-control outcome is re-estimated after subtracting a unit-specific
+    linear trend.
+  - The trend is fitted on pre-period data only (2023-01-01 to 2024-11-13) and extrapolated
+    forward.
+  - The primary specification is unchanged and stays primary.
+- **Flagged outcomes.** T2, R4, A1, A3 and R2 are flagged in advance. For these, the
+  detrended estimate enters the decision rule (§8). The Phase 5 robustness table and the
+  write-up discuss them explicitly.
+- **Inference.** The trend is re-estimated inside every bootstrap replication and every
+  permutation.
+- **Horizon.** The headline detrended estimate covers post year 1 (2025) only. Estimates for
+  2026 are labelled as depending more heavily on the extrapolation.
+- **Sensitivity.** For the flagged DiD outcomes (T2, A3, R2), Phase 5 adds the HonestDiD
+  smoothness-restriction bound (Δ^SD). With M = 0, that bound is the same as linear
+  extrapolation. It is used only if it passes the ADR 0006 validation rule.

@@ -3,6 +3,12 @@
 All notable changes are documented here. Format follows Keep a Changelog; phases are tagged
 `phase-N`.
 
+## [Unreleased]
+### Changed
+- Analysis plan amendment 1 (tag `analysis-plan-v1.1`): adds a pre-period-detrended secondary
+  specification for every design, with a stricter claim rule for T2, R4, A1, A3 and R2
+  (ADR 0011, deviation 5). Made before any treatment-effect estimate.
+
 ## [phase-2] — 2026-11-09
 ### Added
 - Spatial groups for every taxi zone (`data/final/zone_groups.csv`), committed before any outcome
