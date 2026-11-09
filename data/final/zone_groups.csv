@@ -1,0 +1,264 @@
+location_id,zone,borough,distance_km,group
+1,Newark Airport,EWR,13.13,excluded
+2,Jamaica Bay,Queens,16.152,far_control
+3,Allerton/Pelham Gardens,Bronx,14.994,upper_manhattan_bronx
+4,Alphabet City,Manhattan,0.0,crz
+5,Arden Heights,Staten Island,22.08,far_control
+6,Arrochar/Fort Wadsworth,Staten Island,12.246,far_control
+7,Astoria,Queens,3.296,intermediate
+8,Astoria Park,Queens,3.693,intermediate
+9,Auburndale,Queens,14.439,far_control
+10,Baisley Park,Queens,16.031,far_control
+11,Bath Beach,Brooklyn,10.608,far_control
+12,Battery Park,Manhattan,0.087,crz
+13,Battery Park City,Manhattan,0.0,crz
+14,Bay Ridge,Brooklyn,8.505,far_control
+15,Bay Terrace/Fort Totten,Queens,14.82,far_control
+16,Bayside,Queens,15.641,far_control
+17,Bedford,Brooklyn,3.139,intermediate
+18,Bedford Park,Bronx,13.333,upper_manhattan_bronx
+19,Bellerose,Queens,19.765,far_control
+20,Belmont,Bronx,12.554,upper_manhattan_bronx
+21,Bensonhurst East,Brooklyn,11.137,far_control
+22,Bensonhurst West,Brooklyn,9.797,far_control
+23,Bloomfield/Emerson Hill,Staten Island,16.8,far_control
+24,Bloomingdale,Manhattan,3.877,upper_manhattan_bronx
+25,Boerum Hill,Brooklyn,2.368,border_ring
+26,Borough Park,Brooklyn,7.841,intermediate
+27,Breezy Point/Fort Tilden/Riis Beach,Queens,17.824,far_control
+28,Briarwood/Jamaica Hills,Queens,13.717,far_control
+29,Brighton Beach,Brooklyn,13.811,far_control
+30,Broad Channel,Queens,17.709,far_control
+31,Bronx Park,Bronx,13.003,upper_manhattan_bronx
+32,Bronxdale,Bronx,14.075,upper_manhattan_bronx
+33,Brooklyn Heights,Brooklyn,1.001,border_ring
+34,Brooklyn Navy Yard,Brooklyn,1.205,border_ring
+35,Brownsville,Brooklyn,7.674,intermediate
+36,Bushwick North,Brooklyn,5.062,intermediate
+37,Bushwick South,Brooklyn,4.906,intermediate
+38,Cambria Heights,Queens,20.171,far_control
+39,Canarsie,Brooklyn,10.392,far_control
+40,Carroll Gardens,Brooklyn,2.548,border_ring
+41,Central Harlem,Manhattan,4.689,upper_manhattan_bronx
+42,Central Harlem North,Manhattan,6.47,upper_manhattan_bronx
+43,Central Park,Manhattan,2.006,border_ring
+44,Charleston/Tottenville,Staten Island,26.87,far_control
+45,Chinatown,Manhattan,0.0,crz
+46,City Island,Bronx,17.941,upper_manhattan_bronx
+47,Claremont/Bathgate,Bronx,10.498,upper_manhattan_bronx
+48,Clinton East,Manhattan,0.0,crz
+49,Clinton Hill,Brooklyn,2.819,border_ring
+50,Clinton West,Manhattan,0.0,crz
+51,Co-Op City,Bronx,16.838,upper_manhattan_bronx
+52,Cobble Hill,Brooklyn,1.798,border_ring
+53,College Point,Queens,10.07,far_control
+54,Columbia Street,Brooklyn,1.497,border_ring
+55,Coney Island,Brooklyn,13.759,far_control
+56,Corona,Queens,8.652,far_control
+57,Corona,Queens,8.906,far_control
+58,Country Club,Bronx,14.818,upper_manhattan_bronx
+59,Crotona Park,Bronx,10.324,upper_manhattan_bronx
+60,Crotona Park East,Bronx,10.331,upper_manhattan_bronx
+61,Crown Heights North,Brooklyn,5.143,intermediate
+62,Crown Heights South,Brooklyn,5.46,intermediate
+63,Cypress Hills,Brooklyn,8.822,far_control
+64,Douglaston,Queens,18.515,far_control
+65,Downtown Brooklyn/MetroTech,Brooklyn,1.487,border_ring
+66,DUMBO/Vinegar Hill,Brooklyn,0.767,border_ring
+67,Dyker Heights,Brooklyn,8.911,far_control
+68,East Chelsea,Manhattan,0.0,crz
+69,East Concourse/Concourse Village,Bronx,8.796,upper_manhattan_bronx
+70,East Elmhurst,Queens,7.631,intermediate
+71,East Flatbush/Farragut,Brooklyn,8.08,far_control
+72,East Flatbush/Remsen Village,Brooklyn,7.971,intermediate
+73,East Flushing,Queens,12.789,far_control
+74,East Harlem North,Manhattan,4.947,upper_manhattan_bronx
+75,East Harlem South,Manhattan,3.519,upper_manhattan_bronx
+76,East New York,Brooklyn,10.103,far_control
+77,East New York/Pennsylvania Avenue,Brooklyn,8.461,far_control
+78,East Tremont,Bronx,11.351,upper_manhattan_bronx
+79,East Village,Manhattan,0.0,crz
+80,East Williamsburg,Brooklyn,3.106,intermediate
+81,Eastchester,Bronx,16.993,upper_manhattan_bronx
+82,Elmhurst,Queens,7.219,intermediate
+83,Elmhurst/Maspeth,Queens,6.068,intermediate
+84,Eltingville/Annadale/Prince's Bay,Staten Island,24.125,far_control
+85,Erasmus,Brooklyn,7.456,intermediate
+86,Far Rockaway,Queens,22.266,far_control
+87,Financial District North,Manhattan,0.0,crz
+88,Financial District South,Manhattan,0.0,crz
+89,Flatbush/Ditmas Park,Brooklyn,7.994,intermediate
+90,Flatiron,Manhattan,0.0,crz
+91,Flatlands,Brooklyn,10.175,far_control
+92,Flushing,Queens,10.958,far_control
+93,Flushing Meadows-Corona Park,Queens,10.153,far_control
+94,Fordham South,Bronx,12.025,upper_manhattan_bronx
+95,Forest Hills,Queens,10.263,far_control
+96,Forest Park/Highland Park,Queens,8.935,far_control
+97,Fort Greene,Brooklyn,2.148,border_ring
+98,Fresh Meadows,Queens,15.559,far_control
+99,Freshkills Park,Staten Island,19.997,far_control
+100,Garment District,Manhattan,0.0,crz
+101,Glen Oaks,Queens,20.958,far_control
+102,Glendale,Queens,8.421,far_control
+103,Governor's Island/Ellis Island/Liberty Island,Manhattan,2.723,border_ring
+104,Governor's Island/Ellis Island/Liberty Island,Manhattan,1.919,border_ring
+105,Governor's Island/Ellis Island/Liberty Island,Manhattan,1.478,border_ring
+106,Gowanus,Brooklyn,3.315,intermediate
+107,Gramercy,Manhattan,0.0,crz
+108,Gravesend,Brooklyn,12.591,far_control
+109,Great Kills,Staten Island,20.229,far_control
+110,Great Kills Park,Staten Island,19.834,far_control
+111,Green-Wood Cemetery,Brooklyn,5.531,intermediate
+112,Greenpoint,Brooklyn,1.91,border_ring
+113,Greenwich Village North,Manhattan,0.0,crz
+114,Greenwich Village South,Manhattan,0.0,crz
+115,Grymes Hill/Clifton,Staten Island,11.167,far_control
+116,Hamilton Heights,Manhattan,7.003,upper_manhattan_bronx
+117,Hammels/Arverne,Queens,20.473,far_control
+118,Heartland Village/Todt Hill,Staten Island,16.203,far_control
+119,Highbridge,Bronx,8.968,upper_manhattan_bronx
+120,Highbridge Park,Manhattan,9.659,upper_manhattan_bronx
+121,Hillcrest/Pomonok,Queens,13.626,far_control
+122,Hollis,Queens,17.528,far_control
+123,Homecrest,Brooklyn,11.72,far_control
+124,Howard Beach,Queens,12.571,far_control
+125,Hudson Sq,Manhattan,0.0,crz
+126,Hunts Point,Bronx,8.519,upper_manhattan_bronx
+127,Inwood,Manhattan,11.991,upper_manhattan_bronx
+128,Inwood Hill Park,Manhattan,12.404,upper_manhattan_bronx
+129,Jackson Heights,Queens,6.192,intermediate
+130,Jamaica,Queens,15.179,far_control
+131,Jamaica Estates,Queens,15.997,far_control
+132,JFK Airport,Queens,17.557,excluded
+133,Kensington,Brooklyn,7.144,intermediate
+134,Kew Gardens,Queens,12.238,far_control
+135,Kew Gardens Hills,Queens,12.098,far_control
+136,Kingsbridge Heights,Bronx,12.459,upper_manhattan_bronx
+137,Kips Bay,Manhattan,0.0,crz
+138,LaGuardia Airport,Queens,7.371,excluded
+139,Laurelton,Queens,19.912,far_control
+140,Lenox Hill East,Manhattan,0.773,border_ring
+141,Lenox Hill West,Manhattan,0.716,border_ring
+142,Lincoln Square East,Manhattan,0.465,border_ring
+143,Lincoln Square West,Manhattan,0.446,border_ring
+144,Little Italy/NoLiTa,Manhattan,0.0,crz
+145,Long Island City/Hunters Point,Queens,1.553,border_ring
+146,Long Island City/Queens Plaza,Queens,2.08,border_ring
+147,Longwood,Bronx,8.398,upper_manhattan_bronx
+148,Lower East Side,Manhattan,0.0,crz
+149,Madison,Brooklyn,11.736,far_control
+150,Manhattan Beach,Brooklyn,14.366,far_control
+151,Manhattan Valley,Manhattan,3.377,upper_manhattan_bronx
+152,Manhattanville,Manhattan,5.91,upper_manhattan_bronx
+153,Marble Hill,Manhattan,13.316,upper_manhattan_bronx
+154,Marine Park/Floyd Bennett Field,Brooklyn,14.455,far_control
+155,Marine Park/Mill Basin,Brooklyn,11.888,far_control
+156,Mariners Harbor,Staten Island,14.912,far_control
+157,Maspeth,Queens,5.86,intermediate
+158,Meatpacking/West Village West,Manhattan,0.0,crz
+159,Melrose South,Bronx,7.616,upper_manhattan_bronx
+160,Middle Village,Queens,7.784,intermediate
+161,Midtown Center,Manhattan,0.0,crz
+162,Midtown East,Manhattan,0.0,crz
+163,Midtown North,Manhattan,0.0,crz
+164,Midtown South,Manhattan,0.0,crz
+165,Midwood,Brooklyn,9.816,far_control
+166,Morningside Heights,Manhattan,4.757,upper_manhattan_bronx
+167,Morrisania/Melrose,Bronx,8.954,upper_manhattan_bronx
+168,Mott Haven/Port Morris,Bronx,6.41,upper_manhattan_bronx
+169,Mount Hope,Bronx,10.913,upper_manhattan_bronx
+170,Murray Hill,Manhattan,0.0,crz
+171,Murray Hill-Queens,Queens,12.627,far_control
+172,New Dorp/Midland Beach,Staten Island,16.363,far_control
+173,North Corona,Queens,8.103,far_control
+174,Norwood,Bronx,14.707,upper_manhattan_bronx
+175,Oakland Gardens,Queens,17.323,far_control
+176,Oakwood,Staten Island,18.019,far_control
+177,Ocean Hill,Brooklyn,6.553,intermediate
+178,Ocean Parkway South,Brooklyn,9.732,far_control
+179,Old Astoria,Queens,2.904,border_ring
+180,Ozone Park,Queens,11.607,far_control
+181,Park Slope,Brooklyn,4.017,intermediate
+182,Parkchester,Bronx,12.177,upper_manhattan_bronx
+183,Pelham Bay,Bronx,14.657,upper_manhattan_bronx
+184,Pelham Bay Park,Bronx,17.568,upper_manhattan_bronx
+185,Pelham Parkway,Bronx,13.756,upper_manhattan_bronx
+186,Penn Station/Madison Sq West,Manhattan,0.0,crz
+187,Port Richmond,Staten Island,13.301,far_control
+188,Prospect-Lefferts Gardens,Brooklyn,6.286,intermediate
+189,Prospect Heights,Brooklyn,3.712,intermediate
+190,Prospect Park,Brooklyn,5.4,intermediate
+191,Queens Village,Queens,18.967,far_control
+192,Queensboro Hill,Queens,12.228,far_control
+193,Queensbridge/Ravenswood,Queens,1.408,border_ring
+194,Randalls Island,Manhattan,4.556,upper_manhattan_bronx
+195,Red Hook,Brooklyn,2.692,border_ring
+196,Rego Park,Queens,8.841,far_control
+197,Richmond Hill,Queens,12.334,far_control
+198,Ridgewood,Queens,6.206,intermediate
+199,Rikers Island,Bronx,7.33,upper_manhattan_bronx
+200,Riverdale/North Riverdale/Fieldston,Bronx,15.754,upper_manhattan_bronx
+201,Rockaway Park,Queens,18.579,far_control
+202,Roosevelt Island,Manhattan,0.792,border_ring
+203,Rosedale,Queens,20.855,far_control
+204,Rossville/Woodrow,Staten Island,24.188,far_control
+205,Saint Albans,Queens,18.024,far_control
+206,Saint George/New Brighton,Staten Island,10.08,far_control
+207,Saint Michaels Cemetery/Woodside,Queens,5.032,intermediate
+208,Schuylerville/Edgewater Park,Bronx,13.444,upper_manhattan_bronx
+209,Seaport,Manhattan,0.0,crz
+210,Sheepshead Bay,Brooklyn,13.305,far_control
+211,SoHo,Manhattan,0.0,crz
+212,Soundview/Bruckner,Bronx,10.706,upper_manhattan_bronx
+213,Soundview/Castle Hill,Bronx,10.697,upper_manhattan_bronx
+214,South Beach/Dongan Hills,Staten Island,14.11,far_control
+215,South Jamaica,Queens,15.647,far_control
+216,South Ozone Park,Queens,13.793,far_control
+217,South Williamsburg,Brooklyn,1.706,border_ring
+218,Springfield Gardens North,Queens,17.692,far_control
+219,Springfield Gardens South,Queens,18.691,far_control
+220,Spuyten Duyvil/Kingsbridge,Bronx,13.932,upper_manhattan_bronx
+221,Stapleton,Staten Island,10.51,far_control
+222,Starrett City,Brooklyn,10.648,far_control
+223,Steinway,Queens,4.929,intermediate
+224,Stuy Town/Peter Cooper Village,Manhattan,0.0,crz
+225,Stuyvesant Heights,Brooklyn,4.553,intermediate
+226,Sunnyside,Queens,3.722,intermediate
+227,Sunset Park East,Brooklyn,6.442,intermediate
+228,Sunset Park West,Brooklyn,5.271,intermediate
+229,Sutton Place/Turtle Bay North,Manhattan,0.0,crz
+230,Times Sq/Theatre District,Manhattan,0.0,crz
+231,TriBeCa/Civic Center,Manhattan,0.0,crz
+232,Two Bridges/Seward Park,Manhattan,0.0,crz
+233,UN/Turtle Bay South,Manhattan,0.0,crz
+234,Union Sq,Manhattan,0.0,crz
+235,University Heights/Morris Heights,Bronx,10.809,upper_manhattan_bronx
+236,Upper East Side North,Manhattan,2.125,border_ring
+237,Upper East Side South,Manhattan,0.624,border_ring
+238,Upper West Side North,Manhattan,2.57,border_ring
+239,Upper West Side South,Manhattan,1.59,border_ring
+240,Van Cortlandt Park,Bronx,16.284,upper_manhattan_bronx
+241,Van Cortlandt Village,Bronx,13.971,upper_manhattan_bronx
+242,Van Nest/Morris Park,Bronx,13.329,upper_manhattan_bronx
+243,Washington Heights North,Manhattan,10.572,upper_manhattan_bronx
+244,Washington Heights South,Manhattan,8.724,upper_manhattan_bronx
+245,West Brighton,Staten Island,10.838,far_control
+246,West Chelsea/Hudson Yards,Manhattan,0.0,crz
+247,West Concourse,Bronx,8.174,upper_manhattan_bronx
+248,West Farms/Bronx River,Bronx,11.066,upper_manhattan_bronx
+249,West Village,Manhattan,0.0,crz
+250,Westchester Village/Unionport,Bronx,12.319,upper_manhattan_bronx
+251,Westerleigh,Staten Island,13.199,far_control
+252,Whitestone,Queens,12.491,far_control
+253,Willets Point,Queens,9.911,far_control
+254,Williamsbridge/Olinville,Bronx,16.04,upper_manhattan_bronx
+255,Williamsburg (North Side),Brooklyn,1.323,border_ring
+256,Williamsburg (South Side),Brooklyn,1.321,border_ring
+257,Windsor Terrace,Brooklyn,5.769,intermediate
+258,Woodhaven,Queens,10.458,far_control
+259,Woodlawn/Wakefield,Bronx,17.835,upper_manhattan_bronx
+260,Woodside,Queens,4.717,intermediate
+261,World Trade Center,Manhattan,0.0,crz
+262,Yorkville East,Manhattan,2.125,border_ring
+263,Yorkville West,Manhattan,2.211,border_ring

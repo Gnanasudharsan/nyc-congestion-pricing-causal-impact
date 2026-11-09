@@ -9,6 +9,8 @@ requires-python = ">=3.12,<3.13"
 dependencies = [
     "altair>=6.3.0",
     "duckdb>=2.0.0",
+    "geopandas>=1.2.0",
+    "holidays>=0.108",
     "linearmodels>=7.1",
     "matplotlib>=3.11.2",
     "numpy>=2.5.4",
@@ -66,7 +68,7 @@ mypy_path = "src"
 packages = ["cordon"]
 
 [[tool.mypy.overrides]]
-module = ["duckdb.*", "statsmodels.*", "linearmodels.*", "causalpy.*", "pysyncon.*", "dowhy.*", "wildboottest.*", "altair.*", "plotly.*", "scipy.*"]
+module = ["duckdb.*", "geopandas.*", "shapely.*", "holidays.*", "statsmodels.*", "linearmodels.*", "causalpy.*", "pysyncon.*", "dowhy.*", "wildboottest.*", "altair.*", "plotly.*", "scipy.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
