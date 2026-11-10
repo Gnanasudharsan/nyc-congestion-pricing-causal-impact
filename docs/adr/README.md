@@ -18,3 +18,4 @@ are used for results. Superseded ADRs stay in place and link to their replacemen
 | [0010](0010-spatial-groups.md) | Treated, spillover, and control geography | Accepted |
 | [0011](0011-detrended-secondary-specification.md) | Pre-period-detrended secondary specification | Accepted |
 | [0012](0012-event-study-seasonal-baseline.md) | Event-study seasonal baseline | Accepted |
+| [0013](0013-publishing.md) | Publishing the paper and website | Accepted |

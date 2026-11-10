@@ -1,0 +1,7 @@
+page,profile,performance,accessibility,best-practices,seo,fcp,lcp,cls,lighthouse,server,date
+index,desktop,98,100,100,100,0.6 s,1.1 s,0.004,13.5.0,local static server with gzip (approximates GitHub Pages),2026-11-10
+index,mobile,74,100,100,100,3.1 s,5.4 s,0,13.5.0,local static server with gzip (approximates GitHub Pages),2026-11-10
+paper,desktop,97,100,100,100,0.8 s,1.2 s,0.004,13.5.0,local static server with gzip (approximates GitHub Pages),2026-11-10
+paper,mobile,67,100,100,100,4.2 s,6.5 s,0,13.5.0,local static server with gzip (approximates GitHub Pages),2026-11-10
+results,desktop,96,100,100,100,0.7 s,1.3 s,0.003,13.5.0,local static server with gzip (approximates GitHub Pages),2026-11-10
+results,mobile,70,100,100,100,3.4 s,6.8 s,0,13.5.0,local static server with gzip (approximates GitHub Pages),2026-11-10
