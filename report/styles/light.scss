@@ -23,6 +23,7 @@ $footer-fg: $cordon-slate;
 $toc-color: $cordon-slate;
 $code-bg: $cordon-surface;
 $code-color: $cordon-ink;
+$pre-color: $cordon-ink;  // Bootstrap's default is #000, unreadable on the dark surface
 $font-family-sans-serif: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
 $font-family-serif: "Source Serif 4", Georgia, serif;
 $font-family-base: $font-family-serif;
