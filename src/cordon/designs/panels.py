@@ -549,12 +549,13 @@ def air_synthetic(
     raw = donor_wide.select(donor_names).to_numpy().astype(np.float64)
     # Keep weeks where most donors report; this also ends the panel where the AQS
     # donor files end, so whole stretches of donor data are never invented.
+    covered = (~np.isnan(raw)).mean(axis=1) >= MIN_DONOR_COVERAGE
+    raw = raw[covered]
     if min_donor_completeness is not None:
+        # Completeness is measured over the panel's weeks (after the coverage rule).
         complete = (~np.isnan(raw)).mean(axis=0) >= min_donor_completeness
         raw = raw[:, complete]
         donor_names = [n for n, keep in zip(donor_names, complete, strict=True) if keep]
-    covered = (~np.isnan(raw)).mean(axis=1) >= MIN_DONOR_COVERAGE
-    raw = raw[covered]
     periods = [
         week for week, keep in zip(treated_series["week"].to_list(), covered, strict=True) if keep
     ]
