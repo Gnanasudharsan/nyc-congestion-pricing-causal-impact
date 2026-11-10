@@ -3,6 +3,19 @@
 All notable changes are documented here. Format follows Keep a Changelog; phases are tagged
 `phase-N`.
 
+## [phase-6] — 2026-11-10
+### Added
+- Quarto website and paper (`report/`): overview, paper (HTML + PDF), all results, methods,
+  data. Every number comes from `report/_variables.yml` and every table from
+  `report/_generated/`, both generated from `results/` by `cordon.viz.report_inputs`.
+- Interactive event-study explorer (Altair/Vega-Lite, pinned CDN versions).
+- Design-token themes, light and dark. Self-hosted Source Serif 4 and Inter Tight (SIL OFL):
+  TTFs for the PDF via LuaLaTeX, subset WOFF2 for the site.
+- GitHub Pages deployment (`.github/workflows/pages.yml`); the PDF is built in CI with TinyTeX.
+- Lighthouse 13.5.0 scores in `results/lighthouse_scores.csv`. Desktop: performance 96–98 and
+  100 in every other category. Mobile performance is 67–74, below the 90 target (ADR 0013).
+- ADR 0013.
+
 ## [phase-5] — 2026-11-09
 ### Added
 - Falsification and re-estimation checks (`cordon.robustness.checks`):

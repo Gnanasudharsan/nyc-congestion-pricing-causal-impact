@@ -3,7 +3,9 @@
 [![CI](https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact/actions/workflows/ci.yml/badge.svg)](https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-> **Status: Phase 5 of 7 complete (robustness and claim labels).**
+> **Status: Phase 6 of 7 complete (paper and website).**
+> **Site:** <https://gnanasudharsan.github.io/nyc-congestion-pricing-causal-impact/> ·
+> **Paper (PDF):** <https://gnanasudharsan.github.io/nyc-congestion-pricing-causal-impact/paper.pdf>
 > The analysis plan was tagged `analysis-plan-v1` (amended to `analysis-plan-v1.1`) before any
 > effect estimate was computed. Phase 3 estimates, with uncertainty, are in
 > [docs/results-phase3.md](docs/results-phase3.md); spillovers, heterogeneity, and the
@@ -58,8 +60,8 @@ real space.
 | 3 | Core causal estimates (DiD / event study, synthetic control), replication | ✅ Done |
 | 4 | Spillovers, heterogeneity, equity lens | ✅ Done |
 | 5 | Robustness, placebo tests, parallel-trends sensitivity, DoWhy refuters | ✅ Done |
-| 6 | Quarto paper (PDF) and website (GitHub Pages) | ⏳ Next |
-| 7 | v1.0.0 release | — |
+| 6 | Quarto paper (PDF) and website (GitHub Pages) | ✅ Done |
+| 7 | v1.0.0 release | ⏳ Next |
 
 ## Reproduce
 
@@ -75,7 +77,8 @@ make setup         # pinned Python 3.12 environment + pre-commit hooks
 make test          # unit tests
 make data          # download raw data, build and validate processed panels (~1-2 hours)
 make descriptives  # figures, pre-period MDEs, docs/descriptives.md
-make analysis      # every design -> results/, docs/results-phase3.md and -phase4.md (~45 min)
+make analysis      # every design, check, and label -> results/ (~2 hours)
+make report        # paper (HTML + PDF) and website from results/ (needs Quarto)
 make all           # full rebuild from raw downloads (filled in phase by phase)
 ```
 
