@@ -51,8 +51,7 @@ format:
       light: [none, styles/light.scss]
       dark: [none, styles/dark.scss]
     respect-user-color-scheme: true
-    css: styles/fonts.css
-    include-in-header: preload.html  # fonts ready at first paint (avoids layout shift)
+    include-in-header: preload.html  # @font-face + preloads: fonts ready at first paint
     toc: true
     toc-depth: 2
     smooth-scroll: false

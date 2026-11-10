@@ -6,7 +6,8 @@ outcome, with a dropdown to pick the outcome and tooltips on each bin. The
 pre-registered and detrended specifications are drawn in the design-token data
 colours. Axis colours are chosen at load time for light or dark mode.
 
-Vega libraries are loaded from jsDelivr at pinned versions.
+Vega libraries are loaded from jsDelivr at pinned versions, and only once the
+chart is near the viewport.
 Run: ``python -m cordon.viz.site_charts``.
 """
 
@@ -100,31 +101,53 @@ def build_chart(data: pl.DataFrame) -> alt.LayerChart | alt.FacetChart:
 
 
 def fragment(spec: dict[str, object]) -> str:
-    """HTML fragment embedding the spec with light/dark axis colours."""
-    scripts = "\n".join(
-        f'<script src="https://cdn.jsdelivr.net/npm/{name}@{version}"></script>'
-        for name, version in VERSIONS.items()
+    """HTML fragment embedding the spec with light/dark axis colours.
+
+    The Vega libraries (about 300 KB) load only when the chart comes within
+    600 px of the viewport, so they never compete with first paint (ADR 0013).
+    """
+    sources = json.dumps(
+        [f"https://cdn.jsdelivr.net/npm/{name}@{version}" for name, version in VERSIONS.items()]
     )
     return f"""```{{=html}}
-<div id="event-study-chart" style="width:100%" role="img"
+<div id="event-study-chart" style="width:100%;min-height:380px" role="img"
      aria-label="Interactive event-study chart; choose an outcome from the dropdown."></div>
-{scripts}
 <script>
 (function () {{
-  var dark = document.body.classList.contains("quarto-dark");
-  var ink = dark ? "#E7EAEF" : "{style.INK}";
-  var slate = dark ? "#A7B0BD" : "{style.SLATE}";
-  var line = dark ? "#2C3441" : "{style.LINE}";
-  var spec = {json.dumps(spec)};
-  spec.config = {{
-    background: null, view: {{stroke: null}},
-    font: "Inter Tight, Helvetica Neue, Arial, sans-serif",
-    axis: {{labelColor: slate, titleColor: slate, gridColor: line, domainColor: line,
-            tickColor: line}},
-    legend: {{labelColor: ink}}, title: {{color: ink, anchor: "start", fontWeight: 600}},
-    rule: {{color: slate}}
-  }};
-  vegaEmbed("#event-study-chart", spec, {{actions: false, renderer: "svg"}});
+  var target = document.getElementById("event-study-chart");
+  var sources = {sources};
+  function loadScript(index, done) {{
+    if (index === sources.length) {{ done(); return; }}
+    var script = document.createElement("script");
+    script.src = sources[index];
+    script.onload = function () {{ loadScript(index + 1, done); }};
+    document.head.appendChild(script);
+  }}
+  function draw() {{
+    var dark = document.body.classList.contains("quarto-dark");
+    var ink = dark ? "#E7EAEF" : "{style.INK}";
+    var slate = dark ? "#A7B0BD" : "{style.SLATE}";
+    var line = dark ? "#2C3441" : "{style.LINE}";
+    var spec = {json.dumps(spec)};
+    spec.config = {{
+      background: null, view: {{stroke: null}},
+      font: "Inter Tight, Helvetica Neue, Arial, sans-serif",
+      axis: {{labelColor: slate, titleColor: slate, gridColor: line, domainColor: line,
+              tickColor: line}},
+      legend: {{labelColor: ink}}, title: {{color: ink, anchor: "start", fontWeight: 600}},
+      rule: {{color: slate}}
+    }};
+    vegaEmbed(target, spec, {{actions: false, renderer: "svg"}});
+  }}
+  function start() {{ loadScript(0, draw); }}
+  if (!("IntersectionObserver" in window)) {{ start(); return; }}
+  var observer = new IntersectionObserver(function (entries) {{
+    if (entries.some(function (entry) {{ return entry.isIntersecting; }})) {{
+      observer.disconnect();
+      start();
+    }}
+  }}, {{rootMargin: "600px 0px"}});
+  observer.observe(target);
 }})();
 </script>
 ```

@@ -1,7 +1,7 @@
 # Cordon build entry points. `make all` rebuilds everything from raw downloads.
 # Stages are filled in phase by phase; unimplemented stages say so and exit 0.
 
-.PHONY: help setup audit catalog data validate descriptives analysis report all test lint format typecheck clean
+.PHONY: help setup audit catalog data validate descriptives analysis report lighthouse all test lint format typecheck clean
 
 UV ?= uv
 RUN = $(UV) run
@@ -62,6 +62,9 @@ report:  ## Paper (HTML + PDF) and website from results/ (needs Quarto; PDF need
 	$(RUN) python -m cordon.viz.site_charts
 	$(RUN) python -m cordon.viz.webfonts
 	cd report && $(QUARTO) render
+
+lighthouse:  ## Audit the live site with Lighthouse -> results/lighthouse_scores.csv (needs Node + Chrome)
+	$(RUN) python -m cordon.viz.lighthouse
 
 all: data analysis report  ## Full rebuild from raw downloads
 
