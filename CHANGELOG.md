@@ -3,6 +3,23 @@
 All notable changes are documented here. Format follows Keep a Changelog; phases are tagged
 `phase-N`.
 
+## [1.0.0] — 2026-11-10 (phase-7)
+### Added
+- `CITATION.cff`; README rewritten for the release (findings, how the analysis was kept honest,
+  reproduction steps, scope limits).
+### Changed
+- Package version 1.0.0.
+### Fixed
+- Reproducibility: a full `make analysis` re-run reproduces every estimate, CI, p-value, and claim
+  label in `results/` to within 1e-10 relative. Two sources of run-to-run drift came from
+  unordered group-bys and are now fixed:
+  - DoWhy refuter inputs are sorted by unit and period before the seeded permutations. The
+    refuter p-values in `results/dowhy_refuters.csv` change slightly as a result; no label
+    depends on them.
+  - Pre-trend figure data are sorted by period and group.
+- The Bayesian synthetic-control cross-check (PyMC, 4 chains) still varies in the third decimal
+  between runs. It is a cross-check only and no label depends on it.
+
 ## [phase-6] — 2026-11-10
 ### Added
 - Quarto website and paper (`report/`): overview, paper (HTML + PDF), all results, methods,
