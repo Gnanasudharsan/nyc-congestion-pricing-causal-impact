@@ -274,9 +274,14 @@ def breakdown(bounds: pl.DataFrame, key: str) -> tuple[str, bool | None]:
 def dowhy_rows(
     key: str, rows: pl.DataFrame, outcome: DidOutcome, weather: pl.DataFrame
 ) -> list[dict[str, Any]]:
-    """DoWhy refuters on fixed-effect-residualised data (deviation 20)."""
-    import pandas as pd
-    from dowhy import CausalModel
+    """DoWhy refuters on fixed-effect-residualised data (deviations 20 and 24).
+
+    Residualising by the DiD fixed effects (Frisch-Waugh) means a linear-regression
+    estimand reproduces the pooled coefficient. DoWhy itself runs in an isolated
+    environment (``scripts/dowhy_refuters.py``).
+    """
+    import json
+    import subprocess
 
     spec = specs.DidSpec(
         "pooled",
@@ -290,39 +295,32 @@ def dowhy_rows(
         did.adjusted_outcome(design, design.y, prepared.projection), list(design.fixed_effects)
     )
     x = prepared.x_tilde
-    frame = pd.DataFrame(
+    work = honest.WORK_DIR.parent / "dowhy"
+    work.mkdir(parents=True, exist_ok=True)
+    data_path, output = work / f"{key}_residualised.parquet", work / f"{key}_refuters.json"
+    pl.DataFrame(
         {
             "y": y,
             "d": x[:, design.names.index("post_year1")],
             "a": x[:, design.names.index("anticipation")],
         }
+    ).write_parquet(data_path)
+    script = REPO_ROOT / "scripts" / "dowhy_refuters.py"
+    subprocess.run(
+        [
+            "uv",
+            "run",
+            "--quiet",
+            "--script",
+            str(script),
+            str(data_path),
+            str(output),
+            str(RANDOM_SEED),
+        ],
+        check=True,
     )
-    model = CausalModel(data=frame, treatment="d", outcome="y", common_causes=["a"])
-    estimand = model.identify_effect(proceed_when_unidentifiable=True)
-    estimate = model.estimate_effect(estimand, method_name="backdoor.linear_regression")
-    out = []
-    np.random.seed(RANDOM_SEED)
-    for refuter, kwargs in (
-        ("placebo_treatment_refuter", {"placebo_type": "permute", "num_simulations": 100}),
-        ("random_common_cause", {"num_simulations": 100}),
-        ("data_subset_refuter", {"subset_fraction": 0.8, "num_simulations": 100}),
-    ):
-        refutation = model.refute_estimate(
-            estimand, estimate, method_name=refuter, random_seed=RANDOM_SEED, **kwargs
-        )
-        out.append(
-            {
-                "key": key,
-                "refuter": refuter,
-                "estimate": float(estimate.value),
-                "new_effect": float(refutation.new_effect),
-                "p_value": float(refutation.refutation_result["p_value"])
-                if refutation.refutation_result
-                else None,
-            }
-        )
     LOG.info("DoWhy %s done", key)
-    return out
+    return [{"key": key, **item} for item in json.loads(output.read_text())]
 
 
 # --------------------------------------------------------------------------- per outcome

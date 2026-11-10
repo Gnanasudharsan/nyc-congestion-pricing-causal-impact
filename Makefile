@@ -43,13 +43,15 @@ descriptives:  ## Phase 2 figures, pre-period MDEs, and docs/descriptives.md (no
 	$(RUN) python -m cordon.robustness.mde
 	$(RUN) python -m cordon.viz.descriptives_page
 
-analysis: descriptives  ## Run every pre-registered design and write results/ (about 45 min)
+analysis: descriptives  ## Run every pre-registered design and write results/ (about 2 hours)
 	$(RUN) python -m cordon.robustness.honest
 	$(RUN) python -m cordon.designs.run
 	$(RUN) python -m cordon.designs.replication
 	$(RUN) python -m cordon.designs.bayesian_sc
 	$(RUN) python -m cordon.designs.heterogeneity
 	$(RUN) python -m cordon.designs.zone_effects
+	$(RUN) python -m cordon.robustness.checks
+	$(RUN) python -m cordon.robustness.labels
 	$(RUN) python -m cordon.viz.estimates
 	$(RUN) python -m cordon.designs.results_page
 

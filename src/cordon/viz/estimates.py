@@ -289,8 +289,69 @@ def plot_zone_equity() -> None:
     style.save(figure, "phase4_zone_equity")
 
 
+def plot_honestdid() -> None:
+    """Relative-magnitudes robust CIs against M-bar for each DiD outcome."""
+    import matplotlib.pyplot as plt
+
+    bounds = pl.read_csv(RESULTS / "honestdid_bounds.csv", infer_schema_length=None).filter(
+        pl.col("lb").is_not_null()
+    )
+    keys = (
+        bounds.filter(pl.col("restriction") == "relative_magnitudes")["key"]
+        .unique(maintain_order=True)
+        .to_list()
+    )
+    columns = 5
+    rows_n = int(np.ceil(len(keys) / columns))
+    figure, axes = plt.subplots(rows_n, columns, figsize=(11, 2.3 * rows_n + 0.8), squeeze=False)
+    figure.set_layout_engine(None)
+    excluded = 0
+    for axis, key in zip(axes.ravel(), keys, strict=False):
+        part = bounds.filter(pl.col("key") == key)
+        original = part.filter(pl.col("restriction") == "original").row(0, named=True)
+        rm = part.filter(pl.col("restriction") == "relative_magnitudes").sort("parameter")
+        x = [0.0, *rm["parameter"].to_list()]
+        low = [original["lb"], *rm["lb"].to_list()]
+        high = [original["ub"], *rm["ub"].to_list()]
+        scale = 100.0
+        axis.vlines(
+            x, np.array(low) * scale, np.array(high) * scale, color=style.TREATED, linewidth=2
+        )
+        axis.axhline(0, color=style.SLATE, linewidth=0.8)
+        axis.axvline(1.0, color=style.SLATE, linewidth=0.6, linestyle=":")
+        at_one = rm.filter(pl.col("parameter") == 1.0).row(0, named=True)
+        holds = not (at_one["lb"] <= 0 <= at_one["ub"])
+        excluded += int(holds)
+        axis.set_title(f"{key}: {'excludes' if holds else 'includes'} 0 at M̄ = 1", fontsize=8)
+        axis.tick_params(labelsize=7)
+    for axis in axes.ravel()[len(keys) :]:
+        axis.set_visible(False)
+    figure.text(
+        0.01,
+        0.97,
+        f"HonestDiD: {excluded} of {len(keys)} DiD estimates keep a "
+        "robust 95% CI that excludes zero when post-period violations may be as large as "
+        "the largest pre-period one (M̄ = 1)",
+        fontsize=10.5,
+        fontweight="bold",
+        color=style.INK,
+        va="top",
+    )
+    figure.text(
+        0.01,
+        0.92,
+        "Relative-magnitudes robust CIs (x100: log points or levels) for "
+        "the 2025 event-study average; M̄ = 0 assumes exact parallel trends.",
+        fontsize=8,
+        color=style.SLATE,
+        va="top",
+    )
+    figure.subplots_adjust(left=0.05, right=0.99, top=0.82, bottom=0.08, hspace=0.6, wspace=0.3)
+    style.save(figure, "phase5_honestdid")
+
+
 def main() -> None:
-    """Draw every Phase 3 and Phase 4 figure."""
+    """Draw every Phase 3, 4, and 5 figure."""
     from cordon.designs.run import DID_OUTCOMES, SYNTHETIC_OUTCOMES
 
     style.apply_style()
@@ -303,6 +364,8 @@ def main() -> None:
         plot_heterogeneity()
     if (RESULTS / "zone_spillover_effects.csv").exists():
         plot_zone_equity()
+    if (RESULTS / "honestdid_bounds.csv").exists():
+        plot_honestdid()
 
 
 if __name__ == "__main__":
