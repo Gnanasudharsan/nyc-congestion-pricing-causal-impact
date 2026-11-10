@@ -3,6 +3,24 @@
 All notable changes are documented here. Format follows Keep a Changelog; phases are tagged
 `phase-N`.
 
+## [phase-5] — 2026-11-09
+### Added
+- Falsification and re-estimation checks (`cordon.robustness.checks`):
+  - placebo date; placebo outcomes (Staten Island trips, Verrazzano-Narrows);
+  - control-group swaps; June 2024 pause and holiday weeks dropped;
+  - did2s imputation estimator; dose-response; leave-one-out donors; A1/A3 data variants.
+  Pass rules were fixed before any check ran (deviation 18).
+- HonestDiD relative-magnitudes bounds for every DiD with ≥ 30 clusters. Smoothness bounds for
+  T2 and R2 (amendment 1). DoWhy refuters for T2 and A3.
+- Claim labels (`cordon.robustness.labels`, `results/claims.csv`) with BH families for the
+  secondary outcomes. Generated `docs/results-phase5.md` and a HonestDiD figure.
+- Deviations 18–24.
+### Changed
+- DoWhy runs in an isolated, locked environment: 0.12 fails under pandas 3, and 0.14 needs an
+  older SciPy (deviation 24). HonestDiD results are cached by input.
+### Fixed
+- The A1 donor-completeness check now measures completeness over the panel's weeks.
+
 ## [phase-4] — 2026-11-09
 ### Added
 - Spillover outcomes S2 (randomization inference over 56 assignments), S3, S4, S5, A2

@@ -3,12 +3,15 @@
 [![CI](https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact/actions/workflows/ci.yml/badge.svg)](https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-> **Status: Phase 4 of 7 complete (spillovers, heterogeneity, equity).**
+> **Status: Phase 5 of 7 complete (robustness and claim labels).**
 > The analysis plan was tagged `analysis-plan-v1` (amended to `analysis-plan-v1.1`) before any
 > effect estimate was computed. Phase 3 estimates, with uncertainty, are in
 > [docs/results-phase3.md](docs/results-phase3.md); spillovers, heterogeneity, and the
 > exploratory equity lens are in [docs/results-phase4.md](docs/results-phase4.md).
-> **They are not final claims.** Several
+> Every claim now carries a robust / fragile / not supported label:
+> [docs/results-phase5.md](docs/results-phase5.md). **No claim is labelled robust.** The
+> traffic and spillover estimates are fragile, mainly because of pre-trends, and the transit
+> and air-quality estimates are not supported. Several
 > designs show pre-trends, and the robust / fragile / not supported labels come after the
 > Phase 5 falsification tests.
 
@@ -54,15 +57,18 @@ real space.
 | 2 | Cleaning pipelines, data tests, descriptive and pre-trend plots | ✅ Done |
 | 3 | Core causal estimates (DiD / event study, synthetic control), replication | ✅ Done |
 | 4 | Spillovers, heterogeneity, equity lens | ✅ Done |
-| 5 | Robustness, placebo tests, parallel-trends sensitivity, DoWhy refuters | ⏳ Next |
-| 6 | Quarto paper (PDF) and website (GitHub Pages) | — |
+| 5 | Robustness, placebo tests, parallel-trends sensitivity, DoWhy refuters | ✅ Done |
+| 6 | Quarto paper (PDF) and website (GitHub Pages) | ⏳ Next |
 | 7 | v1.0.0 release | — |
 
 ## Reproduce
 
 Requires [uv](https://docs.astral.sh/uv/) (and, from Phase 6, [Quarto](https://quarto.org/)).
-HonestDiD bounds run in their own locked environment (`scripts/honestdid_bounds.py`), which uv
-creates on first use.
+HonestDiD bounds and DoWhy refuters run in their own locked environments
+(`scripts/honestdid_bounds.py`, `scripts/dowhy_refuters.py`), which uv creates on first use.
+
+**Not estimated in v1** (deviation 21): secondary outcomes T4 (MTA zonal speeds), T6 (DOT link
+speeds), R5 (PATH/NJ Transit), and R6 (Citi Bike).
 
 ```bash
 make setup         # pinned Python 3.12 environment + pre-commit hooks
