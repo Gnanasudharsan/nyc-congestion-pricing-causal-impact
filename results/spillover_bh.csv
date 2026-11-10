@@ -1,6 +1,6 @@
 key,design,spec,reported,reported_unit,p_value,p_method,q_bh
 S2,did,pooled_year1,0.3138595195127533,percent,0.8035714285714286,randomization inference (56 assignments),0.85
-S3,did,pooled_year1,-2.0777223747390368,percent,0.003430540843591718,cluster-robust t(151),0.008576352108979295
-S4,did,pooled_year1,1.2768515670536285,percent,2.1289209373695794e-7,cluster-robust t(121),1.0644604686847896e-6
+S3,did,pooled_year1,-2.077722374739059,percent,0.0034305408435916767,cluster-robust t(151),0.008576352108979193
+S4,did,pooled_year1,1.276851567053622,percent,2.1289209373696156e-7,cluster-robust t(121),1.0644604686848078e-6
 S5,synthetic_control,synthetic,-1.8951600847124495,µg/m³,0.85,placebo RMSPE-ratio rank,0.85
 A2,synthetic_control,synthetic,-0.4279602541818782,ppb,0.7884615384615384,placebo RMSPE-ratio rank,0.85

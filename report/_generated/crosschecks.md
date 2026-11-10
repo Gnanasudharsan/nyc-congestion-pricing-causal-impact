@@ -21,8 +21,8 @@
 
 | Outcome | Frequentist gap | Posterior mean [95% credible interval] |
 |---|---|---|
-| R1 | +0.0575 | +0.0453 [+0.0033, +0.0867] |
-| A1 | -2.1417 | -2.8157 [-2.9297, -2.6955] |
+| R1 | +0.0575 | +0.0454 [+0.0037, +0.0882] |
+| A1 | -2.1417 | -2.8173 [-2.9320, -2.7002] |
 
 **Minimum detectable effects (80% power), deviation 2 follow-up.**
 

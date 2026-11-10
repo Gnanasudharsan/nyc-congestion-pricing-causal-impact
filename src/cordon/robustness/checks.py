@@ -301,6 +301,9 @@ def dowhy_rows(
         weather=outcome.weather,
         weather_columns=outcome.weather_columns,
     )
+    # Fixed row order: DoWhy's seeded permutations depend on it, and upstream group-bys
+    # do not guarantee one.
+    rows = rows.sort("unit", "period")
     design = specs.build_design(rows, spec, weather=weather if outcome.weather else None)
     prepared = did.prepare(design)
     y = demean(

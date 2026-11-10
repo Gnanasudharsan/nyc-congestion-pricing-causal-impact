@@ -78,7 +78,7 @@ def group_series(frame: pl.DataFrame) -> pl.DataFrame:
         centre_on_pre_period(frame)
         .group_by("period", "group")
         .agg(pl.col("centred").mean().alias("value"), pl.col("unit").n_unique().alias("units"))
-        .sort("period")
+        .sort("period", "group")
     )
 
 

@@ -4,9 +4,9 @@ On fixed-effect-residualised data (deviation 20). The placebo refuter permutes t
 
 | Outcome | Refuter | Original estimate | New effect | p |
 |---|---|---|---|---|
-| T2 | placebo_treatment_refuter | -0.1091 | -0.0001 | 0.920 |
-| T2 | random_common_cause | -0.1091 | -0.1091 | 0.880 |
-| T2 | data_subset_refuter | -0.1091 | -0.1093 | 0.880 |
-| A3 | placebo_treatment_refuter | -2.0125 | -0.0122 | 0.800 |
-| A3 | random_common_cause | -2.0125 | -2.0124 | 0.980 |
-| A3 | data_subset_refuter | -2.0125 | -2.0152 | 0.940 |
+| T2 | placebo_treatment_refuter | -0.1091 | -0.0005 | 0.820 |
+| T2 | random_common_cause | -0.1091 | -0.1091 | 0.980 |
+| T2 | data_subset_refuter | -0.1091 | -0.1089 | 0.840 |
+| A3 | placebo_treatment_refuter | -2.0125 | +0.0061 | 0.860 |
+| A3 | random_common_cause | -2.0125 | -2.0125 | 0.940 |
+| A3 | data_subset_refuter | -2.0125 | -2.0150 | 0.880 |
