@@ -115,7 +115,9 @@ def failures_for(
                 + (f"; pre-trend p = {pre_p:.3f}" if not np.isnan(pre_p) else "")
             )
         elif not excludes:
-            failures.append(f"breakdown M-bar = {label} < 1 (pre-trend p = {pre_p:.3g})")
+            failures.append(
+                f"breakdown M-bar {label}, below the required 1 (pre-trend p = {pre_p:.3g})"
+            )
     if key in FLAGGED:
         detrended = lookup(estimates, key, detrended_spec(key))
         if key in SC_KEYS:

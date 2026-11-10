@@ -460,6 +460,13 @@ Pass rules for each check were fixed before any check was run (deviation 18).
 """
 
 
+def pretty(text: str | None) -> str:
+    """Typographic symbols for labels written in ASCII by the labelling code."""
+    if not text:
+        return "\u2014"
+    return text.replace("<=", "\u2264").replace("M-bar", "M\u0304")
+
+
 def claims_section() -> str:
     """Tabulate the labelled claims."""
     table = pl.read_csv(RESULTS / "claims.csv", infer_schema_length=None)
@@ -473,8 +480,8 @@ def claims_section() -> str:
         suffix = "%" if row["unit"] == "percent" else f" {row['unit']}"
         lines.append(
             f"| **{row['key']}** {row['description']} | {fmt(row['estimate'])}{suffix} | "
-            f"{fmt_p(row['adjusted_p'])} ({row['adjustment']}) | {row['breakdown_mbar'] or '—'} "
-            f"| **{row['label']}** | {row['reasons'] or '—'} |"
+            f"{fmt_p(row['adjusted_p'])} ({row['adjustment']}) | {pretty(row['breakdown_mbar'])} "
+            f"| **{row['label']}** | {pretty(row['reasons'])} |"
         )
     return "\n".join(lines)
 
