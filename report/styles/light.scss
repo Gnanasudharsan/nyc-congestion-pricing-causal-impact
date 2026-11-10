@@ -1,0 +1,55 @@
+/*-- scss:defaults --*/
+// Cordon design tokens (light). Data colours: treated #C8553D, control #5B7083,
+// spillover #D99A2B (used in figures, not in the page chrome).
+$cordon-ink: #1A2230;
+$cordon-slate: #586274;
+$cordon-paper: #FAFAF8;
+$cordon-surface: #FFFFFF;
+$cordon-line: #DDE1E6;
+$cordon-accent: #2F5BD3;
+
+$body-bg: $cordon-paper;
+$body-color: $cordon-ink;
+$body-secondary: $cordon-slate;
+$link-color: $cordon-accent;
+$primary: $cordon-accent;
+$border-color: $cordon-line;
+$table-border-color: $cordon-line;
+$navbar-bg: $cordon-surface;
+$navbar-fg: $cordon-ink;
+$navbar-hl: $cordon-accent;
+$footer-bg: $cordon-paper;
+$footer-fg: $cordon-slate;
+$toc-color: $cordon-slate;
+$code-bg: $cordon-surface;
+$code-color: $cordon-ink;
+$font-family-sans-serif: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+$font-family-serif: "Source Serif 4", Georgia, serif;
+$font-family-base: $font-family-serif;
+$headings-font-family: $font-family-sans-serif;
+$headings-font-weight: 650;
+$font-size-root: 18px;
+$line-height-base: 1.6;
+
+/*-- scss:rules --*/
+body { background: $cordon-paper; color: $cordon-ink; }
+h1, h2, h3, h4, .navbar, .sidebar, .quarto-title-meta, figcaption, .figure-caption,
+.table, table, .callout, .toc-actions, #TOC, nav { font-family: $font-family-sans-serif; }
+h1.title { letter-spacing: -0.01em; }
+p, li { max-width: 72ch; }
+.subtitle, .quarto-title-meta-heading, .figure-caption, figcaption, .text-muted { color: $cordon-slate !important; }
+table, .table { font-variant-numeric: tabular-nums; font-size: 0.8rem; }
+table th { font-weight: 600; }
+.table > :not(caption) > * > * { border-bottom-color: $cordon-line; background: transparent; color: $cordon-ink; }
+figure img, .figure img, p > img { border-radius: 4px; border: 1px solid $cordon-line; background: #FAFAF8; }
+.callout { border-left-color: $cordon-accent !important; background: $cordon-surface; }
+.navbar { border-bottom: 1px solid $cordon-line; }
+main a, #quarto-document-content a { text-decoration: underline; text-underline-offset: 2px; }
+main .nav a, #TOC a, .sidebar a { text-decoration: none; }
+.label-robust { font-weight: 600; }
+.label-fragile, .label-not-supported { font-weight: 600; }
+.hero-figure img { width: 100%; }
+.vega-bind { font-family: $font-family-sans-serif; font-size: 0.85rem; margin-top: 0.5rem; }
+.vega-bind select { background: $cordon-surface; color: $cordon-ink; border: 1px solid $cordon-line;
+  border-radius: 4px; padding: 0.25rem 0.5rem; max-width: 100%; }
+img[width][height] { height: auto; max-width: 100%; }

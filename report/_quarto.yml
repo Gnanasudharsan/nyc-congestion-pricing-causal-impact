@@ -1,0 +1,67 @@
+project:
+  type: website
+  output-dir: _site
+  post-render: scripts/postprocess.py
+  render:
+    - index.qmd
+    - paper.qmd
+    - results.qmd
+    - methods.qmd
+    - data.qmd
+  resources:
+    - fonts/*.woff2
+    - fonts/*.txt
+    - figures/*.png
+
+website:
+  title: "Cordon"
+  description: "A pre-registered causal analysis of New York City's congestion pricing: traffic, transit, air quality, and spillovers."
+  site-url: https://gnanasudharsan.github.io/nyc-congestion-pricing-causal-impact/
+  repo-url: https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact
+  open-graph: true
+  favicon: favicon.svg
+  search: false  # five pages; dropping search removes several render-blocking scripts
+  navbar:
+    background: light
+    left:
+      - href: index.qmd
+        text: Overview
+      - href: paper.qmd
+        text: Paper
+      - href: results.qmd
+        text: All results
+      - href: methods.qmd
+        text: Methods
+      - href: data.qmd
+        text: Data
+    right:
+      - icon: github
+        href: https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact
+        aria-label: Source code on GitHub
+  page-footer:
+    left: "Cordon · Gnanasudharsan Ashokumar · MIT License"
+    right: "Every number on this site is generated from `results/` by code."
+
+bibliography: references.bib
+lang: en
+
+format:
+  html:
+    theme:
+      light: [none, styles/light.scss]
+      dark: [none, styles/dark.scss]
+    respect-user-color-scheme: true
+    css: styles/fonts.css
+    include-in-header: preload.html  # fonts ready at first paint (avoids layout shift)
+    toc: true
+    toc-depth: 2
+    smooth-scroll: false
+    link-external-newwindow: true
+    fig-responsive: true
+    anchor-sections: false
+    citations-hover: false
+    footnotes-hover: false
+    crossrefs-hover: false
+    code-tools: false
+    highlight-style: none
+    html-math-method: plain

@@ -1,0 +1,13 @@
+% Design-token fonts for the PDF (vendored in ../fonts, SIL OFL). Requires LuaLaTeX.
+\usepackage{fontspec}
+\setmainfont{SourceSerif4[opsz,wght].ttf}[
+  Path=fonts/, Renderer=HarfBuzz, RawFeature={axis={wght=400}},
+  BoldFont={SourceSerif4[opsz,wght].ttf}, BoldFeatures={RawFeature={axis={wght=650}}},
+  ItalicFont={SourceSerif4-Italic[opsz,wght].ttf}, ItalicFeatures={RawFeature={axis={wght=400}}},
+  BoldItalicFont={SourceSerif4-Italic[opsz,wght].ttf},
+  BoldItalicFeatures={RawFeature={axis={wght=650}}}]
+\setsansfont{InterTight[wght].ttf}[
+  Path=fonts/, Renderer=HarfBuzz, RawFeature={axis={wght=450}},
+  BoldFont={InterTight[wght].ttf}, BoldFeatures={RawFeature={axis={wght=650}}}]
+\usepackage{sectsty}
+\allsectionsfont{\sffamily}

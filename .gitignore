@@ -36,3 +36,13 @@ report/.quarto/
 # Secrets
 .env
 *.pem
+
+# Quarto build output
+report/_site/
+report/.quarto/
+report/*_files/
+# Raw Lighthouse reports (summary is results/lighthouse_scores.csv)
+results/lighthouse/
+report/paper.tex
+report/paper.log
+report/paper.pdf

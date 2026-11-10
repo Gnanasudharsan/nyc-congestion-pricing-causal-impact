@@ -3,7 +3,9 @@ repos:
     rev: v5.0.0
     hooks:
       - id: trailing-whitespace
+        exclude: ^report/fonts/  # third-party licence texts stay verbatim
       - id: end-of-file-fixer
+        exclude: ^report/fonts/
       - id: check-yaml
       - id: check-toml
       - id: check-json

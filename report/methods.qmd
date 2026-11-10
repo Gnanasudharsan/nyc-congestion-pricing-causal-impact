@@ -1,0 +1,62 @@
+---
+description-meta: "Pre-registration, difference-in-differences and synthetic-control designs, inference, and logged deviations in the Cordon analysis."
+title: "Methods"
+subtitle: "Pre-registration, designs, inference, and every logged deviation"
+---
+
+## Pre-registration
+
+The analysis plan was committed and tagged `analysis-plan-v1` before any treatment-effect
+estimate existed. An amendment (`analysis-plan-v1.1`), also made before any estimate, added a
+pre-period-detrended secondary specification for every design. Every later change is in the
+[deviations log](https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact/blob/main/docs/deviations.md).
+Each entry is dated and says whether it was made before or after the related estimate was
+seen.
+
+- [Analysis plan](https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact/blob/main/docs/analysis-plan.md)
+- [Architecture decision records (ADRs 0001–0012)](https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact/tree/main/docs/adr)
+- [Confounder timeline](https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact/blob/main/docs/confounders.md)
+- [Literature review](https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact/blob/main/docs/literature.md)
+
+## Designs
+
+| Design | Used for | Key choices |
+|---|---|---|
+| DiD / event study | Facility, taxi-zone, station, route, and site panels | Unit × season and date fixed effects; anticipation window as its own term; 2023 as the event-study seasonal baseline (ADR 0012) |
+| Detrended DiD | Every DiD (amendment 1) | Unit trends fitted on the pre-period only, then extrapolated |
+| Synthetic control | Systems (NTD) and monitors | Demeaned; non-negative weights summing to 1, solved exactly by NNLS; placebo-in-space RMSPE-ratio inference |
+| Stacked heterogeneity | Peak/overnight, weekday/weekend, vehicle class, borough | Level-specific fixed effects; SEs for differences clustered by the original unit |
+| Zone effects | Equity lens (exploratory) | Placebo-in-time noise; DerSimonian–Laird empirical Bayes |
+
+## Inference
+
+- **30 or more clusters:** cluster-robust standard errors with t(G − 1) critical values. These
+  match `pyfixest` exactly on every unadjusted design.
+- **Fewer than 30 clusters:**
+  - restricted wild cluster bootstrap-t with Webb weights. The estimators are linear in the
+    outcome, so each replication re-estimates the pre-period adjustment exactly;
+  - randomization inference over every assignment of treated status.
+- **Multiplicity:** Holm across the six primary outcomes; Benjamini–Hochberg within each
+  secondary family.
+- **Parallel-trends sensitivity:** HonestDiD relative-magnitudes and smoothness bounds
+  [@rambachan2023]. The Python port was validated against the R package's published example
+  (20 of 20 interval endpoints to two decimals). It runs in its own locked environment because
+  it requires NumPy 1.x.
+
+## Testing on simulated data
+
+Every estimator is unit-tested on simulated panels with known effects. The tests cover:
+
+- recovery of pooled and event-study effects;
+- removal of a pre-existing trend by detrending;
+- removal of weather confounding by the weather adjustment;
+- the bootstrap and randomization-inference p-values;
+- synthetic-control weights.
+
+The simulations caught one flaw in the plan as written: the seasonal collinearity in the
+event study described in ADR 0012.
+
+## References {.unnumbered}
+
+::: {#refs}
+:::

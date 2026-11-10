@@ -1,0 +1,26 @@
+---
+description-meta: "Public data sources, coverage, and how to rebuild the Cordon analysis of NYC congestion pricing from raw downloads."
+title: "Data"
+subtitle: "Sources, coverage, and how to rebuild everything"
+---
+
+All inputs are public. Each raw file's download date, size, checksum, and coverage are
+recorded in
+[`data/MANIFEST.json`](https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact/blob/main/data/MANIFEST.json).
+Datasets that begin in January 2025 have no pre-period, so they are used only descriptively.
+
+## Coverage of every audited source
+
+{{< include _generated/coverage.md >}}
+
+## Rebuild
+
+```bash
+make setup     # pinned Python 3.12 environment (uv) + git hooks
+make data      # download raw data, build and validate every panel (1-2 hours)
+make analysis  # every design, check, and label -> results/ (about 2 hours)
+make report    # this site and the PDF paper (requires Quarto)
+```
+
+The [data catalog](https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact/blob/main/docs/data-catalog.md)
+documents every dataset ID, column meaning, and cleaning rule.

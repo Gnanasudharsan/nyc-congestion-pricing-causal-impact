@@ -1,0 +1,67 @@
+---
+description-meta: "Every estimate, robustness check and claim label from the Cordon analysis of NYC congestion pricing, generated from code."
+title: "All results"
+subtitle: "Every estimate, check, and label. Generated from `results/`; nothing here is typed by hand."
+---
+
+## Claim labels
+
+{{< include _generated/claims.md >}}
+
+## Primary outcomes
+
+Holm adjustment across the six primary outcomes:
+
+{{< include _generated/holm.md >}}
+
+Difference-in-differences: headline (2025), detrended, anticipation, and extended windows.
+
+{{< include _generated/primary_did.md >}}
+
+Synthetic control:
+
+{{< include _generated/primary_sc.md >}}
+
+## Secondary outcomes
+
+{{< include _generated/secondary_did.md >}}
+
+{{< include _generated/secondary_sc.md >}}
+
+## Spillovers
+
+{{< include _generated/spillover_bh.md >}}
+
+{{< include _generated/spillover_did.md >}}
+
+{{< include _generated/spillover_sc.md >}}
+
+## Explore the event studies
+
+{{< include _generated/event_study_chart.html >}}
+
+## Heterogeneity
+
+{{< include _generated/heterogeneity.md >}}
+
+## Zone-level spillovers and the equity lens (exploratory)
+
+{{< include _generated/zones.md >}}
+
+![Shrunk zone spillover effects against neighbourhood characteristics.](figures/phase4_zone_equity.png){fig-alt="Four scatter panels of zone effects against income, car-free households, poverty and asthma ED visits; border-ring zones in orange, upper Manhattan and Bronx zones in grey."}
+
+## Robustness
+
+{{< include _generated/honestdid.md >}}
+
+![HonestDiD relative-magnitudes robust intervals by M̄.](figures/phase5_honestdid.png){fig-alt="Small multiples of robust confidence intervals widening with M-bar; all include zero by M-bar of one."}
+
+{{< include _generated/checks.md >}}
+
+{{< include _generated/dowhy.md >}}
+
+## Replication and cross-checks
+
+{{< include _generated/replication.md >}}
+
+{{< include _generated/crosschecks.md >}}
