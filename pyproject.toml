@@ -32,6 +32,7 @@ causal = [
     "wildboottest>=0.3.2",
 ]
 dev = [
+    "brotli>=1.1",
     "mypy>=2.4.1",
     "pandas-stubs>=3.1.0.261029",
     "pre-commit>=4.7.0",
@@ -68,7 +69,7 @@ mypy_path = "src"
 packages = ["cordon"]
 
 [[tool.mypy.overrides]]
-module = ["duckdb.*", "pyfixest.*", "geopandas.*", "shapely.*", "holidays.*", "statsmodels.*", "linearmodels.*", "causalpy.*", "pysyncon.*", "dowhy.*", "wildboottest.*", "altair.*", "plotly.*", "scipy.*"]
+module = ["duckdb.*", "pyfixest.*", "geopandas.*", "shapely.*", "holidays.*", "statsmodels.*", "linearmodels.*", "causalpy.*", "pysyncon.*", "dowhy.*", "wildboottest.*", "altair.*", "plotly.*", "scipy.*", "fontTools.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
