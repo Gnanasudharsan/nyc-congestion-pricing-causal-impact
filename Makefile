@@ -55,8 +55,13 @@ analysis: descriptives  ## Run every pre-registered design and write results/ (a
 	$(RUN) python -m cordon.viz.estimates
 	$(RUN) python -m cordon.designs.results_page
 
-report: analysis  ## Render the Quarto paper (PDF) and website
-	@echo "make report: Quarto paper and site arrive in Phase 6 (not yet implemented)."
+QUARTO ?= quarto
+
+report:  ## Paper (HTML + PDF) and website from results/ (needs Quarto; PDF needs LuaLaTeX)
+	$(RUN) python -m cordon.viz.report_inputs
+	$(RUN) python -m cordon.viz.site_charts
+	$(RUN) python -m cordon.viz.webfonts
+	cd report && $(QUARTO) render
 
 all: data analysis report  ## Full rebuild from raw downloads
 
