@@ -55,4 +55,4 @@ main .nav a, #TOC a, .sidebar a { text-decoration: none; }
   border-radius: 4px; padding: 0.25rem 0.5rem; max-width: 100%; }
 img[width][height] { height: auto; max-width: 100%; }
 // Quarto draws title-meta headings at 80% opacity, which drops slate below 4.5:1 on paper.
-.quarto-title-meta-heading { opacity: 1; }
+#title-block-header.quarto-title-block.default .quarto-title-meta-heading { opacity: 1; }  // same selector as Quarto
