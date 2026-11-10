@@ -25,6 +25,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: quarto-dev/quarto-actions/setup@v2
+        env:
+          # Authenticated GitHub API calls for the TinyTeX release lookup
+          # (unauthenticated calls are rate-limited and can fail with 403).
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           version: 1.11.9
           tinytex: true
