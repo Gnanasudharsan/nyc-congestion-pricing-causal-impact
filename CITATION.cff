@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use Cordon, please cite it as below."
+title: "Cordon: the causal impact of NYC congestion pricing"
+abstract: "A pre-registered causal analysis of New York City's Congestion Relief Zone toll on traffic, transit ridership, air quality, and nearby neighbourhoods, using public data."
+authors:
+  - family-names: Ashokumar
+    given-names: Gnanasudharsan
+version: 1.0.0
+date-released: 2026-11-10
+license: MIT
+repository-code: "https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact"
+url: "https://gnanasudharsan.github.io/nyc-congestion-pricing-causal-impact/"
+keywords:
+  - congestion pricing
+  - causal inference
+  - difference-in-differences
+  - synthetic control
+  - pre-registration

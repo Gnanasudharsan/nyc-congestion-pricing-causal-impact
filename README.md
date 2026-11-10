@@ -1,99 +1,109 @@
 # Cordon: the causal impact of NYC congestion pricing
 
 [![CI](https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact/actions/workflows/ci.yml/badge.svg)](https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact/actions/workflows/ci.yml)
+[![Site](https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact/actions/workflows/pages.yml/badge.svg)](https://gnanasudharsan.github.io/nyc-congestion-pricing-causal-impact/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-> **Status: Phase 6 of 7 complete (paper and website).**
-> **Site:** <https://gnanasudharsan.github.io/nyc-congestion-pricing-causal-impact/> ·
-> **Paper (PDF):** <https://gnanasudharsan.github.io/nyc-congestion-pricing-causal-impact/paper.pdf>
-> The analysis plan was tagged `analysis-plan-v1` (amended to `analysis-plan-v1.1`) before any
-> effect estimate was computed. Phase 3 estimates, with uncertainty, are in
-> [docs/results-phase3.md](docs/results-phase3.md); spillovers, heterogeneity, and the
-> exploratory equity lens are in [docs/results-phase4.md](docs/results-phase4.md).
-> Every claim now carries a robust / fragile / not supported label:
-> [docs/results-phase5.md](docs/results-phase5.md). **No claim is labelled robust.** The
-> traffic and spillover estimates are fragile, mainly because of pre-trends, and the transit
-> and air-quality estimates are not supported. Several
-> designs show pre-trends, and the robust / fragile / not supported labels come after the
-> Phase 5 falsification tests.
+> **v1.0.0.**
+> [Website](https://gnanasudharsan.github.io/nyc-congestion-pricing-causal-impact/) ·
+> [Paper (PDF)](https://gnanasudharsan.github.io/nyc-congestion-pricing-causal-impact/paper.pdf) ·
+> [All results](https://gnanasudharsan.github.io/nyc-congestion-pricing-causal-impact/results.html)
 
 ## Question
 
-What causal effect did New York City's congestion pricing program (the Congestion Relief Zone,
-Manhattan at or below 60th Street, tolling since January 5, 2025) have on:
+What causal effect did New York City's Congestion Relief Zone toll (Manhattan at or below
+60th Street, tolling since January 5, 2025) have on:
 
-1. vehicle traffic and speeds,
-2. transit ridership,
-3. air quality, and
-4. neighborhoods just outside the zone (spillovers)?
+1. vehicle traffic and speeds;
+2. transit ridership;
+3. air quality;
+4. the neighbourhoods just outside the zone (spillovers)?
 
-Published studies and agency reports already cover headline traffic and PM2.5 effects
-(see [docs/literature.md](docs/literature.md)). Cordon aims to **replicate** those findings with
-transparent, pre-registered methods on public data, and to **extend** them with a spillover and
-equity analysis of bordering neighborhoods, the Bronx, upper Manhattan, and New Jersey approaches.
+Cordon has two aims:
+- **Replicate** published headline findings ([docs/literature.md](docs/literature.md)) with
+  transparent, pre-registered methods on public data.
+- **Extend** them to spillovers and an exploratory equity lens for the border ring, upper
+  Manhattan, and the Bronx.
 
-**Pre-registered design** ([docs/analysis-plan.md](docs/analysis-plan.md)): six primary outcomes,
-Holm-adjusted:
+New Jersey approaches could not be studied: no open Port Authority crossing data with a
+pre-period was found.
 
-| ID | Outcome | Design |
-|---|---|---|
-| T1 | Crossings at MTA tunnels feeding the zone | Facility DiD, randomization inference |
-| T2 | Taxi + FHV trips from the zone | Taxi-zone DiD/event study |
-| T3 | Taxi + FHV trip speeds inside the zone | Taxi-zone DiD/event study |
-| R1 | Subway ridership | Synthetic control vs other US systems (NTD) |
-| A1 | PM2.5 at zone monitors | Synthetic control with out-of-region donors |
-| S1 | Taxi + FHV trips in the border ring | DiD vs far-away zones |
+## What we found
 
-Data sources and their coverage are in [docs/data-catalog.md](docs/data-catalog.md).
+Every claim gets one label (robust, fragile, or not supported) under rules fixed before any
+robustness check was run. The labelled table is on the site's
+[results page](https://gnanasudharsan.github.io/nyc-congestion-pricing-causal-impact/results.html#claim-labels)
+and in [docs/results-phase5.md](docs/results-phase5.md).
 
-The project reports what the data shows, including null or unfavorable results, with
-uncertainty, and gives competing explanations (see [docs/confounders.md](docs/confounders.md))
-real space.
+- **Traffic, speeds, and nearby trips are fragile.** Taxi and ride-hail trips from the zone
+  fell relative to distant zones, trip speeds in the zone rose, and trips in the surrounding
+  ring fell. All are statistically clear, but none passes the robustness bar:
+  - the pre-period data violate parallel trends;
+  - HonestDiD breakdown values are small;
+  - a placebo toll a year early "finds" a similar decline in trips.
+- **Subway ridership, bus ridership, and air quality are not supported.** These designs detect
+  no effect. The air-quality designs are limited by having only two usable monitors inside the
+  zone.
+- **No sign of displacement.** We find no evidence of traffic or pollution pushed into
+  neighbouring areas, although the Bronx air-quality designs fail their fit checks and are
+  descriptive only.
+- **Replication.** Our re-run of a published ride-hail estimate matches it closely. Using
+  distant zones as the control instead of upper Manhattan gives a larger decline.
 
-## Roadmap
+The [paper](https://gnanasudharsan.github.io/nyc-congestion-pricing-causal-impact/paper.html)
+gives the numbers with uncertainty, the alternative explanations, and the limitations.
 
-| Phase | Scope | Status |
-|---|---|---|
-| 0 | Foundation, literature review, confounder timeline | ✅ Done |
-| 1 | Data audit, `data/MANIFEST.json`, pre-registered analysis plan | ✅ Done |
-| 2 | Cleaning pipelines, data tests, descriptive and pre-trend plots | ✅ Done |
-| 3 | Core causal estimates (DiD / event study, synthetic control), replication | ✅ Done |
-| 4 | Spillovers, heterogeneity, equity lens | ✅ Done |
-| 5 | Robustness, placebo tests, parallel-trends sensitivity, DoWhy refuters | ✅ Done |
-| 6 | Quarto paper (PDF) and website (GitHub Pages) | ✅ Done |
-| 7 | v1.0.0 release | ⏳ Next |
+## How the analysis was kept honest
+
+- **Pre-registration.** [docs/analysis-plan.md](docs/analysis-plan.md) was tagged
+  `analysis-plan-v1` before any treatment-effect estimate. Its one amendment
+  (`analysis-plan-v1.1`) was also made before any estimate.
+- **Deviations.** All 24 are logged in [docs/deviations.md](docs/deviations.md). Each is dated
+  and says whether it came before or after the related estimates.
+- **Methodological choices** are recorded as ADRs in [docs/adr/](docs/adr/).
+- **Tested estimators.** Every estimator is unit-tested on simulated data with known effects.
+  The simulations caught one design flaw in the plan (ADR 0012).
+- **No hand-typed numbers.** The paper and site read every number from `results/`.
 
 ## Reproduce
 
-Requires [uv](https://docs.astral.sh/uv/) (and, from Phase 6, [Quarto](https://quarto.org/)).
-HonestDiD bounds and DoWhy refuters run in their own locked environments
-(`scripts/honestdid_bounds.py`, `scripts/dowhy_refuters.py`), which uv creates on first use.
-
-**Not estimated in v1** (deviation 21): secondary outcomes T4 (MTA zonal speeds), T6 (DOT link
-speeds), R5 (PATH/NJ Transit), and R6 (Citi Bike).
+Requires [uv](https://docs.astral.sh/uv/). The paper and site also need
+[Quarto](https://quarto.org/) 1.11, and the PDF needs LuaLaTeX. HonestDiD and DoWhy run in
+their own locked environments (`scripts/`), which uv creates on first use.
 
 ```bash
 make setup         # pinned Python 3.12 environment + pre-commit hooks
 make test          # unit tests
-make data          # download raw data, build and validate processed panels (~1-2 hours)
-make descriptives  # figures, pre-period MDEs, docs/descriptives.md
-make analysis      # every design, check, and label -> results/ (~2 hours)
-make report        # paper (HTML + PDF) and website from results/ (needs Quarto)
-make all           # full rebuild from raw downloads (filled in phase by phase)
+make data          # download raw data, build and validate processed panels (1-2 hours)
+make analysis      # every design, check, and label -> results/ (about 2 hours)
+make report        # paper (HTML + PDF) and website (set QUARTO=... if not on PATH)
+make all           # data + analysis + report
 ```
+
+Every raw input is recorded in [data/MANIFEST.json](data/MANIFEST.json) with its download date,
+size, SHA-256, and coverage. Random seeds are fixed (`cordon.config.RANDOM_SEED`).
+
+**Not estimated in v1** (deviation 21): T4 (MTA zonal speeds), T6 (DOT link speeds), R5
+(PATH/NJ Transit), and R6 (Citi Bike).
 
 ## Repository layout
 
 ```
 src/cordon/        ingest → clean → features → designs → robustness → viz
 data/              raw/ interim/ processed/ (gitignored), final/ (small committed aggregates)
-data/MANIFEST.json download dates, row counts, checksums, coverage
+data/MANIFEST.json download dates, sizes, checksums, coverage
 docs/              literature, confounders, analysis plan, data catalog, ADRs, deviations log
 report/            Quarto paper and website
 results/           tables generated by code only
+scripts/           isolated, locked environments for HonestDiD and DoWhy
 notebooks/         exploration only, never the source of reported results
 ```
 
+## Citation
+
+See [CITATION.cff](CITATION.cff).
+
 ## License
 
-MIT © Gnanasudharsan Ashokumar
+Code: MIT © Gnanasudharsan Ashokumar. Vendored fonts in `report/fonts/`: SIL Open Font License
+(licences included).
