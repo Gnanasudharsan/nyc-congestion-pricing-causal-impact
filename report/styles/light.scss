@@ -54,3 +54,5 @@ main .nav a, #TOC a, .sidebar a { text-decoration: none; }
 .vega-bind select { background: $cordon-surface; color: $cordon-ink; border: 1px solid $cordon-line;
   border-radius: 4px; padding: 0.25rem 0.5rem; max-width: 100%; }
 img[width][height] { height: auto; max-width: 100%; }
+// Quarto draws title-meta headings at 80% opacity, which drops slate below 4.5:1 on paper.
+.quarto-title-meta-heading { opacity: 1; }

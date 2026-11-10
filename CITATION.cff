@@ -5,7 +5,7 @@ abstract: "A pre-registered causal analysis of New York City's Congestion Relief
 authors:
   - family-names: Ashokumar
     given-names: Gnanasudharsan
-version: 1.0.0
+version: 1.0.1
 date-released: 2026-11-10
 license: MIT
 repository-code: "https://github.com/Gnanasudharsan/nyc-congestion-pricing-causal-impact"

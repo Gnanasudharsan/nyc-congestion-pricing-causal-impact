@@ -15,24 +15,49 @@ CLAUDE.md asks for:
   no executable code, so CI renders committed inputs and never reruns the analysis.
 - **Fonts.** Source Serif 4 and Inter Tight (SIL OFL) are kept in `report/fonts/`:
   - the PDF uses the variable TTFs through LuaLaTeX and fontspec (HarfBuzz renderer, weight
-    axis);
-  - the site self-hosts subset WOFF2 files (415 KB instead of 2.6 MB) and preloads them.
-    This avoids a third-party font request and the layout shift that font swapping causes.
+    and optical-size axes);
+  - the site self-hosts subset WOFF2 files built by `cordon.viz.webfonts`: Latin characters
+    only, only the OpenType features the site uses, and Source Serif's optical-size axis
+    pinned at the font's default (its text design; headings are set in Inter Tight). The
+    weight axis stays variable. This brings 2.6 MB down to about 140 KB. The `@font-face`
+    rules sit inline in `report/preload.html`, next to the preloads, so first paint needs
+    no extra stylesheet request.
 - **Dark mode** uses Quarto's light/dark themes, which follow the reader's system setting, plus
-  a toggle. A standard-library post-render step (`report/scripts/postprocess.py`) starts the
-  inactive theme's stylesheet as disabled, so it does not block first paint. Quarto's own
-  script enables it when needed. The step also adds intrinsic image dimensions.
+  a toggle.
+- **Post-render step.** `report/scripts/postprocess.py` (standard library only) trims what
+  first paint waits for, without changing behaviour:
+  - inactive colour-scheme stylesheets start disabled; Quarto's own script enables the one
+    the reader's preference or the toggle asks for;
+  - Quarto's classic `<head>` scripts are marked `defer`. Its inline code that uses them
+    already waits for `DOMContentLoaded`;
+  - the tooltip stylesheet loads without blocking (hover popups are off);
+  - the Bootstrap Icons web font is replaced with the two icons the site uses, inlined as SVG
+    (`report/icons/`, extracted by `cordon.viz.icons`; MIT licence notice kept);
+  - PNG figures get intrinsic sizes (no layout shift), and all but the overview's hero
+    image load lazily.
+  These helpers are unit-tested (`tests/test_postprocess.py`).
+- **Interactive chart.** The event-study explorer loads Vega only when it comes near the
+  viewport, so about 300 KB of script never competes with first paint.
 - **Site features turned off:** search, hover popups, and section anchors. Each adds
   render-blocking scripts, and five pages do not need search.
 - **PDF in CI.** The local TeX installation (BasicTeX) lacks packages and its `tlmgr` needs
   admin rights. The PDF is therefore built in GitHub Actions with Quarto's TinyTeX, which
   installs missing packages itself. The HTML is rendered and audited locally.
-- **Lighthouse** 13.5.0 is run against a gzip-serving local server that approximates GitHub
-  Pages. Scores are in `results/lighthouse_scores.csv`.
+- **Lighthouse.** `make lighthouse` (`cordon.viz.lighthouse`) audits every page of the live
+  site with Lighthouse 13.5.0: mobile and desktop profiles, light and dark schemes, three
+  runs each, keeping the median performance run. Results are in
+  `results/lighthouse_scores.csv`.
 
 ## Consequences
-- Desktop: performance 96–98 and 100 in every other category on the audited pages.
-- **Mobile performance is 67–74, below the 90 target.** Under Lighthouse's simulated slow-4G
-  profile, first paint is dominated by the roughly 70 KB of gzipped Bootstrap CSS that Quarto's
-  theme needs. Closing the gap would mean replacing Quarto's framework CSS, which risks
-  breaking the navbar and the dark-mode toggle. It is recorded as a known gap rather than hidden.
+- Every page meets the target of at least 90 in every category, on mobile and desktop and in
+  both colour schemes (`results/lighthouse_scores.csv`).
+- The first version of this ADR (Phase 6) recorded mobile performance of 67–74, measured
+  against a local server, and called replacing Quarto's framework CSS the only fix. That
+  was wrong. The remaining cost was the work around that CSS: unused fonts and font
+  features, synchronous scripts, an icon font, eager figures, and an eagerly loaded chart
+  library. Removing those was enough (v1.0.1). Quarto's Bootstrap CSS (about 70 KB gzipped)
+  is still the largest render-blocking file.
+- Auditing the dark scheme surfaced a real defect: code blocks were black on the dark
+  background (Bootstrap's default `pre` colour). It is fixed in both themes.
+- The post-render step relies on the exact markup Quarto 1.11 emits. A Quarto upgrade
+  should be followed by `make report`, the post-render tests, and `make lighthouse`.

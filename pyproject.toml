@@ -1,6 +1,6 @@
 [project]
 name = "cordon"
-version = "1.0.0"
+version = "1.0.1"
 description = "Causal inference on NYC congestion pricing: difference-in-differences, synthetic control, and spillover analysis on public MTA, TLC, and EPA data."
 readme = "README.md"
 license = { text = "MIT" }

@@ -3,6 +3,26 @@
 All notable changes are documented here. Format follows Keep a Changelog; phases are tagged
 `phase-N`.
 
+## [1.0.1] — 2026-11-10
+Website only; no analysis result changes.
+### Fixed
+- Mobile Lighthouse performance now meets the target of at least 90 on every page, in both
+  colour schemes (`results/lighthouse_scores.csv`). The fixes:
+  - smaller web fonts: only the features in use, and Source Serif's optical-size axis pinned;
+  - `@font-face` declared inline;
+  - deferred Quarto head scripts and non-blocking tooltip CSS;
+  - two inlined SVG icons in place of the Bootstrap Icons font;
+  - lazy figures, and Vega loaded only when the chart nears the viewport.
+- Code blocks were unreadable in dark mode (black on the dark surface), and the paper's
+  title-meta headings fell below 4.5:1 contrast in light mode. Both are fixed.
+### Added
+- `make lighthouse` (`cordon.viz.lighthouse`): reproducible audits of the live site across
+  pages, mobile and desktop, and light and dark.
+- `cordon.viz.icons`, and tests for the post-render step.
+### Changed
+- ADR 0013 is revised. Its Phase 6 claim that closing the mobile gap required replacing
+  Quarto's CSS was wrong, and the ADR now says so.
+
 ## [1.0.0] — 2026-11-10 (phase-7)
 ### Added
 - `CITATION.cff`; README rewritten for the release (findings, how the analysis was kept honest,
