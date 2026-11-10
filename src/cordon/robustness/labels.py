@@ -134,15 +134,22 @@ def failures_for(
 
 
 def ruled_out(headline: dict[str, Any], key: str) -> str:
-    """For unsupported DiD claims: the effects the interval rules out."""
+    """For unsupported DiD claims: the effects the interval rules out (if reliable)."""
     if key in SC_KEYS:
         return "no interval for synthetic control; see the placebo range and MDE"
     unit = "%" if headline["reported_unit"] == "percent" else f" {headline['reported_unit']}"
-    return (
-        f"95% CI {float(headline['reported_ci_low']):+.1f}{unit} to "
-        f"{float(headline['reported_ci_high']):+.1f}{unit}; effects outside it are ruled "
-        "out at 95% (unadjusted)"
+    interval = (
+        f"{float(headline['reported_ci_low']):+.1f}{unit} to "
+        f"{float(headline['reported_ci_high']):+.1f}{unit}"
     )
+    clusters = int(headline["n_clusters"])
+    if clusters < 30:
+        return (
+            f"pre-registered p = {float(headline['p_value']):.3f} ({headline['p_method']}); "
+            f"the cluster-robust interval {interval} is not reliable with {clusters} clusters, "
+            "so no range is claimed as ruled out"
+        )
+    return f"95% CI {interval}; effects outside it are ruled out at 95% (unadjusted)"
 
 
 def claims() -> pl.DataFrame:

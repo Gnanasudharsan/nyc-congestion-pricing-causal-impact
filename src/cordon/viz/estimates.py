@@ -323,6 +323,7 @@ def plot_honestdid() -> None:
         holds = not (at_one["lb"] <= 0 <= at_one["ub"])
         excluded += int(holds)
         axis.set_title(f"{key}: {'excludes' if holds else 'includes'} 0 at M̄ = 1", fontsize=8)
+        axis.set_xlabel("M̄", fontsize=7, labelpad=1)
         axis.tick_params(labelsize=7)
     for axis in axes.ravel()[len(keys) :]:
         axis.set_visible(False)

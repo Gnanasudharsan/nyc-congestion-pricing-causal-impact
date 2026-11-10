@@ -30,7 +30,9 @@ def test_breakdown_is_the_smallest_mbar_whose_interval_includes_zero() -> None:
         }
     )
     label, excludes_at_one = checks.breakdown(bounds, "X")
-    assert label == "1.5"
+    assert label == "1-1.5"
     assert excludes_at_one is True
     none = bounds.with_columns(pl.lit(None, dtype=pl.Float64).alias("lb"))
     assert checks.breakdown(none, "X") == ("not computed", None)
+    first = bounds.with_columns(pl.lit(-1.0).alias("lb"), pl.lit(1.0).alias("ub"))
+    assert checks.breakdown(first, "X") == ("<= 0.5", False)

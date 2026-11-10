@@ -160,6 +160,12 @@ def did2s_effect(rows: pl.DataFrame, outcome: DidOutcome) -> dict[str, Any]:
         )
         .with_columns(((pl.col("post_year1") + pl.col("anticipation")) > 0).alias("treat_any"))
     )
+    # Imputation needs every unit x season level in the untreated (first-stage) sample;
+    # treated rows whose level never appears untreated cannot be imputed.
+    observed = frame.filter(~pl.col("treat_any"))["unit_season"].unique()
+    before = frame.height
+    frame = frame.filter(pl.col("unit_season").is_in(observed.implode()))
+    dropped = before - frame.height
     fit = pf.did2s(
         frame.select(
             "value",
@@ -182,7 +188,7 @@ def did2s_effect(rows: pl.DataFrame, outcome: DidOutcome) -> dict[str, Any]:
         "ci_low": value - 1.96 * se,
         "ci_high": value + 1.96 * se,
         "p_value": float(fit.pvalue()["post_year1"]),
-        "p_method": "pyfixest did2s",
+        "p_method": f"pyfixest did2s ({dropped} non-imputable treated rows dropped)",
     }
 
 
@@ -261,9 +267,15 @@ def breakdown(bounds: pl.DataFrame, key: str) -> tuple[str, bool | None]:
     if rm.height == 0 or rm["lb"].null_count() == rm.height:
         return "not computed", None
     rm = rm.sort("parameter")
-    includes = rm.filter((pl.col("lb") <= 0) & (pl.col("ub") >= 0))
-    smallest = float(includes["parameter"].cast(pl.Float64).min() or 0.0)  # type: ignore[arg-type]
-    label = f"{smallest:g}" if includes.height else f"> {max(MBAR_GRID):g}"
+    grid = rm["parameter"].cast(pl.Float64).to_list()
+    includes = [lb <= 0 <= ub for lb, ub in zip(rm["lb"], rm["ub"], strict=True)]
+    if not any(includes):
+        label = f"> {grid[-1]:g}"
+    elif includes[0]:
+        label = f"<= {grid[0]:g}"  # already includes zero at the smallest grid value
+    else:
+        first = includes.index(True)
+        label = f"{grid[first - 1]:g}-{grid[first]:g}"
     at_one = rm.filter(pl.col("parameter") == 1.0).row(0, named=True)
     return label, not (at_one["lb"] <= 0 <= at_one["ub"])
 

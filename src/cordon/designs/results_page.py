@@ -440,10 +440,6 @@ def write_phase4() -> None:
     PHASE4_PAGE.write_text("\n\n".join(sections).rstrip() + "\n")
 
 
-if __name__ == "__main__":
-    main()
-
-
 # --------------------------------------------------------------------------- Phase 5 page
 
 PHASE5_PAGE = REPO_ROOT / "docs" / "results-phase5.md"
@@ -561,3 +557,7 @@ def write_phase5() -> None:
         "## Figures\n\n![honestdid](../report/figures/phase5_honestdid.png)\n",
     ]
     PHASE5_PAGE.write_text("\n\n".join(sections).rstrip() + "\n")
+
+
+if __name__ == "__main__":
+    main()
