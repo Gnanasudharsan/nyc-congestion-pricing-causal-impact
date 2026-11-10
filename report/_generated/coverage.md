@@ -23,10 +23,10 @@ _Generated from `data/catalog/profiles.json` (audited 2026-11-09T13:25:33-05:00)
 | `bus_speeds_monthly` | [cudb-vcni](https://data.ny.gov/d/cudb-vcni) | 112,388 | 2019-01-01 | 2026-09-01 | yes | outcome |
 | `bus_segment_speeds_2023_2024` | [58t6-89vi](https://data.ny.gov/d/58t6-89vi) | 11,656,097 | 2023-01-01 | 2024-12-01 | yes | outcome |
 | `bus_segment_speeds_2025` | [kufs-yh3x](https://data.ny.gov/d/kufs-yh3x) | 10,217,290 | 2025-01-01 | 2026-09-01 | **no** | outcome |
-| `cbd_geofence` | [srxy-5nxn](https://data.ny.gov/d/srxy-5nxn) | 7 | — | — | n/a | geography |
-| `cbd_taxi_zones` | [yfdc-w5jh](https://data.ny.gov/d/yfdc-w5jh) | 38 | — | — | n/a | geography |
-| `subway_stations` | [39hk-dx4f](https://data.ny.gov/d/39hk-dx4f) | 496 | — | — | n/a | geography |
-| `taxi_zones` | [8meu-9t5y](https://data.cityofnewyork.us/d/8meu-9t5y) | 263 | — | — | n/a | geography |
+| `cbd_geofence` | [srxy-5nxn](https://data.ny.gov/d/srxy-5nxn) | 7 | n/a | n/a | n/a | geography |
+| `cbd_taxi_zones` | [yfdc-w5jh](https://data.ny.gov/d/yfdc-w5jh) | 38 | n/a | n/a | n/a | geography |
+| `subway_stations` | [39hk-dx4f](https://data.ny.gov/d/39hk-dx4f) | 496 | n/a | n/a | n/a | geography |
+| `taxi_zones` | [8meu-9t5y](https://data.cityofnewyork.us/d/8meu-9t5y) | 263 | n/a | n/a | n/a | geography |
 | `nta_2020` | 9nt8-h7nd | error: 503 Server Error: Service Unavailable for url: https://data. | | | | |
 | `ntd_monthly_ridership` | [8bui-9xvu](https://datahub.transportation.gov/d/8bui-9xvu) | 374,103 | 2002-01-01 | 2026-09-01 | yes | outcome |
 | `tlc_yellow` | TLC parquet | 45 monthly files (14,086,407 rows in 4 probe months) | 2023-01 | 2026-09 | yes | outcome |

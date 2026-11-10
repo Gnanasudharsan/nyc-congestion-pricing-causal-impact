@@ -9,7 +9,7 @@ Estimates are on the model scale: log points for logs, levels for pollution.
 | T1 | June 2024 pause dropped | re-estimation | -0.0381 | -0.0364 | [-0.0592, -0.0170] | 0.038 | yes |
 | T1 | holiday weeks dropped | re-estimation | -0.0358 | -0.0364 | [-0.0600, -0.0117] | 0.037 | yes |
 | T1 | did2s imputation estimator | re-estimation | -0.0354 | -0.0364 | [-0.0498, -0.0210] | < 0.001 | yes |
-| T1 | dose-response: |overnight| <= |peak| | dose-response | -0.0252 | -0.0408 | — | — | yes |
+| T1 | dose-response: |overnight| <= |peak| | dose-response | -0.0252 | -0.0408 | n/a | n/a | yes |
 | T2 | placebo date 2024-01-07 | placebo | -0.0784 | -0.1091 | [-0.0930, -0.0639] | < 0.001 | **no** |
 | T2 | placebo outcome: Staten Island trips | placebo | +0.0132 | -0.1091 | [-0.0056, +0.0320] | 0.166 | yes |
 | T2 | June 2024 pause dropped | re-estimation | -0.1140 | -0.1091 | [-0.1301, -0.0980] | < 0.001 | yes |
@@ -21,17 +21,17 @@ Estimates are on the model scale: log points for logs, levels for pollution.
 | T3 | placebo date 2024-01-07 | placebo | -0.0162 | +0.0233 | [-0.0196, -0.0127] | < 0.001 | **no** |
 | T3 | June 2024 pause dropped | re-estimation | +0.0232 | +0.0233 | [+0.0182, +0.0282] | < 0.001 | yes |
 | T3 | holiday weeks dropped | re-estimation | +0.0211 | +0.0233 | [+0.0163, +0.0259] | < 0.001 | yes |
-| T3 | did2s imputation estimator | re-estimation | — | +0.0233 | — | — | — |
+| T3 | did2s imputation estimator | re-estimation | n/a | +0.0233 | n/a | n/a | n/a |
 | T3 | control: Brooklyn far zones only | re-estimation | +0.0229 | +0.0233 | [+0.0177, +0.0282] | < 0.001 | yes |
 | T3 | control: Queens far zones only | re-estimation | +0.0279 | +0.0233 | [+0.0223, +0.0334] | < 0.001 | yes |
 | T3 | control: intermediate band | re-estimation | +0.0151 | +0.0233 | [+0.0102, +0.0201] | < 0.001 | yes |
 | T3 | no 20-trip minimum (unweighted) | re-estimation | +0.0221 | +0.0233 | [+0.0171, +0.0271] | < 0.001 | yes |
-| T3 | dose-response: |overnight| <= |peak| | dose-response | +0.0124 | +0.0233 | — | — | yes |
+| T3 | dose-response: |overnight| <= |peak| | dose-response | +0.0124 | +0.0233 | n/a | n/a | yes |
 | S1 | placebo date 2024-01-07 | placebo | -0.0159 | -0.0445 | [-0.0350, +0.0031] | 0.101 | yes |
 | S1 | placebo outcome: Staten Island trips | placebo | +0.0132 | -0.0445 | [-0.0056, +0.0320] | 0.166 | yes |
 | S1 | June 2024 pause dropped | re-estimation | -0.0455 | -0.0445 | [-0.0640, -0.0270] | < 0.001 | yes |
 | S1 | holiday weeks dropped | re-estimation | -0.0415 | -0.0445 | [-0.0588, -0.0241] | < 0.001 | yes |
-| S1 | did2s imputation estimator | re-estimation | — | -0.0445 | — | — | — |
+| S1 | did2s imputation estimator | re-estimation | n/a | -0.0445 | n/a | n/a | n/a |
 | S1 | control: Brooklyn far zones only | re-estimation | -0.0248 | -0.0445 | [-0.0504, +0.0009] | 0.058 | yes |
 | S1 | control: Queens far zones only | re-estimation | -0.0494 | -0.0445 | [-0.0685, -0.0303] | < 0.001 | yes |
 | S1 | control: intermediate band | re-estimation | -0.0131 | -0.0445 | [-0.0335, +0.0072] | 0.202 | yes |
@@ -53,7 +53,7 @@ Estimates are on the model scale: log points for logs, levels for pollution.
 | R2 | did2s imputation estimator | re-estimation | +0.0035 | +0.0020 | [-0.0352, +0.0421] | 0.861 | yes |
 | R3 | placebo date 2024-01-07 | placebo | +0.0008 | +0.0343 | [-0.0037, +0.0052] | 0.740 | yes |
 | R3 | June 2024 pause dropped | re-estimation | +0.0354 | +0.0343 | [+0.0269, +0.0439] | < 0.001 | yes |
-| R3 | did2s imputation estimator | re-estimation | — | +0.0343 | — | — | — |
+| R3 | did2s imputation estimator | re-estimation | n/a | +0.0343 | n/a | n/a | n/a |
 | A3 | placebo date 2024-01-07 | placebo | -2.7252 | -2.0125 | [-5.2198, -0.2307] | 0.050 | yes |
 | A3 | June 2024 pause dropped | re-estimation | -2.1218 | -2.0125 | [-2.8661, -1.3775] | 0.046 | yes |
 | A3 | holiday weeks dropped | re-estimation | -2.0656 | -2.0125 | [-3.1109, -1.0203] | 0.053 | yes |
@@ -62,7 +62,7 @@ Estimates are on the model scale: log points for logs, levels for pollution.
 | S2 | placebo date 2024-01-07 | placebo | +0.0079 | +0.0031 | [-0.0224, +0.0383] | 0.585 | yes |
 | S2 | June 2024 pause dropped | re-estimation | +0.0028 | +0.0031 | [-0.0236, +0.0293] | 0.810 | yes |
 | S2 | holiday weeks dropped | re-estimation | +0.0032 | +0.0031 | [-0.0175, +0.0240] | 0.769 | yes |
-| S2 | did2s imputation estimator | re-estimation | — | +0.0031 | — | — | — |
+| S2 | did2s imputation estimator | re-estimation | n/a | +0.0031 | n/a | n/a | n/a |
 | S3 | placebo date 2024-01-07 | placebo | -0.0111 | -0.0210 | [-0.0249, +0.0028] | 0.116 | yes |
 | S3 | June 2024 pause dropped | re-estimation | -0.0210 | -0.0210 | [-0.0357, -0.0063] | 0.005 | yes |
 | S3 | holiday weeks dropped | re-estimation | -0.0188 | -0.0210 | [-0.0334, -0.0042] | 0.012 | yes |
@@ -70,22 +70,22 @@ Estimates are on the model scale: log points for logs, levels for pollution.
 | S4 | placebo date 2024-01-07 | placebo | -0.0061 | +0.0127 | [-0.0098, -0.0025] | 0.001 | yes |
 | S4 | June 2024 pause dropped | re-estimation | +0.0126 | +0.0127 | [+0.0079, +0.0173] | < 0.001 | yes |
 | S4 | holiday weeks dropped | re-estimation | +0.0124 | +0.0127 | [+0.0078, +0.0169] | < 0.001 | yes |
-| S4 | did2s imputation estimator | re-estimation | — | +0.0127 | — | — | — |
+| S4 | did2s imputation estimator | re-estimation | n/a | +0.0127 | n/a | n/a | n/a |
 | A2b | placebo date 2024-01-07 | placebo | +0.2025 | -0.1430 | [-0.7694, +1.1744] | 0.559 | yes |
 | A2b | June 2024 pause dropped | re-estimation | -0.2852 | -0.1430 | [-0.8799, +0.3094] | 0.148 | yes |
 | A2b | holiday weeks dropped | re-estimation | +0.0401 | -0.1430 | [-1.0790, +1.1591] | 0.894 | **no** |
-| S5 | leave-one-out donors (5 with weight > 0) | re-estimation | -2.0670 | -1.8952 | [—, -1.3966] | — | yes |
-| S5 | placebo date 2024-01-07 (pre-period only) | placebo | -1.4518 | -1.8952 | — | — | **no** |
-| A2 | leave-one-out donors (7 with weight > 0) | re-estimation | -0.4570 | -0.4280 | [—, -0.4036] | — | yes |
-| A2 | placebo date 2024-01-07 (pre-period only) | placebo | -0.6391 | -0.4280 | — | — | **no** |
-| R1 | leave-one-out donors (9 with weight > 0) | re-estimation | +0.0284 | +0.0575 | [—, +0.1004] | — | yes |
-| R1 | placebo date 2024-01-07 (pre-period only) | placebo | -0.0472 | +0.0575 | — | — | **no** |
-| A1 | leave-one-out donors (5 with weight > 0) | re-estimation | -2.1760 | -2.1417 | [—, -1.8016] | — | yes |
-| A1 | placebo date 2024-01-07 (pre-period only) | placebo | -1.8806 | -2.1417 | — | — | **no** |
-| A1 | all five CRZ sites (>= 2 valid per week) | re-estimation | -1.5824 | -2.1417 | — | — | yes |
-| A1 | smoke days included | re-estimation | -2.5048 | -2.1417 | — | — | yes |
-| A1 | donors >= 98% complete | re-estimation | -2.2205 | -2.1417 | — | — | yes |
-| R4 | leave-one-out donors (5 with weight > 0) | re-estimation | -0.0199 | -0.0139 | [—, +0.0364] | — | **no** |
-| R4 | placebo date 2024-01-07 (pre-period only) | placebo | +0.0316 | -0.0139 | — | — | **no** |
-| A4 | leave-one-out donors (6 with weight > 0) | re-estimation | -4.0880 | -3.8240 | [—, -3.4946] | — | yes |
-| A4 | placebo date 2024-01-07 (pre-period only) | placebo | -1.7520 | -3.8240 | — | — | yes |
+| S5 | leave-one-out donors (5 with weight > 0) | re-estimation | -2.0670 | -1.8952 | [n/a, -1.3966] | n/a | yes |
+| S5 | placebo date 2024-01-07 (pre-period only) | placebo | -1.4518 | -1.8952 | n/a | n/a | **no** |
+| A2 | leave-one-out donors (7 with weight > 0) | re-estimation | -0.4570 | -0.4280 | [n/a, -0.4036] | n/a | yes |
+| A2 | placebo date 2024-01-07 (pre-period only) | placebo | -0.6391 | -0.4280 | n/a | n/a | **no** |
+| R1 | leave-one-out donors (9 with weight > 0) | re-estimation | +0.0284 | +0.0575 | [n/a, +0.1004] | n/a | yes |
+| R1 | placebo date 2024-01-07 (pre-period only) | placebo | -0.0472 | +0.0575 | n/a | n/a | **no** |
+| A1 | leave-one-out donors (5 with weight > 0) | re-estimation | -2.1760 | -2.1417 | [n/a, -1.8016] | n/a | yes |
+| A1 | placebo date 2024-01-07 (pre-period only) | placebo | -1.8806 | -2.1417 | n/a | n/a | **no** |
+| A1 | all five CRZ sites (>= 2 valid per week) | re-estimation | -1.5824 | -2.1417 | n/a | n/a | yes |
+| A1 | smoke days included | re-estimation | -2.5048 | -2.1417 | n/a | n/a | yes |
+| A1 | donors >= 98% complete | re-estimation | -2.2205 | -2.1417 | n/a | n/a | yes |
+| R4 | leave-one-out donors (5 with weight > 0) | re-estimation | -0.0199 | -0.0139 | [n/a, +0.0364] | n/a | **no** |
+| R4 | placebo date 2024-01-07 (pre-period only) | placebo | +0.0316 | -0.0139 | n/a | n/a | **no** |
+| A4 | leave-one-out donors (6 with weight > 0) | re-estimation | -4.0880 | -3.8240 | [n/a, -3.4946] | n/a | yes |
+| A4 | placebo date 2024-01-07 (pre-period only) | placebo | -1.7520 | -3.8240 | n/a | n/a | yes |

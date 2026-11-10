@@ -4,8 +4,8 @@ Target: the average of the 2025 event-study bins, relative to the reference wind
 
 | Outcome | Restriction | Parameter | 95% robust CI (log points or levels) | Note |
 |---|---|---|---|---|
-| T1 | relative_magnitudes | — | — | not computed: 7 clusters give a singular covariance (deviation 18d) |
-| T2 | original | — | [-0.0845, -0.0504] |  |
+| T1 | relative_magnitudes | n/a | n/a | not computed: 7 clusters give a singular covariance (deviation 18d) |
+| T2 | original | n/a | [-0.0845, -0.0504] |  |
 | T2 | relative_magnitudes | 0.25 | [-0.1249, -0.0096] |  |
 | T2 | relative_magnitudes | 0.5 | [-0.1740, +0.0430] |  |
 | T2 | relative_magnitudes | 0.75 | [-0.1740, +0.0956] |  |
@@ -16,42 +16,42 @@ Target: the average of the 2025 event-study bins, relative to the reference wind
 | T2 | smoothness | 0.013558 | [-0.6104, +0.5213] |  |
 | T2 | smoothness | 0.027116 | [-1.1342, +0.9644] |  |
 | T2 | smoothness | 0.054231 | [-2.0833, +1.9134] |  |
-| T3 | original | — | [+0.0205, +0.0310] |  |
+| T3 | original | n/a | [+0.0205, +0.0310] |  |
 | T3 | relative_magnitudes | 0.25 | [-0.0538, +0.0538] |  |
 | T3 | relative_magnitudes | 0.5 | [-0.0538, +0.0538] |  |
 | T3 | relative_magnitudes | 0.75 | [-0.0538, +0.0538] |  |
 | T3 | relative_magnitudes | 1 | [-0.0538, +0.0538] |  |
 | T3 | relative_magnitudes | 1.5 | [-0.0538, +0.0538] |  |
 | T3 | relative_magnitudes | 2 | [-0.0538, +0.0538] |  |
-| S1 | original | — | [-0.0693, -0.0204] |  |
+| S1 | original | n/a | [-0.0693, -0.0204] |  |
 | S1 | relative_magnitudes | 0.25 | [-0.1343, +0.0438] |  |
 | S1 | relative_magnitudes | 0.5 | [-0.2148, +0.1238] |  |
 | S1 | relative_magnitudes | 0.75 | [-0.2498, +0.2058] |  |
 | S1 | relative_magnitudes | 1 | [-0.2498, +0.2498] |  |
 | S1 | relative_magnitudes | 1.5 | [-0.2498, +0.2498] |  |
 | S1 | relative_magnitudes | 2 | [-0.2498, +0.2498] |  |
-| T5a | original | — | [-0.6002, -0.3957] |  |
+| T5a | original | n/a | [-0.6002, -0.3957] |  |
 | T5a | relative_magnitudes | 0.25 | [-0.7946, -0.2328] |  |
 | T5a | relative_magnitudes | 0.5 | [-1.0222, -0.0240] |  |
 | T5a | relative_magnitudes | 0.75 | [-1.0431, +0.1869] |  |
 | T5a | relative_magnitudes | 1 | [-1.0431, +0.4062] |  |
 | T5a | relative_magnitudes | 1.5 | [-1.0431, +0.8635] |  |
 | T5a | relative_magnitudes | 2 | [-1.0431, +1.0431] |  |
-| T5b | original | — | [-0.1115, -0.0753] |  |
+| T5b | original | n/a | [-0.1115, -0.0753] |  |
 | T5b | relative_magnitudes | 0.25 | [-0.1848, +0.0105] |  |
 | T5b | relative_magnitudes | 0.5 | [-0.1848, +0.1101] |  |
 | T5b | relative_magnitudes | 0.75 | [-0.1848, +0.1848] |  |
 | T5b | relative_magnitudes | 1 | [-0.1848, +0.1848] |  |
 | T5b | relative_magnitudes | 1.5 | [-0.1848, +0.1848] |  |
 | T5b | relative_magnitudes | 2 | [-0.1848, +0.1848] |  |
-| T5c | original | — | [-0.1895, -0.0868] |  |
+| T5c | original | n/a | [-0.1895, -0.0868] |  |
 | T5c | relative_magnitudes | 0.25 | [-0.5236, +0.2909] |  |
 | T5c | relative_magnitudes | 0.5 | [-0.5236, +0.5236] |  |
 | T5c | relative_magnitudes | 0.75 | [-0.5236, +0.5236] |  |
 | T5c | relative_magnitudes | 1 | [-0.5236, +0.5236] |  |
 | T5c | relative_magnitudes | 1.5 | [-0.5236, +0.5236] |  |
 | T5c | relative_magnitudes | 2 | [-0.5236, +0.5236] |  |
-| R2 | original | — | [-0.0334, +0.0636] |  |
+| R2 | original | n/a | [-0.0334, +0.0636] |  |
 | R2 | relative_magnitudes | 0.25 | [-0.2500, +0.2966] |  |
 | R2 | relative_magnitudes | 0.5 | [-0.4946, +0.4946] |  |
 | R2 | relative_magnitudes | 0.75 | [-0.4946, +0.4946] |  |
@@ -62,27 +62,27 @@ Target: the average of the 2025 event-study bins, relative to the reference wind
 | R2 | smoothness | 0.079883 | [-3.0546, +3.0927] |  |
 | R2 | smoothness | 0.159765 | [-5.8504, +5.8886] |  |
 | R2 | smoothness | 0.319531 | [-11.4423, +11.4804] |  |
-| R3 | original | — | [-0.0010, +0.0162] |  |
+| R3 | original | n/a | [-0.0010, +0.0162] |  |
 | R3 | relative_magnitudes | 0.25 | [-0.0413, +0.0533] |  |
 | R3 | relative_magnitudes | 0.5 | [-0.0861, +0.0875] |  |
 | R3 | relative_magnitudes | 0.75 | [-0.0875, +0.0875] |  |
 | R3 | relative_magnitudes | 1 | [-0.0875, +0.0875] |  |
 | R3 | relative_magnitudes | 1.5 | [-0.0875, +0.0875] |  |
 | R3 | relative_magnitudes | 2 | [-0.0875, +0.0875] |  |
-| A3 | relative_magnitudes | — | — | not computed: 4 clusters give a singular covariance (deviation 18d) |
-| S2 | relative_magnitudes | — | — | not computed: 8 clusters give a singular covariance (deviation 18d) |
-| S3 | original | — | [-0.0466, -0.0078] |  |
+| A3 | relative_magnitudes | n/a | n/a | not computed: 4 clusters give a singular covariance (deviation 18d) |
+| S2 | relative_magnitudes | n/a | n/a | not computed: 8 clusters give a singular covariance (deviation 18d) |
+| S3 | original | n/a | [-0.0466, -0.0078] |  |
 | S3 | relative_magnitudes | 0.25 | [-0.0996, +0.0457] |  |
 | S3 | relative_magnitudes | 0.5 | [-0.1653, +0.1115] |  |
 | S3 | relative_magnitudes | 0.75 | [-0.1978, +0.1780] |  |
 | S3 | relative_magnitudes | 1 | [-0.1978, +0.1978] |  |
 | S3 | relative_magnitudes | 1.5 | [-0.1978, +0.1978] |  |
 | S3 | relative_magnitudes | 2 | [-0.1978, +0.1978] |  |
-| S4 | original | — | [-0.0134, +0.0098] |  |
+| S4 | original | n/a | [-0.0134, +0.0098] |  |
 | S4 | relative_magnitudes | 0.25 | [-0.0796, +0.0691] |  |
 | S4 | relative_magnitudes | 0.5 | [-0.1188, +0.1188] |  |
 | S4 | relative_magnitudes | 0.75 | [-0.1188, +0.1188] |  |
 | S4 | relative_magnitudes | 1 | [-0.1188, +0.1188] |  |
 | S4 | relative_magnitudes | 1.5 | [-0.1188, +0.1188] |  |
 | S4 | relative_magnitudes | 2 | [-0.1188, +0.1188] |  |
-| A2b | relative_magnitudes | — | — | not computed: 4 clusters give a singular covariance (deviation 18d) |
+| A2b | relative_magnitudes | n/a | n/a | not computed: 4 clusters give a singular covariance (deviation 18d) |

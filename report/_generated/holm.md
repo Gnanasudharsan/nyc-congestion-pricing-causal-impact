@@ -4,7 +4,7 @@
 |---|---|---|---|---|---|---|
 | A1 | -2.1 µg/m³ | 0.850 | placebo RMSPE-ratio rank | 0.010 | 0.850 | no |
 | R1 | +5.9% | 0.273 | placebo RMSPE-ratio rank | 0.045 | 0.545 | no |
-| S1 | -4.4% | < 0.001 | cluster-robust t(124) | — | < 0.001 | yes |
+| S1 | -4.4% | < 0.001 | cluster-robust t(124) | n/a | < 0.001 | yes |
 | T1 | -3.6% | 0.048 | randomization inference (21 assignments) | 0.048 | 0.143 | no |
-| T2 | -10.3% | < 0.001 | cluster-robust t(130) | — | < 0.001 | yes |
-| T3 | +2.4% | < 0.001 | cluster-robust t(128) | — | < 0.001 | yes |
+| T2 | -10.3% | < 0.001 | cluster-robust t(130) | n/a | < 0.001 | yes |
+| T3 | +2.4% | < 0.001 | cluster-robust t(128) | n/a | < 0.001 | yes |

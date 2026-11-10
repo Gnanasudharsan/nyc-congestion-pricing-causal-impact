@@ -2,5 +2,5 @@
 
 | Outcome | Year-1 gap | Placebo p (min possible) | Placebo effect range | Detrended gap (p) | Anticipation gap | 2026+ gap | Pre-RMSPE vs median placebo | Fit check | Donors |
 |---|---|---|---|---|---|---|---|---|---|
-| **S5** PM2.5 at the Cross Bronx Expwy monitor vs out-of-region monitors | -1.9 µg/m³ | 0.850 (0.010) | -1.6 to +1.5 | +1.7 µg/m³ (0.870) | -2.5 µg/m³ | — | 1.98 vs 0.58 | **fail: descriptive only** | 99 (3.3% of cells imputed) |
-| **A2** NO2 at IS 52 (South Bronx) vs out-of-region monitors | -0.4 ppb | 0.788 (0.019) | -1.2 to +0.9 | +0.6 ppb (0.827) | -0.4 ppb | — | 1.68 vs 0.89 | **fail: descriptive only** | 51 (3.1% of cells imputed) |
+| **S5** PM2.5 at the Cross Bronx Expwy monitor vs out-of-region monitors | -1.9 µg/m³ | 0.850 (0.010) | -1.6 to +1.5 | +1.7 µg/m³ (0.870) | -2.5 µg/m³ | n/a | 1.98 vs 0.58 | **fail: descriptive only** | 99 (3.3% of cells imputed) |
+| **A2** NO2 at IS 52 (South Bronx) vs out-of-region monitors | -0.4 ppb | 0.788 (0.019) | -1.2 to +0.9 | +0.6 ppb (0.827) | -0.4 ppb | n/a | 1.68 vs 0.89 | **fail: descriptive only** | 51 (3.1% of cells imputed) |

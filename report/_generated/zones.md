@@ -15,7 +15,7 @@ Empirical-Bayes mean -3.06 log points x 100; between-zone SD (tau) 2.42.
 | bivariate | Households without a vehicle (share) | -0.44 | -1.16 [-1.69, -0.63] | < 0.001 | 88 |
 | bivariate | Poverty rate | +0.26 | +0.69 [+0.07, +1.31] | 0.030 | 88 |
 | bivariate | Adult asthma ED visits per 10,000 (2017-2019) | +0.25 | +0.67 [-0.02, +1.36] | 0.058 | 88 |
-| multivariable | Median household income | — | -1.13 [-1.92, -0.34] | 0.005 | 88 |
-| multivariable | Households without a vehicle (share) | — | -1.44 [-2.02, -0.86] | < 0.001 | 88 |
-| multivariable | Poverty rate | — | +0.14 [-0.77, +1.05] | 0.763 | 88 |
-| multivariable | Adult asthma ED visits per 10,000 (2017-2019) | — | +0.17 [-0.59, +0.94] | 0.662 | 88 |
+| multivariable | Median household income | n/a | -1.13 [-1.92, -0.34] | 0.005 | 88 |
+| multivariable | Households without a vehicle (share) | n/a | -1.44 [-2.02, -0.86] | < 0.001 | 88 |
+| multivariable | Poverty rate | n/a | +0.14 [-0.77, +1.05] | 0.763 | 88 |
+| multivariable | Adult asthma ED visits per 10,000 (2017-2019) | n/a | +0.17 [-0.59, +0.94] | 0.662 | 88 |
