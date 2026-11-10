@@ -195,7 +195,8 @@ def coverage_table() -> str:
     from cordon.ingest.catalog import BEGIN, END, render_table
 
     profiles = json.loads((REPO_ROOT / "data" / "catalog" / "profiles.json").read_text())
-    return render_table(profiles).replace(BEGIN, "").replace(END, "").strip()
+    table = render_table(profiles).replace(BEGIN, "").replace(END, "").strip()
+    return table.replace("\u2014", "n/a")  # see results_page.MISSING
 
 
 def write_tables() -> None:
